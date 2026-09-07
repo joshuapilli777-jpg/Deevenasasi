@@ -4,10 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>D & S | Wedding Invitation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+@font-face {
+  font-family: 'Candlescript';
+  src: local('Candlescript'), 
+       url('https://fonts.cdnfonts.com/s/19448/Candlescript.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root{
   --bg-main:#f8f9fc;
   --text-main:#252934;
@@ -21,13 +27,16 @@
   --border-light:rgba(255,255,255,0.6);
   --shadow:0 20px 40px -15px rgba(49,46,129,0.07);
 }
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  font-family:'Candlescript', cursive, sans-serif !important;
+}
 html{scroll-behavior:smooth}
 body{
   margin:0;
   background:var(--bg-main);
   color:var(--text-main);
-  font-family:'Plus Jakarta Sans',sans-serif;
+  font-family:'Candlescript', cursive, sans-serif;
   letter-spacing:-0.01em;
 }
 .locked{overflow:hidden}
@@ -54,21 +63,19 @@ body{
   border-radius:28px;
 }
 .mono,.hero h1,h2,h3,.names,.verse,.big{
-  font-family:'candlescript',serif;
+  font-family:'Candlescript', cursive, sans-serif;
 }
 .mono{font-size:90px;line-height:.85;margin-bottom:15px;letter-spacing:2px}
 .kicker,.small{
-  font-size:11px;
+  font-size:16px;
   font-weight:600;
-  letter-spacing:3.5px;
-  text-transform:uppercase;
+  letter-spacing:1px;
   color:var(--text-muted);
 }
 #open .small,#open .kicker{color:rgba(255,255,255,0.75)}
 .openverse{
-  font-family:'Playfair Display',serif;
-  font-style:italic;
-  font-size:24px;
+  font-family:'Candlescript', cursive, sans-serif;
+  font-size:28px;
   margin:25px 0 10px;
   line-height:1.4;
 }
@@ -81,7 +88,7 @@ body{
   padding:15px 32px;
   background:var(--indigo-primary);
   color:#fff;
-  font-size:13px;
+  font-size:16px;
   font-weight:500;
   text-decoration:none;
   letter-spacing:0.5px;
@@ -125,8 +132,7 @@ body{
 .section{max-width:980px;margin:auto;padding:90px 24px;text-align:center}
 .section h2{font-size:46px;font-weight:400;margin:12px 0 25px}
 .verse{
-  font-size:26px;
-  font-style:italic;
+  font-size:30px;
   line-height:1.6;
   max-width:620px;
   margin:18px auto;
@@ -147,13 +153,13 @@ body{
   backdrop-filter:blur(8px);
 }
 .person h3{
-  font-size:32px;
+  font-size:34px;
   font-weight:600;
   margin:12px 0 8px;
   color:var(--indigo-primary);
 }
 .parents{
-  font-size:13px;
+  font-size:18px;
   line-height:1.7;
   color:var(--text-muted);
 }
@@ -168,13 +174,13 @@ body{
   margin:30px auto 0;
 }
 .venue-card h3{
-  font-size:32px;
+  font-size:34px;
   font-weight:600;
   margin:0 0 12px;
   color:var(--indigo-primary);
 }
 .venue-card p{
-  font-size:15px;
+  font-size:18px;
   line-height:1.8;
   color:var(--text-muted);
   margin:0 0 25px;
@@ -203,10 +209,9 @@ body{
   border-color:var(--pink-accent);
 }
 .venue-note{
-  font-size:11px;
+  font-size:14px;
   margin-top:25px;
   letter-spacing:.12em;
-  text-transform:uppercase;
   color:var(--text-muted);
   font-weight:600;
 }
@@ -233,9 +238,8 @@ body{
   padding:20px;
 }
 .reveal .large{
-  font-size:11px;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
+  font-size:16px;
+  letter-spacing:1px;
   font-weight:600;
   color:var(--pink-accent);
 }
@@ -245,7 +249,7 @@ body{
   margin:6px 0;
 }
 .reveal .time-info{
-  font-size:13px;
+  font-size:18px;
   color:var(--text-muted);
   font-weight:500;
 }
@@ -263,10 +267,9 @@ body{
   background:linear-gradient(135deg,#e06d8b,#d45b7a);
   color:#fff;
   border-radius:999px;
-  font-size:15px;
-  letter-spacing:2px;
+  font-size:18px;
+  letter-spacing:1px;
   font-weight:600;
-  text-transform:uppercase;
   box-shadow:0 6px 18px rgba(224,109,139,0.35);
   border:1px solid rgba(255,255,255,0.4);
 }
@@ -286,15 +289,15 @@ body{
 }
 .time strong{
   display:block;
-  font-family:'Playfair Display',serif;
+  font-family:'Candlescript', cursive, sans-serif;
   font-size:46px;
   color:var(--indigo-primary);
   line-height:1;
 }
 .time span{
-  font-size:10px;
+  font-size:13px;
   font-weight:600;
-  letter-spacing:2px;
+  letter-spacing:1px;
   color:var(--pink-accent);
   margin-top:8px;
   display:block;
@@ -308,9 +311,8 @@ body{
 .closing .small{color:rgba(255,255,255,0.75)}
 .closing h2{font-size:50px;font-weight:400;margin:15px 0 20px}
 .closing p{
-  font-size:17px;
-  font-family:'Playfair Display',serif;
-  font-style:italic;
+  font-size:24px;
+  font-family:'Candlescript', cursive, sans-serif;
   color:rgba(255,255,255,0.9);
 }
 footer{
@@ -318,8 +320,8 @@ footer{
   padding:30px 20px;
   background:#1a1c23;
   color:#9a9fb1;
-  font-size:10px;
-  letter-spacing:2.5px;
+  font-size:14px;
+  letter-spacing:1px;
 }
 @media(max-width:700px){
   .couple{grid-template-columns:1fr;gap:18px}
@@ -375,7 +377,7 @@ footer{
   </section>
 
   <section class="section">
-    <div class="small" style="font-family: 'Playfair Display', serif;">A GRAND REVEAL</div>
+    <div class="small">A GRAND REVEAL</div>
     <div class="scratch-card-wrapper">
       <div class="scratch">
         <div class="reveal">
@@ -482,7 +484,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.fillStyle = "#c2c7d0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.font = "600 13px 'Plus Jakarta Sans', sans-serif";
+    ctx.font = "600 16px 'Candlescript', cursive, sans-serif";
     ctx.fillStyle = "#555b6e";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";

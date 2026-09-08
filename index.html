@@ -379,6 +379,7 @@ body{
   cursor: pointer;
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow);
+  background: #eae6d9;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .album-item:hover {
@@ -566,14 +567,14 @@ footer{
     </div>
     
     <div class="album-grid">
-      <div class="album-item"><img src="TLB06338.jpg" alt="Photo 1" loading="lazy"></div>
-      <div class="album-item"><img src="TLB06586.jpg" alt="Photo 2" loading="lazy"></div>
-      <div class="album-item"><img src="TLB06597.jpg" alt="Photo 3" loading="lazy"></div>
-      <div class="album-item"><img src="TLB06823.jpg" alt="Photo 4" loading="lazy"></div>
-      <div class="album-item"><img src="TLB06978.jpg" alt="Photo 5" loading="lazy"></div>
-      <div class="album-item"><img src="TLB07432.jpg" alt="Photo 6" loading="lazy"></div>
-      <div class="album-item"><img src="TLB07452.jpg" alt="Photo 7" loading="lazy"></div>
-      <div class="album-item"><img src="TLB07602.jpg" alt="Photo 8" loading="lazy"></div>
+      <div class="album-item"><img src="./TLB06338.jpg" alt="Deevena" loading="lazy"></div>
+      <div class="album-item"><img src="./TLB06586.jpg" alt="Sasi Preetham" loading="lazy"></div>
+      <div class="album-item"><img src="./TLB06597.jpg" alt="Sasi Preetham" loading="lazy"></div>
+      <div class="album-item"><img src="./TLB06823.jpg" alt="Deevena" loading="lazy"></div>
+      <div class="album-item"><img src="./TLB06978.jpg" alt="Couple Portrait" loading="lazy"></div>
+      <div class="album-item"><img src="./TLB07432.jpg" alt="Family" loading="lazy"></div>
+      <div class="album-item"><img src="./TLB07452.jpg" alt="Family" loading="lazy"></div>
+      <div class="album-item"><img src="./TLB07602.jpg" alt="Couple Mandap" loading="lazy"></div>
     </div>
   </section>
 
@@ -623,7 +624,7 @@ footer{
       <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
       <span class="bar right" style="background:linear-gradient(90deg, var(--gold-accent), transparent)"></span>
     </div>
-    <p>Dr. Salivendra Deevena &amp; Dr. Manukonda Sasi Preetham</p>
+    <p>Dr. Deevena Salivendra &amp; Dr. Sasi Preetham Manukonda</p>
   </section>
 </main>
 
@@ -735,6 +736,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightboxClose = document.getElementById("lightboxClose");
 
   document.querySelectorAll(".album-item img").forEach((img) => {
+    img.addEventListener("error", () => {
+      console.error("Failed to load image at:", img.src);
+    });
     img.addEventListener("click", () => {
       lightboxImg.src = img.src;
       lightbox.classList.add("active");
@@ -756,8 +760,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (calendarBtn) {
     calendarBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      const title = encodeURIComponent("Wedding: Dr. Salivendra Deevena & Dr. Manukonda Sasi Preetham");
-      const details = encodeURIComponent("Wedding ceremony celebrating Dr. Salivendra Deevena & Dr. Manukonda Sasi Preetham.");
+      const title = encodeURIComponent("Wedding: Dr. Deevena Salivendra & Dr. Sasi Preetham Manukonda");
+      const details = encodeURIComponent("Wedding ceremony celebrating Dr. Deevena Salivendra & Dr. Sasi Preetham Manukonda.");
       const location = encodeURIComponent("Adabala Gardens, Saibaba Temple Rd, Palakollu, Andhra Pradesh 534260");
       const dates = "20261123T043000Z/20261123T083000Z";
 

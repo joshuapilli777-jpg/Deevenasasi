@@ -363,6 +363,83 @@ body{
   margin-top:8px;
   display:block;
 }
+
+/* Photo Album Section */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 30px;
+}
+.album-item {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 220px;
+  cursor: pointer;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.album-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -6px rgba(30, 42, 94, 0.2);
+}
+.album-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Lightbox Modal */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(14, 18, 41, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding: 20px;
+}
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+.lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 14px;
+  border: 2px solid var(--gold-accent);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  object-fit: contain;
+}
+.lightbox-close {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  font-size: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.4);
+}
+
 .closing{
   padding:110px 24px;
   text-align:center;
@@ -400,6 +477,8 @@ footer{
   .section h2{font-size:42px}
   .big{font-size:38px}
   .scratch{height:190px}
+  .album-grid{grid-template-columns:repeat(2, 1fr);gap:10px}
+  .album-item{height:160px}
 }
 </style>
 </head>
@@ -450,16 +529,17 @@ footer{
       <div class="person">
         <div class="small">The Bride</div>
         <h3>Dr. Deevena Salivendra</h3>
-       <div class="parents"><strong>D/o Dr. Salivendra Kishore Kumar and Mrs. Emily</strong></div>
+        <div class="parents"><strong>D/o Dr. Salivendra Kishore Kumar and Mrs. Emily</strong></div>
       </div>
       <div class="person">
         <div class="small">The Groom</div>
-        <h3>Dr. Sasi Preetham Manukonda </h3>
-        <div class="parents"><strong>S/o Mr. Manumkoda.V.V. Satyanarayana and Mrs. Santha Kumari</strong><div>
+        <h3>Dr. Sasi Preetham Manukonda</h3>
+        <div class="parents"><strong>S/o Mr. Manumkoda.V.V. Satyanarayana and Mrs. Santha Kumari</strong></div>
       </div>
     </div>
   </section>
 
+  <!-- Date Section: Scratch Reveal -->
   <section class="section">
     <div class="small">A Grand Reveal</div>
     <div class="scratch-card-wrapper">
@@ -475,6 +555,29 @@ footer{
     </div>
   </section>
 
+  <!-- Photo Album Gallery -->
+  <section class="section">
+    <div class="small">Cherished Memories</div>
+    <h2>Moments &amp; Memories</h2>
+    <div class="floral-divider">
+      <span class="bar"></span>
+      <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
+      <span class="bar right"></span>
+    </div>
+    
+    <div class="album-grid">
+      <div class="album-item"><img src="TLB06338.jpg" alt="Photo 1" loading="lazy"></div>
+      <div class="album-item"><img src="TLB06586.jpg" alt="Photo 2" loading="lazy"></div>
+      <div class="album-item"><img src="TLB06597.jpg" alt="Photo 3" loading="lazy"></div>
+      <div class="album-item"><img src="TLB06823.jpg" alt="Photo 4" loading="lazy"></div>
+      <div class="album-item"><img src="TLB06978.jpg" alt="Photo 5" loading="lazy"></div>
+      <div class="album-item"><img src="TLB07432.jpg" alt="Photo 6" loading="lazy"></div>
+      <div class="album-item"><img src="TLB07452.jpg" alt="Photo 7" loading="lazy"></div>
+      <div class="album-item"><img src="TLB07602.jpg" alt="Photo 8" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Countdown Section -->
   <section class="section">
     <div class="small">Counting the Moments</div>
     <h2>Until We Say “I Do”</h2>
@@ -491,6 +594,7 @@ footer{
     </div>
   </section>
 
+  <!-- Venue Address Section -->
   <section class="section venue reveal">
     <div class="section-inner">
       <div class="kicker">The Celebration</div>
@@ -522,6 +626,12 @@ footer{
     <p>Dr. Salivendra Deevena &amp; Dr. Manukonda Sasi Preetham</p>
   </section>
 </main>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <button id="lightboxClose" class="lightbox-close">&times;</button>
+  <img id="lightboxImg" src="" alt="Full view">
+</div>
 
 <footer>D &amp; S · NOVEMBER 23, 2026</footer>
 
@@ -618,6 +728,29 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("touchend", () => (isDrawing = false));
     canvas.addEventListener("touchmove", scratch);
   }
+
+  // Lightbox click-to-open logic
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const lightboxClose = document.getElementById("lightboxClose");
+
+  document.querySelectorAll(".album-item img").forEach((img) => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add("active");
+      document.body.classList.add("locked");
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+    document.body.classList.remove("locked");
+  }
+
+  lightboxClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
 
   const calendarBtn = document.getElementById("calendarBtn");
   if (calendarBtn) {

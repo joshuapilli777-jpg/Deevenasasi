@@ -18,14 +18,14 @@
 }
 
 :root {
-  --bg-main: #F9F6E6;           /* Ivory base */
-  --bg-subtle: #E1EACD;         /* Pale sage accent */
-  --text-main: #1E2A5E;         /* Deep royal navy */
-  --text-muted: #55679C;        /* Slate blue */
-  --sage-accent: #BAD8B6;       /* Soft sage green */
-  --purple-royal: #8D77AB;      /* Royal lavender */
+  --bg-main: #F9F6E6;
+  --bg-subtle: #E1EACD;
+  --text-main: #1E2A5E;
+  --text-muted: #55679C;
+  --sage-accent: #BAD8B6;
+  --purple-royal: #8D77AB;
   --royal-gradient: linear-gradient(135deg, #1E2A5E 0%, #3B4B7F 50%, #8D77AB 100%);
-  --gold-accent: #E1D7B7;       /* Vintage gold accent */
+  --gold-accent: #E1D7B7;
   --card-bg: rgba(255, 255, 255, 0.90);
   --border-light: rgba(141, 119, 171, 0.25);
   --shadow: 0 20px 40px -15px rgba(30, 42, 94, 0.12);
@@ -64,7 +64,6 @@ body{
   font-size:20px;
 }
 
-/* Floral & End-bar Dividers */
 .floral-divider {
   display: flex;
   align-items: center;
@@ -158,6 +157,45 @@ body{
   box-shadow:none;
 }
 .openbtn:hover{background:var(--gold-accent);color:var(--text-main)}
+
+.music-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-accent);
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: transform 0.2s, background-color 0.2s;
+}
+.music-toggle.show {
+  display: flex;
+}
+.music-toggle:hover {
+  transform: scale(1.08);
+}
+.music-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+.music-toggle.playing {
+  animation: spinMusic 5s linear infinite;
+}
+@keyframes spinMusic {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .site{display:none}
 .site.show{display:block}
 .hero{
@@ -364,7 +402,6 @@ body{
   display:block;
 }
 
-/* Photo Album Section */
 .album-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -393,7 +430,6 @@ body{
   display: block;
 }
 
-/* Lightbox Modal */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -480,10 +516,21 @@ footer{
   .scratch{height:190px}
   .album-grid{grid-template-columns:repeat(2, 1fr);gap:10px}
   .album-item{height:160px}
+  .music-toggle{bottom:16px;right:16px;width:42px;height:42px}
 }
 </style>
 </head>
 <body class="locked">
+
+<audio id="weddingMusic" loop preload="auto">
+  <source src="DS.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicToggle" class="music-toggle" aria-label="Toggle Background Music">
+  <svg id="musicIcon" viewBox="0 0 24 24">
+    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+  </svg>
+</button>
 
 <section id="open">
   <div class="card">
@@ -519,7 +566,7 @@ footer{
     <div class="small">With Gratitude &amp; Joy</div>
     <p class="verse">“The steadfast love of the Lord never ceases.”</p>
     <div class="small">Lamentations 3:22</div>
-    
+
     <div class="floral-divider">
       <span class="bar"></span>
       <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
@@ -540,7 +587,6 @@ footer{
     </div>
   </section>
 
-  <!-- Date Section: Scratch Reveal -->
   <section class="section">
     <div class="small">A Grand Reveal</div>
     <div class="scratch-card-wrapper">
@@ -556,7 +602,6 @@ footer{
     </div>
   </section>
 
-  <!-- Photo Album Gallery -->
   <section class="section">
     <div class="small">Cherished Memories</div>
     <h2>Moments &amp; Memories</h2>
@@ -565,7 +610,7 @@ footer{
       <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
       <span class="bar right"></span>
     </div>
-    
+
     <div class="album-grid">
       <div class="album-item"><img src="./DS%20pics/TLB06338.jpg" alt="Photo 1" loading="lazy"></div>
       <div class="album-item"><img src="./DS%20pics/TLB06823.jpg" alt="Photo 2" loading="lazy"></div>
@@ -578,7 +623,6 @@ footer{
     </div>
   </section>
 
-  <!-- Countdown Section -->
   <section class="section">
     <div class="small">Counting the Moments</div>
     <h2>Until We Say “I Do”</h2>
@@ -595,7 +639,6 @@ footer{
     </div>
   </section>
 
-  <!-- Venue Address Section -->
   <section class="section venue">
     <div class="section-inner">
       <div class="kicker">The Celebration</div>
@@ -628,7 +671,6 @@ footer{
   </section>
 </main>
 
-<!-- Lightbox Modal -->
 <div id="lightbox" class="lightbox">
   <button id="lightboxClose" class="lightbox-close">&times;</button>
   <img id="lightboxImg" src="" alt="Full view">
@@ -641,12 +683,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openBtn");
   const openScreen = document.getElementById("open");
   const site = document.getElementById("site");
+  const audio = document.getElementById("weddingMusic");
+  const musicToggle = document.getElementById("musicToggle");
 
   openBtn.addEventListener("click", () => {
     openScreen.classList.add("hide");
     document.body.classList.remove("locked");
     site.classList.add("show");
+    musicToggle.classList.add("show");
+    
+    audio.play().then(() => {
+      musicToggle.classList.add("playing");
+    }).catch(err => {
+      console.log("Autoplay prevented:", err);
+    });
+
     initScratchCard();
+  });
+
+  musicToggle.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      musicToggle.classList.add("playing");
+    } else {
+      audio.pause();
+      musicToggle.classList.remove("playing");
+    }
   });
 
   const targetDate = new Date("2026-11-23T10:00:00+05:30").getTime();
@@ -730,7 +792,6 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.addEventListener("touchmove", scratch);
   }
 
-  // Lightbox click-to-open logic
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const lightboxClose = document.getElementById("lightboxClose");

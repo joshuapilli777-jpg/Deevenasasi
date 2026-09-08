@@ -567,14 +567,14 @@ footer{
     </div>
     
     <div class="album-grid">
-      <div class="album-item"><img src="./TLB06338.jpg" alt="Deevena" loading="lazy"></div>
-      <div class="album-item"><img src="./TLB06586.jpg" alt="Sasi Preetham" loading="lazy"></div>
-      <div class="album-item"><img src="./TLB06597.jpg" alt="Sasi Preetham" loading="lazy"></div>
-      <div class="album-item"><img src="./TLB06823.jpg" alt="Deevena" loading="lazy"></div>
-      <div class="album-item"><img src="./TLB06978.jpg" alt="Couple Portrait" loading="lazy"></div>
-      <div class="album-item"><img src="./TLB07432.jpg" alt="Family" loading="lazy"></div>
-      <div class="album-item"><img src="./TLB07452.jpg" alt="Family" loading="lazy"></div>
-      <div class="album-item"><img src="./TLB07602.jpg" alt="Couple Mandap" loading="lazy"></div>
+      <div class="album-item"><img src="./DS%20pics/TLB06338.jpg" alt="Photo 1" loading="lazy"></div>
+      <div class="album-item"><img src="./DS%20pics/TLB06586.jpg" alt="Photo 2" loading="lazy"></div>
+      <div class="album-item"><img src="./DS%20pics/TLB06597.jpg" alt="Photo 3" loading="lazy"></div>
+      <div class="album-item"><img src="./DS%20pics/TLB06823.jpg" alt="Photo 4" loading="lazy"></div>
+      <div class="album-item"><img src="./DS%20pics/TLB06978.jpg" alt="Photo 5" loading="lazy"></div>
+      <div class="album-item"><img src="./DS%20pics/TLB07432.jpg" alt="Photo 6" loading="lazy"></div>
+      <div class="album-item"><img src="./DS%20pics/TLB07452.jpg" alt="Photo 7" loading="lazy"></div>
+      <div class="album-item"><img src="./DS%20pics/TLB07602.jpg" alt="Photo 8" loading="lazy"></div>
     </div>
   </section>
 
@@ -736,9 +736,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightboxClose = document.getElementById("lightboxClose");
 
   document.querySelectorAll(".album-item img").forEach((img) => {
-    img.addEventListener("error", () => {
-      console.error("Failed to load image at:", img.src);
-    });
     img.addEventListener("click", () => {
       lightboxImg.src = img.src;
       lightbox.classList.add("active");

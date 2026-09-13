@@ -120,6 +120,19 @@ body{
   line-height: 1;
 }
 
+/* Floral Corner Accents for All Cards (Transparent Background) */
+.floral-frame-corner {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  pointer-events: none;
+  z-index: 3;
+}
+.corner-tl { top: -2px; left: -2px; }
+.corner-tr { top: -2px; right: -2px; transform: scaleX(-1); }
+.corner-bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
+.corner-br { bottom: -2px; right: -2px; transform: scale(-1); }
+
 #open{
   position:fixed;
   inset:0;
@@ -293,7 +306,7 @@ body{
 }
 .person{
   position:relative;
-  padding:44px 28px;
+  padding:46px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -314,7 +327,7 @@ body{
 .pop-date-card {
   max-width: 520px;
   margin: 35px auto 0;
-  padding: 45px 30px;
+  padding: 48px 30px;
   background: var(--card-bg);
   border: 1px solid var(--border-light);
   border-radius: 28px;
@@ -371,7 +384,6 @@ body{
   letter-spacing: 1px;
 }
 
-/* --- Interactive Swipeable Wedding Photo Album --- */
 .album-viewport {
   position: relative;
   max-width: 760px;
@@ -474,7 +486,7 @@ body{
 
 .venue-card{
   position:relative;
-  padding:44px 28px;
+  padding:48px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -526,11 +538,16 @@ body{
   margin:40px auto 0;
 }
 .time{
+  position: relative;
   background:var(--card-bg);
   border:1px solid var(--border-light);
   border-radius:20px;
   padding:22px 10px;
   box-shadow:var(--shadow);
+}
+.time .floral-frame-corner {
+  width: 32px;
+  height: 32px;
 }
 .time strong{
   display:block;
@@ -636,6 +653,8 @@ footer{
   .album-page{flex:0 0 260px;height:360px}
   .music-toggle{bottom:16px;right:16px;width:42px;height:42px}
   .vine-border{width:50px}
+  .floral-frame-corner { width: 44px; height: 44px; }
+  .time .floral-frame-corner { width: 24px; height: 24px; }
 }
 </style>
 </head>
@@ -644,6 +663,33 @@ footer{
 <canvas id="celebrationCanvas"></canvas>
 <canvas id="vineCanvasLeft" class="vine-border"></canvas>
 <canvas id="vineCanvasRight" class="vine-border"></canvas>
+
+<!-- Transparent SVG Floral Corner Template (Theme-matched Royal Lavender, Gold, & Sage) -->
+<svg style="display:none">
+  <defs>
+    <g id="floralFrameCorner">
+      <!-- Sage leaf sprigs -->
+      <path d="M0,0 Q18,6 26,26 Q6,18 0,0" fill="#7A9A78" opacity="0.85"/>
+      <path d="M10,0 Q24,14 18,34 Q4,16 10,0" fill="#8DAA8B" opacity="0.75"/>
+      <path d="M0,10 Q14,24 34,18 Q16,4 0,10" fill="#8DAA8B" opacity="0.75"/>
+      <!-- Delicate blossom -->
+      <g transform="translate(18, 18)">
+        <!-- Petals -->
+        <circle cx="0" cy="-8" r="5.5" fill="#8D77AB" opacity="0.9"/>
+        <circle cx="8" cy="0" r="5.5" fill="#8D77AB" opacity="0.9"/>
+        <circle cx="0" cy="8" r="5.5" fill="#8D77AB" opacity="0.9"/>
+        <circle cx="-8" cy="0" r="5.5" fill="#8D77AB" opacity="0.9"/>
+        <circle cx="-6" cy="-6" r="4.5" fill="#C8B6E2" opacity="0.9"/>
+        <circle cx="6" cy="-6" r="4.5" fill="#C8B6E2" opacity="0.9"/>
+        <circle cx="6" cy="6" r="4.5" fill="#C8B6E2" opacity="0.9"/>
+        <circle cx="-6" cy="6" r="4.5" fill="#C8B6E2" opacity="0.9"/>
+        <!-- Golden Core -->
+        <circle cx="0" cy="0" r="3.8" fill="#F5D77F"/>
+        <circle cx="0" cy="0" r="1.8" fill="#E1D7B7"/>
+      </g>
+    </g>
+  </defs>
+</svg>
 
 <audio id="weddingMusic" loop preload="auto">
   <source src="DS.mp3.mpeg" type="audio/mpeg">
@@ -697,12 +743,23 @@ footer{
     </div>
 
     <div class="couple">
+      <!-- Bride Card with Flower Frame -->
       <div class="person">
+        <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
         <div class="small">The Bride</div>
         <h3>Dr. Deevena Salivendra</h3>
         <div class="parents"><strong>D/o Dr. Salivendra Kishore Kumar and Mrs. Emily</strong></div>
       </div>
+
+      <!-- Groom Card with Flower Frame -->
       <div class="person">
+        <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
         <div class="small">The Groom</div>
         <h3>Dr. Sasi Preetham Manukonda</h3>
         <div class="parents"><strong>S/o Mr. Manukoda.V.V. Satyanarayana and Mrs. Santha Kumari</strong></div>
@@ -719,7 +776,12 @@ footer{
       <span class="bar right"></span>
     </div>
     
+    <!-- Save the date card with Flower Frame -->
     <div class="pop-date-card" id="popDateCard">
+      <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+      <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+      <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+      <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
       <span class="pop-tag">Our Wedding Ceremony</span>
       <div class="big">23 November 2026</div>
       <div class="time-info">Monday Morning · 10:00 AM</div>
@@ -735,17 +797,65 @@ footer{
       <span class="bar right"></span>
     </div>
 
-    <!-- Swipeable Photo Album -->
+    <!-- Swipeable Photo Album with Flower Framed Pages -->
     <div class="album-viewport">
       <div class="album-container" id="albumSlider">
-        <div class="album-page"><div class="album-page-inner"><img src="./DS%20pics/TLB06338.jpg" alt="Photo 1" loading="lazy"></div></div>
-        <div class="album-page"><div class="album-page-inner"><img src="./DS%20pics/TLB06823.jpg" alt="Photo 2" loading="lazy"></div></div>
-        <div class="album-page"><div class="album-page-inner"><img src="./DS%20pics/TLB06597.jpg" alt="Photo 3" loading="lazy"></div></div>
-        <div class="album-page"><div class="album-page-inner"><img src="./DS%20pics/TLB06586.jpg" alt="Photo 4" loading="lazy"></div></div>
-        <div class="album-page"><div class="album-page-inner"><img src="./DS%20pics/TLB06978.jpg" alt="Photo 5" loading="lazy"></div></div>
-        <div class="album-page"><div class="album-page-inner"><img src="./DS%20pics/TLB07601.jpg" alt="Photo 6" loading="lazy"></div></div>
-        <div class="album-page"><div class="album-page-inner"><img src="./DS%20pics/TLB07432.jpg" alt="Photo 7" loading="lazy"></div></div>
-        <div class="album-page"><div class="album-page-inner"><img src="./DS%20pics/TLB07452.jpg" alt="Photo 8" loading="lazy"></div></div>
+        <div class="album-page">
+          <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <div class="album-page-inner"><img src="./DS%20pics/TLB06338.jpg" alt="Photo 1" loading="lazy"></div>
+        </div>
+        <div class="album-page">
+          <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <div class="album-page-inner"><img src="./DS%20pics/TLB06823.jpg" alt="Photo 2" loading="lazy"></div>
+        </div>
+        <div class="album-page">
+          <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <div class="album-page-inner"><img src="./DS%20pics/TLB06597.jpg" alt="Photo 3" loading="lazy"></div>
+        </div>
+        <div class="album-page">
+          <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <div class="album-page-inner"><img src="./DS%20pics/TLB06586.jpg" alt="Photo 4" loading="lazy"></div>
+        </div>
+        <div class="album-page">
+          <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <div class="album-page-inner"><img src="./DS%20pics/TLB06978.jpg" alt="Photo 5" loading="lazy"></div>
+        </div>
+        <div class="album-page">
+          <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <div class="album-page-inner"><img src="./DS%20pics/TLB07601.jpg" alt="Photo 6" loading="lazy"></div>
+        </div>
+        <div class="album-page">
+          <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <div class="album-page-inner"><img src="./DS%20pics/TLB07432.jpg" alt="Photo 7" loading="lazy"></div>
+        </div>
+        <div class="album-page">
+          <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+          <div class="album-page-inner"><img src="./DS%20pics/TLB07452.jpg" alt="Photo 8" loading="lazy"></div>
+        </div>
       </div>
 
       <div class="album-controls">
@@ -768,11 +878,36 @@ footer{
       <span class="sparkle">&#10022;</span>
       <span class="bar right"></span>
     </div>
+    <!-- Countdown Cards with Flower Frames -->
     <div class="count">
-      <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
-      <div class="time"><strong id="hours">00</strong><span>HOURS</span></div>
-      <div class="time"><strong id="mins">00</strong><span>MINUTES</span></div>
-      <div class="time"><strong id="secs">00</strong><span>SECONDS</span></div>
+      <div class="time">
+        <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <strong id="days">00</strong><span>DAYS</span>
+      </div>
+      <div class="time">
+        <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <strong id="hours">00</strong><span>HOURS</span>
+      </div>
+      <div class="time">
+        <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <strong id="mins">00</strong><span>MINUTES</span>
+      </div>
+      <div class="time">
+        <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <strong id="secs">00</strong><span>SECONDS</span>
+      </div>
     </div>
   </section>
 
@@ -785,7 +920,12 @@ footer{
         <span class="sparkle">&#10022;</span>
         <span class="bar right"></span>
       </div>
+      <!-- Venue Card with Flower Frame -->
       <div class="venue-card">
+        <svg class="floral-frame-corner corner-tl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-tr" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-bl" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
+        <svg class="floral-frame-corner corner-br" viewBox="0 0 50 50"><use href="#floralFrameCorner"/></svg>
         <h3 style="font-family: 'Playfair Display', serif !important;">Adabala Gardens</h3>
         <p>Saibaba Temple Rd<br>Palakollu, Andhra Pradesh 534260</p>
         <div class="buttons">
@@ -996,7 +1136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animateCelebration);
   }
 
-  // --- Scroll-Grown Botanical Vines & Flowers ---
+  // Botanical Vines Animation
   const vLeft = document.getElementById("vineCanvasLeft");
   const vRight = document.getElementById("vineCanvasRight");
   const ctxVL = vLeft.getContext("2d");
@@ -1084,7 +1224,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderVineOnContext(c, width, height, progress) {
     c.clearRect(0, 0, width, height);
-
     const currentH = height * Math.min(1, progress);
 
     c.beginPath();
@@ -1156,7 +1295,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.addEventListener("scroll", updateVineScroll, { passive: true });
 
-  /* Mid-Screen Scroll Observer for Date Card */
   const dateCard = document.getElementById("popDateCard");
   let burstTriggered = false;
 
@@ -1176,7 +1314,7 @@ document.addEventListener("DOMContentLoaded", () => {
     threshold: 0.1 
   });
 
-  /* Swipeable Photo Album Touch / Drag Engine */
+  // Swipeable Album Engine
   const albumSlider = document.getElementById("albumSlider");
   const albumPrev = document.getElementById("albumPrev");
   const albumNext = document.getElementById("albumNext");
@@ -1219,7 +1357,6 @@ document.addEventListener("DOMContentLoaded", () => {
     albumSlider.scrollBy({ left: cardWidth, behavior: "smooth" });
   });
 
-  // Open Invitation Button
   openBtn.addEventListener("click", () => {
     openScreen.classList.add("hide");
     document.body.classList.remove("locked");

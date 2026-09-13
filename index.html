@@ -44,6 +44,7 @@ body{
 }
 .locked{overflow:hidden}
 
+/* Confetti & Sparkles Canvas */
 #celebrationCanvas {
   position: fixed;
   inset: 0;
@@ -55,6 +56,27 @@ body{
 }
 #celebrationCanvas.active {
   display: block;
+}
+
+/* Botanical Vine Canvases (Left & Right) */
+.vine-border {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 90px;
+  pointer-events: none;
+  z-index: 20;
+  display: none;
+}
+.vine-border.active {
+  display: block;
+}
+#vineCanvasLeft {
+  left: 0;
+}
+#vineCanvasRight {
+  right: 0;
+  transform: scaleX(-1);
 }
 
 .script-font,
@@ -291,7 +313,7 @@ body{
   color:var(--text-muted);
 }
 
-/* Slower Scroll-Pop Date Display Card */
+/* Slow Scroll-Pop Date Display Card */
 .pop-date-card {
   max-width: 520px;
   margin: 35px auto 0;
@@ -544,12 +566,16 @@ footer{
   .album-grid{grid-template-columns:repeat(2, 1fr);gap:10px}
   .album-item{height:160px}
   .music-toggle{bottom:16px;right:16px;width:42px;height:42px}
+  .vine-border{width:50px}
 }
 </style>
 </head>
 <body class="locked">
 
+<!-- Canvas Layers -->
 <canvas id="celebrationCanvas"></canvas>
+<canvas id="vineCanvasLeft" class="vine-border"></canvas>
+<canvas id="vineCanvasRight" class="vine-border"></canvas>
 
 <audio id="weddingMusic" loop preload="auto">
   <source src="DS.mp3.mpeg" type="audio/mpeg">
@@ -718,6 +744,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("celebrationCanvas");
   const ctx = canvas.getContext("2d");
 
+  // Confetti Canvas resize
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -889,6 +916,172 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animateCelebration);
   }
 
+  // --- Scroll-Grown Botanical Vines & Flowers ---
+  const vLeft = document.getElementById("vineCanvasLeft");
+  const vRight = document.getElementById("vineCanvasRight");
+  const ctxVL = vLeft.getContext("2d");
+  const ctxVR = vRight.getContext("2d");
+
+  let maxVineProgress = 0.08;
+
+  function resizeVineCanvases() {
+    const dpr = window.devicePixelRatio || 1;
+    const w = vLeft.clientWidth;
+    const h = window.innerHeight;
+    vLeft.width = w * dpr;
+    vLeft.height = h * dpr;
+    vRight.width = w * dpr;
+    vRight.height = h * dpr;
+    ctxVL.scale(dpr, dpr);
+    ctxVR.scale(dpr, dpr);
+    renderVines();
+  }
+  window.addEventListener("resize", resizeVineCanvases);
+
+  function drawDetailedFlower(c, x, y, scale, type) {
+    c.save();
+    c.translate(x, y);
+    c.scale(scale, scale);
+
+    const petals = type % 2 === 0 ? 5 : 6;
+    const petalGrad = c.createRadialGradient(0, 0, 2, 0, 0, 15);
+    if (type % 2 === 0) {
+      petalGrad.addColorStop(0, "#FFFFFF");
+      petalGrad.addColorStop(0.5, "#D8CEE8");
+      petalGrad.addColorStop(1, "#8D77AB");
+    } else {
+      petalGrad.addColorStop(0, "#FFFDF7");
+      petalGrad.addColorStop(0.5, "#F5EAD4");
+      petalGrad.addColorStop(1, "#E1D7B7");
+    }
+
+    for (let i = 0; i < petals; i++) {
+      c.save();
+      c.rotate((i * 2 * Math.PI) / petals);
+      c.fillStyle = petalGrad;
+      c.beginPath();
+      c.moveTo(0, 0);
+      c.bezierCurveTo(-5, -7, -7, -13, 0, -17);
+      c.bezierCurveTo(7, -13, 5, -7, 0, 0);
+      c.fill();
+      c.restore();
+    }
+
+    // Golden pistil & stamens
+    c.beginPath();
+    c.arc(0, 0, 3.5, 0, Math.PI * 2);
+    c.fillStyle = "#F5D77F";
+    c.fill();
+
+    for (let s = 0; s < 6; s++) {
+      const a = (s * Math.PI * 2) / 6;
+      c.beginPath();
+      c.arc(Math.cos(a) * 4.5, Math.sin(a) * 4.5, 0.9, 0, Math.PI * 2);
+      c.fillStyle = "#8D77AB";
+      c.fill();
+    }
+    c.restore();
+  }
+
+  function drawLeaf(c, x, y, angle, size) {
+    c.save();
+    c.translate(x, y);
+    c.rotate(angle);
+    c.beginPath();
+    c.moveTo(0, 0);
+    c.quadraticCurveTo(size * 0.45, -size * 0.45, size, 0);
+    c.quadraticCurveTo(size * 0.45, size * 0.45, 0, 0);
+    c.fillStyle = "#7A9A78";
+    c.fill();
+
+    c.strokeStyle = "#5B7B5A";
+    c.lineWidth = 0.8;
+    c.beginPath();
+    c.moveTo(0, 0);
+    c.lineTo(size * 0.85, 0);
+    c.stroke();
+    c.restore();
+  }
+
+  function renderVineOnContext(c, width, height, progress) {
+    c.clearRect(0, 0, width, height);
+
+    const currentH = height * Math.min(1, progress);
+
+    // Primary Stem
+    c.beginPath();
+    c.strokeStyle = "#5A7359";
+    c.lineWidth = 2.4;
+    c.lineCap = "round";
+
+    let prevX = 14;
+    let prevY = 0;
+    c.moveTo(prevX, prevY);
+
+    for (let y = 1; y <= currentH; y += 3) {
+      const x = 18 + Math.sin(y * 0.015) * 14 + Math.sin(y * 0.035) * 6;
+      c.lineTo(x, y);
+      prevX = x;
+      prevY = y;
+    }
+    c.stroke();
+
+    // Secondary Delicate Tendril
+    c.beginPath();
+    c.strokeStyle = "#8DAA8B";
+    c.lineWidth = 1.2;
+    for (let y = 0; y <= currentH; y += 4) {
+      const x = 18 + Math.sin(y * 0.015 + 1.2) * 11;
+      if (y === 0) c.moveTo(x, y);
+      else c.lineTo(x, y);
+    }
+    c.stroke();
+
+    // Branching Foliage and Actual Flowers
+    const nodes = 15;
+    for (let i = 1; i <= nodes; i++) {
+      const nodeY = (height / nodes) * i - 15;
+      if (nodeY > currentH) break;
+
+      const nodeX = 18 + Math.sin(nodeY * 0.015) * 14 + Math.sin(nodeY * 0.035) * 6;
+      const growthFactor = Math.min(1, (currentH - nodeY) / 50);
+
+      // Branch out leaves
+      const leafAngle1 = Math.sin(i * 1.5) * 0.5 - 0.2;
+      const leafAngle2 = Math.PI - 0.4 + Math.cos(i * 1.2) * 0.4;
+      drawLeaf(c, nodeX, nodeY, leafAngle1, 14 * growthFactor);
+      drawLeaf(c, nodeX, nodeY + 5, leafAngle2, 11 * growthFactor);
+
+      // Flowers positioned at prominent nodes
+      if (i % 2 === 1) {
+        const flowerX = nodeX + Math.cos(i) * 10;
+        const flowerY = nodeY + Math.sin(i) * 6;
+        drawDetailedFlower(c, flowerX, flowerY, (0.7 + (i % 3) * 0.15) * growthFactor, i);
+      }
+    }
+  }
+
+  function renderVines() {
+    const w = vLeft.clientWidth;
+    const h = window.innerHeight;
+    renderVineOnContext(ctxVL, w, h, maxVineProgress);
+    renderVineOnContext(ctxVR, w, h, maxVineProgress);
+  }
+
+  function updateVineScroll() {
+    if (!site.classList.contains("show")) return;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const currentScroll = window.scrollY;
+    const scrollFrac = maxScroll > 0 ? currentScroll / maxScroll : 0;
+    const targetProgress = Math.min(1, Math.max(0.12, scrollFrac * 1.35));
+
+    if (targetProgress > maxVineProgress) {
+      maxVineProgress = targetProgress;
+      renderVines();
+    }
+  }
+  window.addEventListener("scroll", updateVineScroll, { passive: true });
+
   /* Mid-Screen Scroll Observer for Date Card */
   const dateCard = document.getElementById("popDateCard");
   let burstTriggered = false;
@@ -915,8 +1108,13 @@ document.addEventListener("DOMContentLoaded", () => {
     site.classList.add("show");
     musicToggle.classList.add("show");
     canvas.classList.add("active");
+    vLeft.classList.add("active");
+    vRight.classList.add("active");
+
+    resizeVineCanvases();
     initCelebration();
     dateObserver.observe(dateCard);
+    updateVineScroll();
 
     audio.play().then(() => {
       musicToggle.classList.add("playing");

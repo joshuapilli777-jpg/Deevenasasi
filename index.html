@@ -100,13 +100,14 @@ body{
   line-height: 1;
 }
 
-/* Watercolor Rose & Eucalyptus Corner Spray (Diagonal Asymmetric Framing) */
+/* Realistic Botanical Watercolor Corner Framing */
 .rose-corner-spray {
   position: absolute;
-  width: 125px;
-  height: 125px;
+  width: 135px;
+  height: 135px;
   pointer-events: none;
   z-index: 4;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.06));
 }
 .spray-tl { top: -10px; left: -10px; }
 .spray-br { bottom: -10px; right: -10px; transform: scale(-1); }
@@ -626,7 +627,7 @@ footer{
   .pop-date-card{padding:36px 20px}
   .album-page{flex:0 0 260px;height:360px}
   .music-toggle{bottom:16px;right:16px;width:42px;height:42px}
-  .rose-corner-spray { width: 95px; height: 95px; }
+  .rose-corner-spray { width: 100px; height: 100px; }
 }
 </style>
 </head>
@@ -634,98 +635,175 @@ footer{
 
 <canvas id="celebrationCanvas"></canvas>
 
-<!-- Transparent SVG Watercolor Botanical Frame (Matching Crimson Roses, Pink Cabbage Roses, Rosebuds & Eucalyptus) -->
+<!-- Transparent SVG Layered Botanical Elements (Grounded Watercolor Gradients & Painterly Texture) -->
 <svg style="display:none">
   <defs>
-    <!-- Detailed Layered Watercolor Rose Definition -->
-    <g id="watercolorRose">
-      <!-- Outer Petals -->
-      <path d="M0,0 C-18,-10 -25,-2 0,-24 C25,-2 18,-10 0,0" fill="#E63956"/>
-      <path d="M-15,-6 C-24,-18 -8,-28 0,-22 C8,-28 24,-18 15,-6" fill="#F05470"/>
-      <path d="M-12,-10 C-18,-22 0,-30 0,-16 C0,-30 18,-22 12,-10" fill="#FA8096"/>
-      <!-- Inner Swirl Petals -->
-      <path d="M-8,-14 C-12,-22 0,-26 0,-18 C0,-26 12,-22 8,-14" fill="#B81432"/>
-      <path d="M-5,-16 C-8,-22 0,-24 0,-18 C0,-24 8,-22 5,-16" fill="#8C0D24"/>
-      <ellipse cx="0" cy="-18" rx="3.5" ry="2.2" fill="#5E0617"/>
+    <!-- Soft Watercolor Wet-Edge Texture Filters -->
+    <filter id="watercolorBlend" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- Deep Red Garden Rose Gradient -->
+    <radialGradient id="redRoseGrad" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#540411"/>
+      <stop offset="25%" stop-color="#8A0B20"/>
+      <stop offset="55%" stop-color="#B81432"/>
+      <stop offset="85%" stop-color="#DE2849"/>
+      <stop offset="100%" stop-color="#F25C76"/>
+    </radialGradient>
+
+    <!-- Powder Pink Cabbage Rose Gradient -->
+    <radialGradient id="pinkRoseGrad" cx="40%" cy="38%" r="60%">
+      <stop offset="0%" stop-color="#8F1735"/>
+      <stop offset="30%" stop-color="#C73255"/>
+      <stop offset="60%" stop-color="#E85D7F"/>
+      <stop offset="85%" stop-color="#F7A3B7"/>
+      <stop offset="100%" stop-color="#FDDFE5"/>
+    </radialGradient>
+
+    <!-- Yellow-Cream Rosebud Gradient -->
+    <radialGradient id="creamBudGrad" cx="35%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#9C782F"/>
+      <stop offset="40%" stop-color="#D9A84E"/>
+      <stop offset="80%" stop-color="#FCE192"/>
+      <stop offset="100%" stop-color="#FFF8DC"/>
+    </radialGradient>
+
+    <!-- Deep Forest Foliage Gradient -->
+    <linearGradient id="leafGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B311A"/>
+      <stop offset="50%" stop-color="#2D4D2B"/>
+      <stop offset="100%" stop-color="#466E43"/>
+    </linearGradient>
+
+    <!-- Olive Eucalyptus Foliage Gradient -->
+    <linearGradient id="leafGradOlive" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#283827"/>
+      <stop offset="60%" stop-color="#536E50"/>
+      <stop offset="100%" stop-color="#86A383"/>
+    </linearGradient>
+
+    <!-- Realistic Detailed Red Garden Rose (Multi-tier overlap) -->
+    <g id="realRedRose" filter="url(#watercolorBlend)">
+      <!-- Outer wide guard petals -->
+      <path d="M0,0 C-22,-14 -32,8 -8,26 C8,34 28,18 20,-4 C16,-16 -4,-22 -14,-14 Z" fill="url(#redRoseGrad)" opacity="0.95"/>
+      <path d="M-18,6 C-30,-8 -12,-26 8,-20 C24,-16 32,-2 22,14" fill="#C91837" opacity="0.85"/>
+      <!-- Mid-tier cupped petals -->
+      <path d="M-14,-2 C-20,-16 -2,-24 12,-16 C22,-10 20,6 8,12 C-4,18 -18,12 -14,-2" fill="#9C0D26"/>
+      <path d="M-8,-6 C-14,-18 2,-20 10,-12 C18,-6 14,4 4,8 C-6,12 -14,6 -8,-6" fill="#750519"/>
+      <!-- Inner core swirl -->
+      <path d="M-5,-4 C-10,-12 2,-14 6,-8 C10,-2 6,4 0,5 C-6,6 -10,0 -5,-4" fill="#540411"/>
+      <!-- Painterly petal rim highlights -->
+      <path d="M-16,-12 C-2,-24 16,-14 24,-2" fill="none" stroke="#FFA3B2" stroke-width="1.2" opacity="0.6" stroke-linecap="round"/>
+      <path d="M-22,2 C-28,14 -12,24 2,22" fill="none" stroke="#FFA3B2" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
+      <path d="M-8,-14 C0,-18 8,-12 10,-4" fill="none" stroke="#FFCCD5" stroke-width="0.9" opacity="0.75" stroke-linecap="round"/>
     </g>
 
-    <!-- Detailed Layered Pink Cabbage Rose Definition -->
-    <g id="watercolorPinkRose">
-      <path d="M0,0 C-16,-8 -22,-2 0,-22 C22,-2 16,-8 0,0" fill="#F8A5B5"/>
-      <path d="M-13,-5 C-20,-15 -6,-25 0,-19 C6,-25 20,-15 13,-5" fill="#FAAEC0"/>
-      <path d="M-10,-8 C-15,-18 0,-26 0,-14 C0,-26 15,-18 10,-8" fill="#F37591"/>
-      <path d="M-6,-11 C-10,-18 0,-22 0,-15 C0,-22 10,-18 6,-11" fill="#E24A6F"/>
-      <ellipse cx="0" cy="-15" rx="3.2" ry="1.9" fill="#B32045"/>
+    <!-- Realistic Soft Pink Cabbage Rose -->
+    <g id="realPinkRose" filter="url(#watercolorBlend)">
+      <!-- Outer frilly petals -->
+      <path d="M0,0 C-20,-12 -28,6 -6,22 C6,28 24,14 18,-4 C14,-14 -2,-18 -12,-12 Z" fill="url(#pinkRoseGrad)" opacity="0.95"/>
+      <path d="M-14,4 C-24,-6 -10,-22 6,-16 C20,-12 26,0 18,12" fill="#E85D7F" opacity="0.85"/>
+      <!-- Inner clustered ruffled petals -->
+      <path d="M-10,-2 C-16,-12 -2,-18 8,-12 C16,-8 16,4 6,8 C-4,12 -14,8 -10,-2" fill="#B82346"/>
+      <path d="M-6,-4 C-10,-12 2,-14 6,-8 C12,-4 8,4 2,6 C-4,8 -10,4 -6,-4" fill="#8F1735"/>
+      <ellipse cx="0" cy="-2" rx="3.5" ry="2.2" fill="#660A20"/>
+      <!-- Rim highlights -->
+      <path d="M-12,-10 C-2,-18 12,-12 18,-2" fill="none" stroke="#FFF0F3" stroke-width="1.3" opacity="0.85" stroke-linecap="round"/>
+      <path d="M-18,2 C-22,12 -8,18 2,16" fill="none" stroke="#FFE3E8" stroke-width="1" opacity="0.7" stroke-linecap="round"/>
+      <path d="M-6,-10 C0,-14 6,-10 8,-2" fill="none" stroke="#FFFFFF" stroke-width="0.9" opacity="0.9" stroke-linecap="round"/>
     </g>
 
-    <!-- Complete Botanical Watercolor Spray (No background, transparent) -->
+    <!-- Natural Watercolor Leaf Definition -->
+    <g id="naturalLeaf">
+      <path d="M0,0 C8,-18 28,-18 36,0 C28,18 8,18 0,0 Z" fill="url(#leafGradDark)"/>
+      <path d="M2,0 L32,0" fill="none" stroke="#142413" stroke-width="1.1" stroke-linecap="round"/>
+      <!-- Lateral veins -->
+      <path d="M8,0 Q16,-6 20,-10" fill="none" stroke="#142413" stroke-width="0.7" opacity="0.85"/>
+      <path d="M14,0 Q22,-5 26,-9" fill="none" stroke="#142413" stroke-width="0.7" opacity="0.85"/>
+      <path d="M8,0 Q16,6 20,10" fill="none" stroke="#142413" stroke-width="0.7" opacity="0.85"/>
+      <path d="M14,0 Q22,5 26,9" fill="none" stroke="#142413" stroke-width="0.7" opacity="0.85"/>
+    </g>
+
+    <!-- Complete Realistic Botanical Floral Spray (Transparent, matches reference) -->
     <g id="watercolorFloralSpray">
-      <!-- Dark Forest / Sage Green Eucalyptus & Leaf Stems -->
-      <path d="M12,12 Q45,2 75,18 T115,10" fill="none" stroke="#2B472A" stroke-width="2.2" stroke-linecap="round"/>
-      <path d="M12,12 Q2,45 18,75 T10,115" fill="none" stroke="#2B472A" stroke-width="2.2" stroke-linecap="round"/>
-      <path d="M18,18 Q60,35 105,65" fill="none" stroke="#3D5E3C" stroke-width="1.6" stroke-linecap="round"/>
-      <path d="M18,18 Q35,60 65,105" fill="none" stroke="#3D5E3C" stroke-width="1.6" stroke-linecap="round"/>
+      <!-- Dark Stems & Branches -->
+      <path d="M14,14 Q45,2 78,16 T122,8" fill="none" stroke="#1F331D" stroke-width="2" stroke-linecap="round"/>
+      <path d="M14,14 Q2,45 16,78 T8,122" fill="none" stroke="#1F331D" stroke-width="2" stroke-linecap="round"/>
+      <path d="M20,20 Q62,38 108,68" fill="none" stroke="#2B4529" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M20,20 Q38,62 68,108" fill="none" stroke="#2B4529" stroke-width="1.6" stroke-linecap="round"/>
 
-      <!-- Olive & Forest Green Eucalyptus Leaves with Veining -->
-      <g>
-        <path d="M38,6 Q52,-2 62,10 Q48,18 38,6" fill="#3D5E3C"/>
-        <path d="M38,6 Q50,8 62,10" fill="none" stroke="#233A22" stroke-width="0.9"/>
-        <path d="M68,14 Q84,8 92,22 Q76,28 68,14" fill="#4C6E4A"/>
-        <path d="M94,12 Q108,6 114,18 Q100,24 94,12" fill="#5D805B"/>
-
-        <path d="M6,38 Q-2,52 10,62 Q18,48 6,38" fill="#3D5E3C"/>
-        <path d="M6,38 Q8,50 10,62" fill="none" stroke="#233A22" stroke-width="0.9"/>
-        <path d="M14,68 Q8,84 22,92 Q28,76 14,68" fill="#4C6E4A"/>
-        <path d="M12,94 Q6,108 18,114 Q24,100 12,94" fill="#5D805B"/>
-
-        <path d="M48,58 Q64,52 70,68 Q54,74 48,58" fill="#3D5E3C"/>
-        <path d="M58,48 Q52,64 68,70 Q74,54 58,48" fill="#4C6E4A"/>
-        <path d="M78,65 Q92,60 98,72 Q84,78 78,65" fill="#5D805B"/>
-        <path d="M65,78 Q60,92 72,98 Q78,84 65,78" fill="#5D805B"/>
+      <!-- Foliage Sprays (Various angles & layers) -->
+      <g transform="translate(68, 12) rotate(10) scale(0.8)"><use href="#naturalLeaf"/></g>
+      <g transform="translate(92, 10) rotate(-20) scale(0.65)"><use href="#naturalLeaf"/></g>
+      <g transform="translate(12, 68) rotate(80) scale(0.8)"><use href="#naturalLeaf"/></g>
+      <g transform="translate(10, 92) rotate(110) scale(0.65)"><use href="#naturalLeaf"/></g>
+      
+      <!-- Olive Eucalyptus Leaves -->
+      <g transform="translate(42, 54) rotate(40) scale(0.7)">
+        <path d="M0,0 C6,-15 24,-15 30,0 C24,15 6,15 0,0 Z" fill="url(#leafGradOlive)"/>
+        <path d="M2,0 L26,0" fill="none" stroke="#1E2B1D" stroke-width="0.9"/>
+      </g>
+      <g transform="translate(54, 42) rotate(55) scale(0.65)">
+        <path d="M0,0 C6,-15 24,-15 30,0 C24,15 6,15 0,0 Z" fill="url(#leafGradOlive)"/>
+        <path d="M2,0 L26,0" fill="none" stroke="#1E2B1D" stroke-width="0.9"/>
+      </g>
+      <g transform="translate(80, 64) rotate(25) scale(0.6)">
+        <path d="M0,0 C6,-15 24,-15 30,0 C24,15 6,15 0,0 Z" fill="url(#leafGradOlive)"/>
+      </g>
+      <g transform="translate(64, 80) rotate(70) scale(0.6)">
+        <path d="M0,0 C6,-15 24,-15 30,0 C24,15 6,15 0,0 Z" fill="url(#leafGradOlive)"/>
       </g>
 
-      <!-- Delicate Baby Leaf Sprigs & Calyxes -->
-      <g fill="#759873">
-        <circle cx="82" cy="10" r="3.2"/>
-        <circle cx="95" cy="28" r="3.6"/>
-        <circle cx="10" cy="82" r="3.2"/>
-        <circle cx="28" cy="95" r="3.6"/>
-        <circle cx="88" cy="52" r="3"/>
-        <circle cx="52" cy="88" r="3"/>
+      <!-- Delicate Baby Greens & Calyx Seeds -->
+      <g fill="#436340">
+        <circle cx="86" cy="8" r="2.8"/>
+        <circle cx="102" cy="24" r="3.2"/>
+        <circle cx="8" cy="86" r="2.8"/>
+        <circle cx="24" cy="102" r="3.2"/>
+        <circle cx="94" cy="50" r="2.6"/>
+        <circle cx="50" cy="94" r="2.6"/>
       </g>
 
-      <!-- Soft Rosebuds with Green Sepals -->
-      <g transform="translate(92, 38)">
-        <path d="M0,0 Q-4,-14 6,-18 Q16,-14 12,0 Z" fill="#E63956"/>
-        <path d="M2, -6 Q4,-16 10,-12" fill="#FAAEC0"/>
-        <path d="M-2,0 Q-1,-12 4,-10" fill="none" stroke="#2B472A" stroke-width="1.8"/>
-        <path d="M14,0 Q13,-12 8,-10" fill="none" stroke="#2B472A" stroke-width="1.8"/>
-      </g>
-      <g transform="translate(38, 92) rotate(90)">
-        <path d="M0,0 Q-4,-14 6,-18 Q16,-14 12,0 Z" fill="#F8A5B5"/>
-        <path d="M2, -6 Q4,-16 10,-12" fill="#E24A6F"/>
-        <path d="M-2,0 Q-1,-12 4,-10" fill="none" stroke="#2B472A" stroke-width="1.8"/>
-        <path d="M14,0 Q13,-12 8,-10" fill="none" stroke="#2B472A" stroke-width="1.8"/>
+      <!-- Yellow-Cream Watercolor Rosebud (As seen in invitation reference) -->
+      <g transform="translate(96, 34) rotate(-15) scale(0.85)">
+        <!-- Green sepals wrapping the bud -->
+        <path d="M-6,2 Q-2,-18 4,-14" fill="none" stroke="#1F331D" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M12,2 Q8,-18 4,-14" fill="none" stroke="#1F331D" stroke-width="1.8" stroke-linecap="round"/>
+        <!-- Petal body -->
+        <path d="M-2,0 Q-4,-18 5,-22 Q14,-18 10,0 Z" fill="url(#creamBudGrad)"/>
+        <path d="M1,-6 Q4,-18 8,-14" fill="#FFFDF2" opacity="0.9"/>
+        <path d="M2,0 C-1,6 9,6 6,0 Z" fill="#2B4529"/>
       </g>
 
-      <!-- Rose 1: Main Deep Red & Crimson Watercolor Rose -->
-      <g transform="translate(38, 38) scale(1.15)">
-        <use href="#watercolorRose"/>
+      <!-- Closed Crimson Rosebud -->
+      <g transform="translate(34, 96) rotate(105) scale(0.8)">
+        <path d="M-6,2 Q-2,-18 4,-14" fill="none" stroke="#1F331D" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M12,2 Q8,-18 4,-14" fill="none" stroke="#1F331D" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M-2,0 Q-4,-18 5,-22 Q14,-18 10,0 Z" fill="url(#redRoseGrad)"/>
+        <path d="M1,-6 Q4,-18 8,-14" fill="#FFA3B2" opacity="0.85"/>
+        <path d="M2,0 C-1,6 9,6 6,0 Z" fill="#2B4529"/>
       </g>
 
-      <!-- Rose 2: Lush Watercolor Pink Blossom -->
-      <g transform="translate(56, 18) scale(0.85)">
-        <use href="#watercolorPinkRose"/>
+      <!-- Primary Realistic Deep Red Rose -->
+      <g transform="translate(42, 42) scale(1.18)">
+        <use href="#realRedRose"/>
       </g>
 
-      <!-- Rose 3: Soft Blush Rose on Opposite Branch -->
-      <g transform="translate(18, 56) scale(0.85) rotate(70)">
-        <use href="#watercolorPinkRose"/>
+      <!-- Primary Realistic Soft Pink Cabbage Rose -->
+      <g transform="translate(60, 20) scale(0.88)">
+        <use href="#realPinkRose"/>
       </g>
 
-      <!-- Rose 4: Rich Crimson Accent Rose -->
-      <g transform="translate(68, 50) scale(0.7) rotate(-35)">
-        <use href="#watercolorRose"/>
+      <!-- Secondary Pink Rose (Opposite branch) -->
+      <g transform="translate(20, 60) scale(0.86) rotate(75)">
+        <use href="#realPinkRose"/>
+      </g>
+
+      <!-- Small Crimson Accent Blossom -->
+      <g transform="translate(74, 52) scale(0.68) rotate(-30)">
+        <use href="#realRedRose"/>
       </g>
     </g>
   </defs>
@@ -783,7 +861,7 @@ footer{
     </div>
 
     <div class="couple">
-      <!-- Bride Card with Watercolor Rose & Eucalyptus Frame -->
+      <!-- Bride Card with Realistic Botanical Roses Frame -->
       <div class="person">
         <svg class="rose-corner-spray spray-tl" viewBox="0 0 125 125"><use href="#watercolorFloralSpray"/></svg>
         <svg class="rose-corner-spray spray-br" viewBox="0 0 125 125"><use href="#watercolorFloralSpray"/></svg>
@@ -792,7 +870,7 @@ footer{
         <div class="parents"><strong>D/o Dr. Salivendra Kishore Kumar and Mrs. Emily</strong></div>
       </div>
 
-      <!-- Groom Card with Watercolor Rose & Eucalyptus Frame -->
+      <!-- Groom Card with Realistic Botanical Roses Frame -->
       <div class="person">
         <svg class="rose-corner-spray spray-tl" viewBox="0 0 125 125"><use href="#watercolorFloralSpray"/></svg>
         <svg class="rose-corner-spray spray-br" viewBox="0 0 125 125"><use href="#watercolorFloralSpray"/></svg>
@@ -812,7 +890,7 @@ footer{
       <span class="bar right"></span>
     </div>
     
-    <!-- Save The Date Card with Watercolor Rose & Eucalyptus Frame -->
+    <!-- Save The Date Card with Realistic Botanical Roses Frame -->
     <div class="pop-date-card" id="popDateCard">
       <svg class="rose-corner-spray spray-tl" viewBox="0 0 125 125"><use href="#watercolorFloralSpray"/></svg>
       <svg class="rose-corner-spray spray-br" viewBox="0 0 125 125"><use href="#watercolorFloralSpray"/></svg>
@@ -890,7 +968,7 @@ footer{
         <span class="sparkle">&#10022;</span>
         <span class="bar right"></span>
       </div>
-      <!-- Venue Card with Watercolor Rose & Eucalyptus Frame -->
+      <!-- Venue Card with Realistic Botanical Roses Frame -->
       <div class="venue-card">
         <svg class="rose-corner-spray spray-tl" viewBox="0 0 125 125"><use href="#watercolorFloralSpray"/></svg>
         <svg class="rose-corner-spray spray-br" viewBox="0 0 125 125"><use href="#watercolorFloralSpray"/></svg>

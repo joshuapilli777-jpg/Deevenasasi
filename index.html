@@ -100,17 +100,6 @@ body{
   line-height: 1;
 }
 
-/* Floral Border Frame */
-.floral-frame-overlay {
-  position: absolute;
-  inset: -14px;
-  width: calc(100% + 28px);
-  height: calc(100% + 28px);
-  object-fit: fill;
-  pointer-events: none;
-  z-index: 4;
-}
-
 #open{
   position:fixed;
   inset:0;
@@ -279,12 +268,12 @@ body{
 .couple{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:36px;
+  gap:28px;
   margin-top:50px;
 }
 .person{
   position:relative;
-  padding:56px 36px;
+  padding:44px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -305,13 +294,14 @@ body{
 .pop-date-card {
   max-width: 520px;
   margin: 35px auto 0;
-  padding: 56px 36px;
+  padding: 45px 30px;
   background: var(--card-bg);
   border: 1px solid var(--border-light);
   border-radius: 28px;
   box-shadow: var(--shadow);
   backdrop-filter: blur(8px);
   position: relative;
+  overflow: hidden;
   opacity: 0;
   transform: scale(0.55) translateY(90px);
   transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -335,7 +325,6 @@ body{
   opacity: 0;
   transition: opacity 2s ease 0.4s;
   pointer-events: none;
-  border-radius: 28px;
 }
 .pop-date-card.revealed::before {
   opacity: 1;
@@ -464,7 +453,7 @@ body{
 
 .venue-card{
   position:relative;
-  padding:56px 36px;
+  padding:44px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -614,7 +603,7 @@ footer{
   text-transform:uppercase;
 }
 @media(max-width:700px){
-  .couple{grid-template-columns:1fr;gap:26px}
+  .couple{grid-template-columns:1fr;gap:20px}
   .hero h1{font-size:75px}
   .hero .names{font-size:38px}
   .count{gap:8px}
@@ -623,7 +612,7 @@ footer{
   .section{padding:60px 20px}
   .section h2{font-size:42px}
   .big{font-size:42px}
-  .pop-date-card{padding:42px 24px}
+  .pop-date-card{padding:36px 20px}
   .album-page{flex:0 0 260px;height:360px}
   .music-toggle{bottom:16px;right:16px;width:42px;height:42px}
 }
@@ -685,17 +674,13 @@ footer{
     </div>
 
     <div class="couple">
-      <!-- Bride Card with Uploaded Floral Border -->
       <div class="person">
-        <img class="floral-frame-overlay" src="./flowers/WhatsApp%20Image%202026-09-13%20at%2011.58.28%20PM.jpeg" alt="Floral Border">
         <div class="small">The Bride</div>
         <h3>Dr. Deevena Salivendra</h3>
         <div class="parents"><strong>D/o Dr. Salivendra Kishore Kumar and Mrs. Emily</strong></div>
       </div>
 
-      <!-- Groom Card with Uploaded Floral Border -->
       <div class="person">
-        <img class="floral-frame-overlay" src="./flowers/WhatsApp%20Image%202026-09-13%20at%2011.58.28%20PM.jpeg" alt="Floral Border">
         <div class="small">The Groom</div>
         <h3>Dr. Sasi Preetham Manukonda</h3>
         <div class="parents"><strong>S/o Mr. Manukoda.V.V. Satyanarayana and Mrs. Santha Kumari</strong></div>
@@ -712,9 +697,7 @@ footer{
       <span class="bar right"></span>
     </div>
     
-    <!-- Save The Date Card with Uploaded Floral Border -->
     <div class="pop-date-card" id="popDateCard">
-      <img class="floral-frame-overlay" src="./flowers/WhatsApp%20Image%202026-09-13%20at%2011.58.28%20PM.jpeg" alt="Floral Border">
       <span class="pop-tag">Our Wedding Ceremony</span>
       <div class="big">23 November 2026</div>
       <div class="time-info">Monday Morning · 10:00 AM</div>
@@ -730,7 +713,6 @@ footer{
       <span class="bar right"></span>
     </div>
 
-    <!-- Swipeable Photo Album (Clean Bordered Frame - No Flowers) -->
     <div class="album-viewport">
       <div class="album-container" id="albumSlider">
         <div class="album-page"><div class="album-page-inner"><img src="./DS%20pics/TLB06338.jpg" alt="Photo 1" loading="lazy"></div></div>
@@ -763,7 +745,6 @@ footer{
       <span class="sparkle">&#10022;</span>
       <span class="bar right"></span>
     </div>
-    <!-- Clean Countdown Cards (No Flowers) -->
     <div class="count">
       <div class="time">
         <strong id="days">00</strong><span>DAYS</span>
@@ -789,9 +770,7 @@ footer{
         <span class="sparkle">&#10022;</span>
         <span class="bar right"></span>
       </div>
-      <!-- Venue Card with Uploaded Floral Border -->
       <div class="venue-card">
-        <img class="floral-frame-overlay" src="./flowers/WhatsApp%20Image%202026-09-13%20at%2011.58.28%20PM.jpeg" alt="Floral Border">
         <h3 style="font-family: 'Playfair Display', serif !important;">Adabala Gardens</h3>
         <p>Saibaba Temple Rd<br>Palakollu, Andhra Pradesh 534260</p>
         <div class="buttons">
@@ -1021,7 +1000,6 @@ document.addEventListener("DOMContentLoaded", () => {
     threshold: 0.1 
   });
 
-  // Swipeable Album Engine
   const albumSlider = document.getElementById("albumSlider");
   const albumPrev = document.getElementById("albumPrev");
   const albumNext = document.getElementById("albumNext");

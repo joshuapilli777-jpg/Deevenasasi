@@ -26,7 +26,7 @@
   --purple-royal: #8D77AB;
   --royal-gradient: linear-gradient(135deg, #1E2A5E 0%, #3B4B7F 50%, #8D77AB 100%);
   --gold-accent: #E1D7B7;
-  --card-bg: rgba(255, 255, 255, 0.92);
+  --card-bg: rgba(255, 255, 255, 0.94);
   --border-light: rgba(141, 119, 171, 0.25);
   --shadow: 0 20px 40px -15px rgba(30, 42, 94, 0.12);
 }
@@ -44,7 +44,6 @@ body{
 }
 .locked{overflow:hidden}
 
-/* --- Floating Floral Petals Canvas --- */
 #petalCanvas {
   position: fixed;
   inset: 0;
@@ -83,7 +82,6 @@ body{
   justify-content: center;
   margin: 18px auto;
   gap: 12px;
-  color: var(--purple-royal);
 }
 .floral-divider .bar {
   height: 1px;
@@ -94,24 +92,33 @@ body{
   background: linear-gradient(90deg, var(--purple-royal), transparent);
 }
 .floral-divider svg {
-  fill: currentColor;
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
 }
 
-/* Decorative Floral Corners for Cards */
+/* Detailed Flower Corners */
 .floral-corner {
   position: absolute;
-  width: 46px;
-  height: 46px;
-  fill: var(--purple-royal);
-  opacity: 0.35;
+  width: 70px;
+  height: 70px;
   pointer-events: none;
+  z-index: 2;
 }
-.floral-top-left { top: 12px; left: 12px; }
-.floral-top-right { top: 12px; right: 12px; transform: scaleX(-1); }
-.floral-bottom-left { bottom: 12px; left: 12px; transform: scaleY(-1); }
-.floral-bottom-right { bottom: 12px; right: 12px; transform: scale(-1); }
+.floral-top-left { top: -6px; left: -6px; }
+.floral-top-right { top: -6px; right: -6px; transform: scaleX(-1); }
+.floral-bottom-left { bottom: -6px; left: -6px; transform: scaleY(-1); }
+.floral-bottom-right { bottom: -6px; right: -6px; transform: scale(-1); }
+
+/* Header Floral Crests */
+.flower-crest {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.flower-crest svg {
+  width: 90px;
+  height: 50px;
+}
 
 #open{
   position:fixed;
@@ -128,7 +135,7 @@ body{
 .hide{opacity:0;visibility:hidden;pointer-events:none}
 .card{
   position:relative;
-  padding:46px 36px;
+  padding:50px 36px 42px;
   max-width:580px;
   background:rgba(255,255,255,0.12);
   backdrop-filter:blur(16px);
@@ -281,12 +288,12 @@ body{
 .couple{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:24px;
+  gap:28px;
   margin-top:50px;
 }
 .person{
   position:relative;
-  padding:44px 28px;
+  padding:48px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -305,7 +312,7 @@ body{
 }
 .venue-card{
   position:relative;
-  padding:48px 28px;
+  padding:52px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -542,7 +549,7 @@ footer{
   text-transform:uppercase;
 }
 @media(max-width:700px){
-  .couple{grid-template-columns:1fr;gap:18px}
+  .couple{grid-template-columns:1fr;gap:20px}
   .hero h1{font-size:75px}
   .hero .names{font-size:38px}
   .count{gap:8px}
@@ -555,13 +562,68 @@ footer{
   .album-grid{grid-template-columns:repeat(2, 1fr);gap:10px}
   .album-item{height:160px}
   .music-toggle{bottom:16px;right:16px;width:42px;height:42px}
+  .floral-corner{width:54px;height:54px}
 }
 </style>
 </head>
 <body class="locked">
 
-<!-- Floating petals canvas -->
+<!-- Floating Flowers & Petals Canvas -->
 <canvas id="petalCanvas"></canvas>
+
+<!-- Reusable SVG Templates for Flowers -->
+<svg style="display:none">
+  <defs>
+    <!-- Detailed Botanical Flower Corner -->
+    <g id="flowerCorner">
+      <path d="M0,0 Q30,12 42,42 Q12,30 0,0" fill="#B8D5B3" opacity="0.65"/>
+      <path d="M12,0 Q35,22 30,55 Q8,25 12,0" fill="#8D77AB" opacity="0.45"/>
+      <g transform="translate(18, 18)">
+        <circle cx="0" cy="-12" r="8" fill="#E1D7B7" opacity="0.8"/>
+        <circle cx="12" cy="0" r="8" fill="#E1D7B7" opacity="0.8"/>
+        <circle cx="0" cy="12" r="8" fill="#E1D7B7" opacity="0.8"/>
+        <circle cx="-12" cy="0" r="8" fill="#E1D7B7" opacity="0.8"/>
+        <circle cx="-8" cy="-8" r="7" fill="#8D77AB" opacity="0.7"/>
+        <circle cx="8" cy="-8" r="7" fill="#8D77AB" opacity="0.7"/>
+        <circle cx="8" cy="8" r="7" fill="#8D77AB" opacity="0.7"/>
+        <circle cx="-8" cy="8" r="7" fill="#8D77AB" opacity="0.7"/>
+        <circle cx="0" cy="0" r="6" fill="#F9F6E6"/>
+      </g>
+    </g>
+
+    <!-- Detailed Center Blossom -->
+    <g id="blossomCenter">
+      <path d="M-15,-2 C-10,-12 0,-15 0,-2 C0,-15 10,-12 15,-2 C12,8 0,16 0,16 C0,16 -12,8 -15,-2 Z" fill="#B8D5B3" opacity="0.6"/>
+      <circle cx="0" cy="-7" r="5" fill="#8D77AB" opacity="0.85"/>
+      <circle cx="7" cy="0" r="5" fill="#8D77AB" opacity="0.85"/>
+      <circle cx="0" cy="7" r="5" fill="#8D77AB" opacity="0.85"/>
+      <circle cx="-7" cy="0" r="5" fill="#8D77AB" opacity="0.85"/>
+      <circle cx="-5" cy="-5" r="4.5" fill="#E1D7B7" opacity="0.9"/>
+      <circle cx="5" cy="-5" r="4.5" fill="#E1D7B7" opacity="0.9"/>
+      <circle cx="5" cy="5" r="4.5" fill="#E1D7B7" opacity="0.9"/>
+      <circle cx="-5" cy="5" r="4.5" fill="#E1D7B7" opacity="0.9"/>
+      <circle cx="0" cy="0" r="3.5" fill="#fff"/>
+    </g>
+
+    <!-- Top Flower Crest -->
+    <g id="flowerCrest">
+      <path d="M-30,4 Q-15,-10 0,0 Q15,-10 30,4" fill="none" stroke="#B8D5B3" stroke-width="2"/>
+      <path d="M-22,-4 Q-18,-15 -10,-8" fill="none" stroke="#8D77AB" stroke-width="1.5"/>
+      <path d="M22,-4 Q18,-15 10,-8" fill="none" stroke="#8D77AB" stroke-width="1.5"/>
+      <g transform="translate(0, 0)">
+        <circle cx="0" cy="-6" r="4.5" fill="#8D77AB" opacity="0.85"/>
+        <circle cx="6" cy="0" r="4.5" fill="#8D77AB" opacity="0.85"/>
+        <circle cx="0" cy="6" r="4.5" fill="#8D77AB" opacity="0.85"/>
+        <circle cx="-6" cy="0" r="4.5" fill="#8D77AB" opacity="0.85"/>
+        <circle cx="-4" cy="-4" r="4" fill="#E1D7B7"/>
+        <circle cx="4" cy="-4" r="4" fill="#E1D7B7"/>
+        <circle cx="4" cy="4" r="4" fill="#E1D7B7"/>
+        <circle cx="-4" cy="4" r="4" fill="#E1D7B7"/>
+        <circle cx="0" cy="0" r="3" fill="#fff"/>
+      </g>
+    </g>
+  </defs>
+</svg>
 
 <audio id="weddingMusic" loop preload="auto">
   <source src="DS.mp3.mpeg" type="audio/mpeg">
@@ -575,13 +637,16 @@ footer{
 
 <section id="open">
   <div class="card">
-    <svg class="floral-corner floral-top-left" viewBox="0 0 100 100"><path d="M0,0 Q30,10 45,45 Q10,30 0,0 M15,5 Q40,30 50,70 Q25,45 15,5" fill="var(--gold-accent)" opacity="0.6"/></svg>
-    <svg class="floral-corner floral-top-right" viewBox="0 0 100 100"><path d="M0,0 Q30,10 45,45 Q10,30 0,0 M15,5 Q40,30 50,70 Q25,45 15,5" fill="var(--gold-accent)" opacity="0.6"/></svg>
+    <svg class="floral-corner floral-top-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+    <svg class="floral-corner floral-top-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+    <svg class="floral-corner floral-bottom-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+    <svg class="floral-corner floral-bottom-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+
     <div class="mono">D &amp; S</div>
     <div class="kicker">A Celebration of Love</div>
     <div class="floral-divider">
       <span class="bar"></span>
-      <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
+      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
       <span class="bar right"></span>
     </div>
     <div class="openverse">“The steadfast love of the Lord never ceases.”</div>
@@ -593,12 +658,15 @@ footer{
 <main id="site" class="site">
   <section class="hero">
     <div>
+      <div class="flower-crest">
+        <svg viewBox="-40 -20 80 40"><use href="#flowerCrest"/></svg>
+      </div>
       <div class="small">Together with their families</div>
       <h1>D &amp; S</h1>
       <div class="names">Dr. Deevena Salivendra<br>&amp;<br>Dr. Sasi Preetham Manukonda</div>
       <div class="floral-divider" style="color:var(--gold-accent)">
         <span class="bar" style="background:linear-gradient(90deg, transparent, var(--gold-accent))"></span>
-        <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
+        <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
         <span class="bar right" style="background:linear-gradient(90deg, var(--gold-accent), transparent)"></span>
       </div>
       <div class="small" style="margin-top:15px">November 23, 2026 · 10:00 AM</div>
@@ -612,21 +680,21 @@ footer{
 
     <div class="floral-divider">
       <span class="bar"></span>
-      <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
+      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
       <span class="bar right"></span>
     </div>
 
     <div class="couple">
       <div class="person">
-        <svg class="floral-corner floral-top-left" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
-        <svg class="floral-corner floral-bottom-right" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
+        <svg class="floral-corner floral-top-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+        <svg class="floral-corner floral-bottom-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
         <div class="small">The Bride</div>
         <h3>Dr. Deevena Salivendra</h3>
         <div class="parents"><strong>D/o Dr. Salivendra Kishore Kumar and Mrs. Emily</strong></div>
       </div>
       <div class="person">
-        <svg class="floral-corner floral-top-left" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
-        <svg class="floral-corner floral-bottom-right" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
+        <svg class="floral-corner floral-top-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+        <svg class="floral-corner floral-bottom-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
         <div class="small">The Groom</div>
         <h3>Dr. Sasi Preetham Manukonda</h3>
         <div class="parents"><strong>S/o Mr. Manukoda.V.V. Satyanarayana and Mrs. Santha Kumari</strong></div>
@@ -654,7 +722,7 @@ footer{
     <h2>Moments &amp; Memories</h2>
     <div class="floral-divider">
       <span class="bar"></span>
-      <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
+      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
       <span class="bar right"></span>
     </div>
 
@@ -675,7 +743,7 @@ footer{
     <h2>Until We Say “I Do”</h2>
     <div class="floral-divider">
       <span class="bar"></span>
-      <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
+      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
       <span class="bar right"></span>
     </div>
     <div class="count">
@@ -692,12 +760,12 @@ footer{
       <h2>Meet us at the garden</h2>
       <div class="floral-divider">
         <span class="bar"></span>
-        <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
+        <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
         <span class="bar right"></span>
       </div>
       <div class="venue-card">
-        <svg class="floral-corner floral-top-left" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
-        <svg class="floral-corner floral-top-right" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
+        <svg class="floral-corner floral-top-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+        <svg class="floral-corner floral-top-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
         <h3 style="font-family: 'Playfair Display', serif !important;">Adabala Gardens</h3>
         <p>Saibaba Temple Rd<br>Palakollu, Andhra Pradesh 534260</p>
         <div class="buttons">
@@ -709,11 +777,14 @@ footer{
   </section>
 
   <section class="closing">
+    <div class="flower-crest">
+      <svg viewBox="-40 -20 80 40"><use href="#flowerCrest"/></svg>
+    </div>
     <div class="small">A New Beginning</div>
     <h2>We Can't Wait to Celebrate With You</h2>
     <div class="floral-divider" style="color:var(--gold-accent)">
       <span class="bar" style="background:linear-gradient(90deg, transparent, var(--gold-accent))"></span>
-      <svg viewBox="0 0 24 24"><path d="M12 2C9 5 5 9 5 12c0 3.86 3.14 7 7 7s7-3.14 7-7c0-3-4-7-7-10zm0 15c-2.21 0-4-1.79-4-4 0-1.87 2.1-4.42 4-6.44 1.9 2.02 4 4.57 4 6.44 0 2.21-1.79 4-4 4z"/></svg>
+      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
       <span class="bar right" style="background:linear-gradient(90deg, var(--gold-accent), transparent)"></span>
     </div>
     <p>Dr. Deevena Salivendra &amp; Dr. Sasi Preetham Manukonda</p>
@@ -735,10 +806,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("weddingMusic");
   const musicToggle = document.getElementById("musicToggle");
 
-  // --- Falling Floral Petals Animation ---
+  // --- Falling Flowers & Petals Canvas ---
   const canvas = document.getElementById("petalCanvas");
   const ctx = canvas.getContext("2d");
-  let petals = [];
+  let floralItems = [];
 
   function resizePetalCanvas() {
     canvas.width = window.innerWidth;
@@ -747,25 +818,27 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", resizePetalCanvas);
   resizePetalCanvas();
 
-  class Petal {
+  class FloralParticle {
     constructor() {
       this.reset(true);
     }
     reset(initial = false) {
       this.x = Math.random() * canvas.width;
-      this.y = initial ? Math.random() * canvas.height : -20;
-      this.size = 9 + Math.random() * 8;
-      this.speedY = 0.8 + Math.random() * 1.4;
-      this.speedX = Math.sin(Math.random() * 2) * 0.8;
+      this.y = initial ? Math.random() * canvas.height : -25;
+      this.isFlower = Math.random() > 0.65; // ~35% full flowers, 65% petals
+      this.size = this.isFlower ? 12 + Math.random() * 8 : 8 + Math.random() * 8;
+      this.speedY = 0.7 + Math.random() * 1.3;
+      this.speedX = (Math.random() - 0.5) * 1.2;
       this.angle = Math.random() * 360;
-      this.rotationSpeed = (Math.random() - 0.5) * 1.5;
-      this.color = Math.random() > 0.4 ? "rgba(225, 215, 183, 0.45)" : "rgba(186, 216, 182, 0.4)";
+      this.rotSpeed = (Math.random() - 0.5) * 2;
+      this.color = Math.random() > 0.4 ? "rgba(225, 215, 183, 0.55)" : "rgba(184, 213, 179, 0.45)";
+      this.flowerPetalColor = Math.random() > 0.5 ? "rgba(141, 119, 171, 0.45)" : "rgba(225, 215, 183, 0.55)";
     }
     update() {
       this.y += this.speedY;
-      this.x += Math.sin(this.y * 0.015) + this.speedX;
-      this.angle += this.rotationSpeed;
-      if (this.y > canvas.height + 20 || this.x < -30 || this.x > canvas.width + 30) {
+      this.x += Math.sin(this.y * 0.012) * 1.1 + this.speedX;
+      this.angle += this.rotSpeed;
+      if (this.y > canvas.height + 30 || this.x < -40 || this.x > canvas.width + 40) {
         this.reset();
       }
     }
@@ -773,37 +846,55 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate((this.angle * Math.PI) / 180);
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(this.size / 2, -this.size / 2, this.size, 0);
-      ctx.quadraticCurveTo(this.size / 2, this.size / 2, 0, 0);
-      ctx.fill();
+
+      if (this.isFlower) {
+        // Draw 5-petal blossom
+        ctx.fillStyle = this.flowerPetalColor;
+        for (let i = 0; i < 5; i++) {
+          ctx.rotate((Math.PI * 2) / 5);
+          ctx.beginPath();
+          ctx.ellipse(0, this.size * 0.5, this.size * 0.35, this.size * 0.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        // Flower center pistil
+        ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size * 0.22, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Single petal
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(this.size / 2, -this.size / 2, this.size, 0);
+        ctx.quadraticCurveTo(this.size / 2, this.size / 2, 0, 0);
+        ctx.fill();
+      }
       ctx.restore();
     }
   }
 
-  for (let i = 0; i < 28; i++) {
-    petals.push(new Petal());
+  for (let i = 0; i < 35; i++) {
+    floralItems.push(new FloralParticle());
   }
 
-  function animatePetals() {
+  function animateFlowers() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    petals.forEach((p) => {
+    floralItems.forEach((p) => {
       p.update();
       p.draw();
     });
-    requestAnimationFrame(animatePetals);
+    requestAnimationFrame(animateFlowers);
   }
-  animatePetals();
+  animateFlowers();
 
-  // --- Invitation Open & Audio Handler ---
+  // --- Invitation Open & Music ---
   openBtn.addEventListener("click", () => {
     openScreen.classList.add("hide");
     document.body.classList.remove("locked");
     site.classList.add("show");
     musicToggle.classList.add("show");
-    
+
     audio.play().then(() => {
       musicToggle.classList.add("playing");
     }).catch(err => {

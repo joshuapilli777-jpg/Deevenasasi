@@ -290,6 +290,67 @@ body{
   line-height:1.6;
   color:var(--text-muted);
 }
+
+/* Scroll-Pop Date Display Card */
+.pop-date-card {
+  max-width: 520px;
+  margin: 35px auto 0;
+  padding: 45px 30px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.65) translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.8s ease;
+}
+.pop-date-card.revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  box-shadow: 0 25px 60px -10px rgba(141, 119, 171, 0.35);
+}
+.pop-date-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(245, 215, 127, 0.22) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+.pop-date-card.revealed::before {
+  opacity: 1;
+}
+.pop-date-card .pop-tag {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--purple-royal);
+  margin-bottom: 8px;
+}
+.pop-date-card .big {
+  font-size: 58px;
+  line-height: 1.15;
+  color: var(--text-main);
+  margin: 8px 0;
+}
+.pop-date-card .time-info {
+  font-size: 15px;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
 .venue-card{
   position:relative;
   padding:44px 28px;
@@ -335,67 +396,7 @@ body{
   background:var(--bg-subtle);
   border-color:var(--purple-royal);
 }
-.scratch-card-wrapper{
-  max-width:440px;
-  margin:40px auto 0;
-  position:relative;
-}
-.scratch{
-  height:210px;
-  position:relative;
-  background:linear-gradient(135deg, var(--bg-subtle), #fff);
-  border-radius:24px;
-  overflow:hidden;
-  border:1px solid var(--border-light);
-  box-shadow:var(--shadow);
-}
-.reveal{
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  padding:20px;
-}
-.reveal .large{
-  font-size:11px;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  font-weight:600;
-  color:var(--purple-royal);
-}
-.big{
-  font-size:48px;
-  line-height:1.1;
-  color:var(--text-main);
-  margin:6px 0;
-}
-.reveal .time-info{
-  font-size:14px;
-  color:var(--text-muted);
-  font-weight:500;
-}
-.scratch canvas{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  touch-action:none;
-}
-.scratch-badge{
-  display:inline-block;
-  margin-top:16px;
-  padding:8px 20px;
-  background:linear-gradient(135deg, var(--purple-royal), #756193);
-  color:#fff;
-  border-radius:999px;
-  font-size:12px;
-  letter-spacing:2px;
-  font-weight:600;
-  text-transform:uppercase;
-  box-shadow:0 6px 18px rgba(141, 119, 171, 0.35);
-  border:1px solid rgba(255,255,255,0.4);
-}
+
 .count{
   display:grid;
   grid-template-columns:repeat(4, minmax(0, 1fr));
@@ -537,8 +538,8 @@ footer{
   .time strong{font-size:30px}
   .section{padding:60px 20px}
   .section h2{font-size:42px}
-  .big{font-size:38px}
-  .scratch{height:190px}
+  .big{font-size:42px}
+  .pop-date-card{padding:36px 20px}
   .album-grid{grid-template-columns:repeat(2, 1fr);gap:10px}
   .album-item{height:160px}
   .music-toggle{bottom:16px;right:16px;width:42px;height:42px}
@@ -615,17 +616,18 @@ footer{
   </section>
 
   <section class="section">
-    <div class="small">A Grand Reveal</div>
-    <div class="scratch-card-wrapper">
-      <div class="scratch">
-        <div class="reveal">
-          <div class="large">Our Wedding Day</div>
-          <div class="big">23 November 2026</div>
-          <div class="time-info">10:00 AM</div>
-        </div>
-        <canvas id="scratchCanvas"></canvas>
-      </div>
-      <span class="scratch-badge">Scratch Here</span>
+    <div class="small">Save The Date</div>
+    <h2>The Big Day</h2>
+    <div class="celebration-divider">
+      <span class="bar"></span>
+      <span class="sparkle">&#10022;</span>
+      <span class="bar right"></span>
+    </div>
+    
+    <div class="pop-date-card" id="popDateCard">
+      <span class="pop-tag">Our Wedding Ceremony</span>
+      <div class="big">23 November 2026</div>
+      <div class="time-info">Monday Morning · 10:00 AM</div>
     </div>
   </section>
 
@@ -723,12 +725,12 @@ document.addEventListener("DOMContentLoaded", () => {
   resizeCanvas();
 
   const confettiPalette = [
-    "#E1D7B7", // Champagne Gold
-    "#F5D77F", // Bright Gold
-    "#8D77AB", // Royal Lavender
-    "#C8B6E2", // Soft Violet
-    "#FFFFFF", // White
-    "#E8B4B8"  // Rose Shimmer
+    "#E1D7B7",
+    "#F5D77F",
+    "#8D77AB",
+    "#C8B6E2",
+    "#FFFFFF",
+    "#E8B4B8"
   ];
 
   class ConfettiParticle {
@@ -849,6 +851,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function triggerDateCardBurst(x, y) {
+    for (let i = 0; i < 50; i++) {
+      particles.push(new ConfettiParticle(x, y, true));
+    }
+  }
+
   function initCelebration() {
     for (let i = 0; i < 45; i++) {
       particles.push(new ConfettiParticle(0, 0, false));
@@ -880,6 +888,23 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animateCelebration);
   }
 
+  /* Scroll Pop Observer for the Date Card */
+  const dateCard = document.getElementById("popDateCard");
+  let burstTriggered = false;
+
+  const dateObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        dateCard.classList.add("revealed");
+        if (!burstTriggered) {
+          const rect = dateCard.getBoundingClientRect();
+          triggerDateCardBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+          burstTriggered = true;
+        }
+      }
+    });
+  }, { threshold: 0.35 });
+
   openBtn.addEventListener("click", () => {
     openScreen.classList.add("hide");
     document.body.classList.remove("locked");
@@ -887,14 +912,13 @@ document.addEventListener("DOMContentLoaded", () => {
     musicToggle.classList.add("show");
     canvas.classList.add("active");
     initCelebration();
+    dateObserver.observe(dateCard);
 
     audio.play().then(() => {
       musicToggle.classList.add("playing");
     }).catch(err => {
       console.log("Autoplay prevented:", err);
     });
-
-    initScratchCard();
   });
 
   musicToggle.addEventListener("click", () => {
@@ -938,49 +962,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
-
-  function initScratchCard() {
-    const scratchCanvas = document.getElementById("scratchCanvas");
-    if (!scratchCanvas) return;
-
-    const ctxS = scratchCanvas.getContext("2d");
-    const rect = scratchCanvas.getBoundingClientRect();
-    scratchCanvas.width = rect.width;
-    scratchCanvas.height = rect.height;
-
-    ctxS.fillStyle = "#D5CCE3";
-    ctxS.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
-
-    ctxS.font = "600 12px 'Montserrat', sans-serif";
-    ctxS.fillStyle = "#1E2A5E";
-    ctxS.textAlign = "center";
-    ctxS.textBaseline = "middle";
-    ctxS.fillText("SCRATCH HERE TO REVEAL", scratchCanvas.width / 2, scratchCanvas.height / 2);
-
-    let isDrawing = false;
-
-    function scratch(e) {
-      if (!isDrawing) return;
-      const box = scratchCanvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const x = clientX - box.left;
-      const y = clientY - box.top;
-
-      ctxS.globalCompositeOperation = "destination-out";
-      ctxS.beginPath();
-      ctxS.arc(x, y, 22, 0, Math.PI * 2);
-      ctxS.fill();
-    }
-
-    scratchCanvas.addEventListener("mousedown", () => (isDrawing = true));
-    window.addEventListener("mouseup", () => (isDrawing = false));
-    scratchCanvas.addEventListener("mousemove", scratch);
-
-    scratchCanvas.addEventListener("touchstart", () => (isDrawing = true));
-    window.addEventListener("touchend", () => (isDrawing = false));
-    scratchCanvas.addEventListener("touchmove", scratch);
-  }
 
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");

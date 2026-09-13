@@ -18,15 +18,15 @@
 }
 
 :root {
-  --bg-main: #F9F6E6;
-  --bg-subtle: #E1EACD;
+  --bg-main: #FDFBF7;
+  --bg-subtle: #E8EFE6;
   --text-main: #1E2A5E;
   --text-muted: #55679C;
-  --sage-accent: #BAD8B6;
+  --sage-accent: #B8D5B3;
   --purple-royal: #8D77AB;
   --royal-gradient: linear-gradient(135deg, #1E2A5E 0%, #3B4B7F 50%, #8D77AB 100%);
   --gold-accent: #E1D7B7;
-  --card-bg: rgba(255, 255, 255, 0.90);
+  --card-bg: rgba(255, 255, 255, 0.92);
   --border-light: rgba(141, 119, 171, 0.25);
   --shadow: 0 20px 40px -15px rgba(30, 42, 94, 0.12);
 }
@@ -39,8 +39,20 @@ body{
   color:var(--text-main);
   font-family:'Montserrat', sans-serif;
   letter-spacing:0.02em;
+  position:relative;
+  overflow-x:hidden;
 }
 .locked{overflow:hidden}
+
+/* --- Floating Floral Petals Canvas --- */
+#petalCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+}
 
 .script-font,
 .mono,
@@ -64,6 +76,7 @@ body{
   font-size:20px;
 }
 
+/* Floral Dividers */
 .floral-divider {
   display: flex;
   align-items: center;
@@ -82,14 +95,28 @@ body{
 }
 .floral-divider svg {
   fill: currentColor;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
 }
+
+/* Decorative Floral Corners for Cards */
+.floral-corner {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  fill: var(--purple-royal);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.floral-top-left { top: 12px; left: 12px; }
+.floral-top-right { top: 12px; right: 12px; transform: scaleX(-1); }
+.floral-bottom-left { bottom: 12px; left: 12px; transform: scaleY(-1); }
+.floral-bottom-right { bottom: 12px; right: 12px; transform: scale(-1); }
 
 #open{
   position:fixed;
   inset:0;
-  z-index:20;
+  z-index:30;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -100,9 +127,10 @@ body{
 }
 .hide{opacity:0;visibility:hidden;pointer-events:none}
 .card{
-  padding:40px;
+  position:relative;
+  padding:46px 36px;
   max-width:580px;
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.12);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(225, 215, 183, 0.4);
@@ -228,7 +256,14 @@ body{
   font-size:54px;
   line-height:1.2;
 }
-.section{max-width:980px;margin:auto;padding:90px 24px;text-align:center}
+
+.section{
+  max-width:980px;
+  margin:auto;
+  padding:90px 24px;
+  text-align:center;
+  position:relative;
+}
 .section h2{
   font-size:54px;
   line-height:1.1;
@@ -250,7 +285,8 @@ body{
   margin-top:50px;
 }
 .person{
-  padding:36px 28px;
+  position:relative;
+  padding:44px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -268,7 +304,8 @@ body{
   color:var(--text-muted);
 }
 .venue-card{
-  padding:40px 28px;
+  position:relative;
+  padding:48px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -482,6 +519,7 @@ body{
   text-align:center;
   color:#fff;
   background:var(--royal-gradient);
+  position: relative;
 }
 .closing .small{color:var(--gold-accent)}
 .closing h2{
@@ -522,6 +560,9 @@ footer{
 </head>
 <body class="locked">
 
+<!-- Floating petals canvas -->
+<canvas id="petalCanvas"></canvas>
+
 <audio id="weddingMusic" loop preload="auto">
   <source src="DS.mp3.mpeg" type="audio/mpeg">
 </audio>
@@ -534,6 +575,8 @@ footer{
 
 <section id="open">
   <div class="card">
+    <svg class="floral-corner floral-top-left" viewBox="0 0 100 100"><path d="M0,0 Q30,10 45,45 Q10,30 0,0 M15,5 Q40,30 50,70 Q25,45 15,5" fill="var(--gold-accent)" opacity="0.6"/></svg>
+    <svg class="floral-corner floral-top-right" viewBox="0 0 100 100"><path d="M0,0 Q30,10 45,45 Q10,30 0,0 M15,5 Q40,30 50,70 Q25,45 15,5" fill="var(--gold-accent)" opacity="0.6"/></svg>
     <div class="mono">D &amp; S</div>
     <div class="kicker">A Celebration of Love</div>
     <div class="floral-divider">
@@ -575,11 +618,15 @@ footer{
 
     <div class="couple">
       <div class="person">
+        <svg class="floral-corner floral-top-left" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
+        <svg class="floral-corner floral-bottom-right" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
         <div class="small">The Bride</div>
         <h3>Dr. Deevena Salivendra</h3>
         <div class="parents"><strong>D/o Dr. Salivendra Kishore Kumar and Mrs. Emily</strong></div>
       </div>
       <div class="person">
+        <svg class="floral-corner floral-top-left" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
+        <svg class="floral-corner floral-bottom-right" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
         <div class="small">The Groom</div>
         <h3>Dr. Sasi Preetham Manukonda</h3>
         <div class="parents"><strong>S/o Mr. Manukoda.V.V. Satyanarayana and Mrs. Santha Kumari</strong></div>
@@ -649,6 +696,8 @@ footer{
         <span class="bar right"></span>
       </div>
       <div class="venue-card">
+        <svg class="floral-corner floral-top-left" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
+        <svg class="floral-corner floral-top-right" viewBox="0 0 100 100"><path d="M0,0 Q35,5 45,45 Q15,35 0,0 M15,5 Q40,25 50,65 Q30,40 15,5"/></svg>
         <h3 style="font-family: 'Playfair Display', serif !important;">Adabala Gardens</h3>
         <p>Saibaba Temple Rd<br>Palakollu, Andhra Pradesh 534260</p>
         <div class="buttons">
@@ -686,6 +735,69 @@ document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("weddingMusic");
   const musicToggle = document.getElementById("musicToggle");
 
+  // --- Falling Floral Petals Animation ---
+  const canvas = document.getElementById("petalCanvas");
+  const ctx = canvas.getContext("2d");
+  let petals = [];
+
+  function resizePetalCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizePetalCanvas);
+  resizePetalCanvas();
+
+  class Petal {
+    constructor() {
+      this.reset(true);
+    }
+    reset(initial = false) {
+      this.x = Math.random() * canvas.width;
+      this.y = initial ? Math.random() * canvas.height : -20;
+      this.size = 9 + Math.random() * 8;
+      this.speedY = 0.8 + Math.random() * 1.4;
+      this.speedX = Math.sin(Math.random() * 2) * 0.8;
+      this.angle = Math.random() * 360;
+      this.rotationSpeed = (Math.random() - 0.5) * 1.5;
+      this.color = Math.random() > 0.4 ? "rgba(225, 215, 183, 0.45)" : "rgba(186, 216, 182, 0.4)";
+    }
+    update() {
+      this.y += this.speedY;
+      this.x += Math.sin(this.y * 0.015) + this.speedX;
+      this.angle += this.rotationSpeed;
+      if (this.y > canvas.height + 20 || this.x < -30 || this.x > canvas.width + 30) {
+        this.reset();
+      }
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate((this.angle * Math.PI) / 180);
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(this.size / 2, -this.size / 2, this.size, 0);
+      ctx.quadraticCurveTo(this.size / 2, this.size / 2, 0, 0);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < 28; i++) {
+    petals.push(new Petal());
+  }
+
+  function animatePetals() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    petals.forEach((p) => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animatePetals);
+  }
+  animatePetals();
+
+  // --- Invitation Open & Audio Handler ---
   openBtn.addEventListener("click", () => {
     openScreen.classList.add("hide");
     document.body.classList.remove("locked");
@@ -711,6 +823,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // --- Countdown Timer ---
   const targetDate = new Date("2026-11-23T10:00:00+05:30").getTime();
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
@@ -743,55 +856,51 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
+  // --- Scratch Card ---
   function initScratchCard() {
-    const canvas = document.getElementById("scratchCanvas");
-    if (!canvas) return;
+    const scratchCanvas = document.getElementById("scratchCanvas");
+    if (!scratchCanvas) return;
 
-    const ctx = canvas.getContext("2d");
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
+    const ctxS = scratchCanvas.getContext("2d");
+    const rect = scratchCanvas.getBoundingClientRect();
+    scratchCanvas.width = rect.width;
+    scratchCanvas.height = rect.height;
 
-    ctx.fillStyle = "#BAD8B6";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctxS.fillStyle = "#BAD8B6";
+    ctxS.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
 
-    ctx.font = "600 12px 'Montserrat', sans-serif";
-    ctx.fillStyle = "#1E2A5E";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("SCRATCH HERE TO REVEAL", canvas.width / 2, canvas.height / 2);
+    ctxS.font = "600 12px 'Montserrat', sans-serif";
+    ctxS.fillStyle = "#1E2A5E";
+    ctxS.textAlign = "center";
+    ctxS.textBaseline = "middle";
+    ctxS.fillText("SCRATCH HERE TO REVEAL", scratchCanvas.width / 2, scratchCanvas.height / 2);
 
     let isDrawing = false;
 
     function scratch(e) {
       if (!isDrawing) return;
-      const box = canvas.getBoundingClientRect();
+      const box = scratchCanvas.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
       const x = clientX - box.left;
       const y = clientY - box.top;
 
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.beginPath();
-      ctx.arc(x, y, 22, 0, Math.PI * 2);
-      ctx.fill();
+      ctxS.globalCompositeOperation = "destination-out";
+      ctxS.beginPath();
+      ctxS.arc(x, y, 22, 0, Math.PI * 2);
+      ctxS.fill();
     }
 
-    canvas.addEventListener("mousedown", (e) => {
-      isDrawing = true;
-      scratch(e);
-    });
+    scratchCanvas.addEventListener("mousedown", () => (isDrawing = true));
     window.addEventListener("mouseup", () => (isDrawing = false));
-    canvas.addEventListener("mousemove", scratch);
+    scratchCanvas.addEventListener("mousemove", scratch);
 
-    canvas.addEventListener("touchstart", (e) => {
-      isDrawing = true;
-      scratch(e);
-    });
+    scratchCanvas.addEventListener("touchstart", () => (isDrawing = true));
     window.addEventListener("touchend", () => (isDrawing = false));
-    canvas.addEventListener("touchmove", scratch);
+    scratchCanvas.addEventListener("touchmove", scratch);
   }
 
+  // --- Photo Lightbox ---
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const lightboxClose = document.getElementById("lightboxClose");
@@ -814,6 +923,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === lightbox) closeLightbox();
   });
 
+  // --- Add to Calendar ---
   const calendarBtn = document.getElementById("calendarBtn");
   if (calendarBtn) {
     calendarBtn.addEventListener("click", (e) => {

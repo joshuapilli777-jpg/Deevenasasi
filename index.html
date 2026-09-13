@@ -19,13 +19,13 @@
 
 :root {
   --bg-main: #FAF8F5;
-  --bg-subtle: #E8EFE6;
+  --bg-subtle: #F0EAE1;
   --text-main: #1E2A5E;
   --text-muted: #55679C;
-  --sage-accent: #B8D5B3;
   --purple-royal: #8D77AB;
   --royal-gradient: linear-gradient(135deg, #1E2A5E 0%, #3B4B7F 50%, #8D77AB 100%);
   --gold-accent: #E1D7B7;
+  --gold-bright: #F5D77F;
   --card-bg: rgba(255, 255, 255, 0.94);
   --border-light: rgba(141, 119, 171, 0.25);
   --shadow: 0 20px 40px -15px rgba(30, 42, 94, 0.12);
@@ -44,16 +44,16 @@ body{
 }
 .locked{overflow:hidden}
 
-#flowerCanvas {
+#celebrationCanvas {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 15;
+  z-index: 25;
   display: none;
 }
-#flowerCanvas.active {
+#celebrationCanvas.active {
   display: block;
 }
 
@@ -79,51 +79,25 @@ body{
   font-size:20px;
 }
 
-.minimal-divider {
+.celebration-divider {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 18px auto;
   gap: 12px;
 }
-.minimal-divider .bar {
+.celebration-divider .bar {
   height: 1px;
   width: 70px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7));
+  background: linear-gradient(90deg, transparent, var(--purple-royal));
 }
-.minimal-divider .bar.right {
-  background: linear-gradient(90deg, rgba(255,255,255,0.7), transparent);
+.celebration-divider .bar.right {
+  background: linear-gradient(90deg, var(--purple-royal), transparent);
 }
-.minimal-divider .dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--gold-accent);
-}
-
-/* Realistic Botanical Flower Arrangements */
-.card-flower-header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: -15px auto 10px;
-}
-.card-flower-header img {
-  width: 190px;
-  height: auto;
-  filter: drop-shadow(0 8px 16px rgba(30, 42, 94, 0.12));
-}
-
-.section-floral-spray {
-  display: flex;
-  justify-content: center;
-  margin: 10px auto 20px;
-}
-.section-floral-spray img {
-  width: 210px;
-  max-width: 80%;
-  height: auto;
-  filter: drop-shadow(0 10px 18px rgba(30, 42, 94, 0.14));
+.celebration-divider .sparkle {
+  color: var(--purple-royal);
+  font-size: 16px;
+  line-height: 1;
 }
 
 #open{
@@ -299,7 +273,7 @@ body{
 }
 .person{
   position:relative;
-  padding:32px 28px 44px;
+  padding:44px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -318,7 +292,7 @@ body{
 }
 .venue-card{
   position:relative;
-  padding:36px 28px 48px;
+  padding:44px 28px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -359,7 +333,7 @@ body{
 }
 .buttons .btn:not(.primary):hover{
   background:var(--bg-subtle);
-  border-color:var(--sage-accent);
+  border-color:var(--purple-royal);
 }
 .scratch-card-wrapper{
   max-width:440px;
@@ -568,14 +542,12 @@ footer{
   .album-grid{grid-template-columns:repeat(2, 1fr);gap:10px}
   .album-item{height:160px}
   .music-toggle{bottom:16px;right:16px;width:42px;height:42px}
-  .section-floral-spray img {width: 170px;}
 }
 </style>
 </head>
 <body class="locked">
 
-<!-- Floating Real Flowers & Petals Canvas -->
-<canvas id="flowerCanvas"></canvas>
+<canvas id="celebrationCanvas"></canvas>
 
 <audio id="weddingMusic" loop preload="auto">
   <source src="DS.mp3.mpeg" type="audio/mpeg">
@@ -587,15 +559,14 @@ footer{
   </svg>
 </button>
 
-<!-- Clean Opening Screen (All flower graphics removed) -->
 <section id="open">
   <div class="card">
     <div class="mono">D &amp; S</div>
     <div class="kicker">A Celebration of Love</div>
-    <div class="minimal-divider">
-      <span class="bar"></span>
-      <span class="dot"></span>
-      <span class="bar right"></span>
+    <div class="celebration-divider">
+      <span class="bar" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7));"></span>
+      <span class="sparkle" style="color: var(--gold-accent);">&#10022;</span>
+      <span class="bar right" style="background: linear-gradient(90deg, rgba(255,255,255,0.7), transparent);"></span>
     </div>
     <div class="openverse">“The steadfast love of the Lord never ceases.”</div>
     <div class="small">Lamentations 3:22</div>
@@ -606,16 +577,13 @@ footer{
 <main id="site" class="site">
   <section class="hero">
     <div>
-      <div class="section-floral-spray">
-        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="Floral Header">
-      </div>
       <div class="small">Together with their families</div>
       <h1>D &amp; S</h1>
       <div class="names">Dr. Deevena Salivendra<br>&amp;<br>Dr. Sasi Preetham Manukonda</div>
-      <div class="minimal-divider" style="margin-top:20px;">
-        <span class="bar"></span>
-        <span class="dot"></span>
-        <span class="bar right"></span>
+      <div class="celebration-divider" style="margin-top:20px;">
+        <span class="bar" style="background:linear-gradient(90deg, transparent, var(--gold-accent))"></span>
+        <span class="sparkle" style="color:var(--gold-accent)">&#10022;</span>
+        <span class="bar right" style="background:linear-gradient(90deg, var(--gold-accent), transparent)"></span>
       </div>
       <div class="small" style="margin-top:15px">November 23, 2026 · 10:00 AM</div>
     </div>
@@ -626,23 +594,19 @@ footer{
     <p class="verse">“The steadfast love of the Lord never ceases.”</p>
     <div class="small">Lamentations 3:22</div>
 
-    <div class="section-floral-spray">
-      <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=500&q=80" alt="Floral Accent">
+    <div class="celebration-divider">
+      <span class="bar"></span>
+      <span class="sparkle">&#10022;</span>
+      <span class="bar right"></span>
     </div>
 
     <div class="couple">
       <div class="person">
-        <div class="card-flower-header">
-          <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=400&q=80" alt="Bride Flowers">
-        </div>
         <div class="small">The Bride</div>
         <h3>Dr. Deevena Salivendra</h3>
         <div class="parents"><strong>D/o Dr. Salivendra Kishore Kumar and Mrs. Emily</strong></div>
       </div>
       <div class="person">
-        <div class="card-flower-header">
-          <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=400&q=80" alt="Groom Flowers">
-        </div>
         <div class="small">The Groom</div>
         <h3>Dr. Sasi Preetham Manukonda</h3>
         <div class="parents"><strong>S/o Mr. Manukoda.V.V. Satyanarayana and Mrs. Santha Kumari</strong></div>
@@ -668,8 +632,10 @@ footer{
   <section class="section">
     <div class="small">Cherished Memories</div>
     <h2>Moments &amp; Memories</h2>
-    <div class="section-floral-spray">
-      <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80" alt="Floral Branch">
+    <div class="celebration-divider">
+      <span class="bar"></span>
+      <span class="sparkle">&#10022;</span>
+      <span class="bar right"></span>
     </div>
 
     <div class="album-grid">
@@ -687,8 +653,10 @@ footer{
   <section class="section">
     <div class="small">Counting the Moments</div>
     <h2>Until We Say “I Do”</h2>
-    <div class="section-floral-spray">
-      <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=500&q=80" alt="Floral Branch">
+    <div class="celebration-divider">
+      <span class="bar"></span>
+      <span class="sparkle">&#10022;</span>
+      <span class="bar right"></span>
     </div>
     <div class="count">
       <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
@@ -702,13 +670,12 @@ footer{
     <div class="section-inner">
       <div class="kicker">The Celebration</div>
       <h2>Meet us at the garden</h2>
-      <div class="section-floral-spray">
-        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80" alt="Floral Branch">
+      <div class="celebration-divider">
+        <span class="bar"></span>
+        <span class="sparkle">&#10022;</span>
+        <span class="bar right"></span>
       </div>
       <div class="venue-card">
-        <div class="card-flower-header">
-          <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=400&q=80" alt="Venue Flowers">
-        </div>
         <h3 style="font-family: 'Playfair Display', serif !important;">Adabala Gardens</h3>
         <p>Saibaba Temple Rd<br>Palakollu, Andhra Pradesh 534260</p>
         <div class="buttons">
@@ -720,15 +687,12 @@ footer{
   </section>
 
   <section class="closing">
-    <div class="section-floral-spray">
-      <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80" alt="Closing Floral">
-    </div>
     <div class="small">A New Beginning</div>
     <h2>We Can't Wait to Celebrate With You</h2>
-    <div class="minimal-divider" style="margin-top:20px;">
-      <span class="bar"></span>
-      <span class="dot"></span>
-      <span class="bar right"></span>
+    <div class="celebration-divider" style="margin-top:20px;">
+      <span class="bar" style="background:linear-gradient(90deg, transparent, var(--gold-accent))"></span>
+      <span class="sparkle" style="color:var(--gold-accent)">&#10022;</span>
+      <span class="bar right" style="background:linear-gradient(90deg, var(--gold-accent), transparent)"></span>
     </div>
     <p>Dr. Deevena Salivendra &amp; Dr. Sasi Preetham Manukonda</p>
   </section>
@@ -748,86 +712,181 @@ document.addEventListener("DOMContentLoaded", () => {
   const site = document.getElementById("site");
   const audio = document.getElementById("weddingMusic");
   const musicToggle = document.getElementById("musicToggle");
-  const flowerCanvas = document.getElementById("flowerCanvas");
-  const ctx = flowerCanvas.getContext("2d");
+  const canvas = document.getElementById("celebrationCanvas");
+  const ctx = canvas.getContext("2d");
 
-  // --- Falling Realistic Flowers Canvas ---
-  function resizeFlowerCanvas() {
-    flowerCanvas.width = window.innerWidth;
-    flowerCanvas.height = window.innerHeight;
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
   }
-  window.addEventListener("resize", resizeFlowerCanvas);
-  resizeFlowerCanvas();
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
 
-  // Preload real blossom image assets
-  const flowerImages = [
-    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=120&q=80",
-    "https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=120&q=80"
+  const confettiPalette = [
+    "#E1D7B7", // Champagne Gold
+    "#F5D77F", // Bright Gold
+    "#8D77AB", // Royal Lavender
+    "#C8B6E2", // Soft Violet
+    "#FFFFFF", // White
+    "#E8B4B8"  // Rose Shimmer
   ];
-  const loadedImgs = [];
-  flowerImages.forEach(src => {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = src;
-    loadedImgs.push(img);
-  });
 
-  class RealFlowerParticle {
-    constructor() {
-      this.reset(true);
-    }
-    reset(initial = false) {
-      this.x = Math.random() * flowerCanvas.width;
-      this.y = initial ? Math.random() * flowerCanvas.height : -50;
-      this.size = 28 + Math.random() * 26;
-      this.speedY = 0.8 + Math.random() * 1.2;
-      this.speedX = (Math.random() - 0.5) * 1.2;
-      this.angle = Math.random() * 360;
-      this.rotSpeed = (Math.random() - 0.5) * 1.5;
-      this.img = loadedImgs[Math.floor(Math.random() * loadedImgs.length)];
-      this.opacity = 0.55 + Math.random() * 0.4;
-    }
-    update() {
-      this.y += this.speedY;
-      this.x += Math.sin(this.y * 0.015) * 1.2 + this.speedX;
-      this.angle += this.rotSpeed;
-      if (this.y > flowerCanvas.height + 60 || this.x < -60 || this.x > flowerCanvas.width + 60) {
-        this.reset();
+  class ConfettiParticle {
+    constructor(x, y, isBurst = false) {
+      this.isBurst = isBurst;
+      if (isBurst) {
+        this.x = x;
+        this.y = y;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 4 + Math.random() * 8;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed - 2;
+        this.gravity = 0.18;
+        this.drag = 0.96;
+        this.alpha = 1;
+        this.decay = 0.008 + Math.random() * 0.008;
+      } else {
+        this.reset(true);
       }
+      this.w = 5 + Math.random() * 5;
+      this.h = 9 + Math.random() * 7;
+      this.color = confettiPalette[Math.floor(Math.random() * confettiPalette.length)];
+      this.rotX = Math.random() * Math.PI;
+      this.rotY = Math.random() * Math.PI;
+      this.rotSpeedX = 0.04 + Math.random() * 0.06;
+      this.rotSpeedY = 0.04 + Math.random() * 0.06;
     }
+
+    reset(initial = false) {
+      this.x = Math.random() * canvas.width;
+      this.y = initial ? Math.random() * canvas.height : -20;
+      this.vx = (Math.random() - 0.5) * 1.5;
+      this.vy = 1.2 + Math.random() * 1.8;
+      this.gravity = 0;
+      this.drag = 1;
+      this.alpha = 0.75 + Math.random() * 0.25;
+      this.decay = 0;
+    }
+
+    update() {
+      if (this.isBurst) {
+        this.vx *= this.drag;
+        this.vy = this.vy * this.drag + this.gravity;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.alpha -= this.decay;
+      } else {
+        this.y += this.vy;
+        this.x += Math.sin(this.y * 0.02) * 1.2 + this.vx;
+        if (this.y > canvas.height + 20 || this.x < -30 || this.x > canvas.width + 30) {
+          this.reset();
+        }
+      }
+      this.rotX += this.rotSpeedX;
+      this.rotY += this.rotSpeedY;
+    }
+
     draw() {
-      if (!this.img || !this.img.complete) return;
+      if (this.alpha <= 0) return;
       ctx.save();
       ctx.translate(this.x, this.y);
-      ctx.rotate((this.angle * Math.PI) / 180);
-      ctx.globalAlpha = this.opacity;
-      ctx.drawImage(this.img, -this.size / 2, -this.size / 2, this.size, this.size);
+      ctx.scale(Math.cos(this.rotX), Math.sin(this.rotY));
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.fillStyle = this.color;
+      ctx.fillRect(-this.w / 2, -this.h / 2, this.w, this.h);
       ctx.restore();
     }
   }
 
-  const flowerParticles = [];
-  for (let i = 0; i < 20; i++) {
-    flowerParticles.push(new RealFlowerParticle());
+  class Sparkle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = 2 + Math.random() * 4;
+      this.maxAlpha = 0.4 + Math.random() * 0.5;
+      this.alpha = 0;
+      this.fadeIn = true;
+      this.speed = 0.015 + Math.random() * 0.025;
+    }
+    update() {
+      if (this.fadeIn) {
+        this.alpha += this.speed;
+        if (this.alpha >= this.maxAlpha) this.fadeIn = false;
+      } else {
+        this.alpha -= this.speed;
+        if (this.alpha <= 0) this.reset();
+      }
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.fillStyle = "#FFF";
+      ctx.beginPath();
+      ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = "#F5D77F";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(-this.size * 1.8, 0); ctx.lineTo(this.size * 1.8, 0);
+      ctx.moveTo(0, -this.size * 1.8); ctx.lineTo(0, this.size * 1.8);
+      ctx.stroke();
+      ctx.restore();
+    }
   }
 
-  function animateFlowers() {
-    ctx.clearRect(0, 0, flowerCanvas.width, flowerCanvas.height);
-    flowerParticles.forEach(p => {
+  let particles = [];
+  let sparkles = [];
+
+  function triggerOpeningCannons() {
+    for (let i = 0; i < 90; i++) {
+      particles.push(new ConfettiParticle(canvas.width * 0.2, canvas.height * 0.65, true));
+      particles.push(new ConfettiParticle(canvas.width * 0.8, canvas.height * 0.65, true));
+    }
+  }
+
+  function initCelebration() {
+    for (let i = 0; i < 45; i++) {
+      particles.push(new ConfettiParticle(0, 0, false));
+    }
+    for (let i = 0; i < 25; i++) {
+      sparkles.push(new Sparkle());
+    }
+    triggerOpeningCannons();
+    animateCelebration();
+  }
+
+  function animateCelebration() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = sparkles.length - 1; i >= 0; i--) {
+      sparkles[i].update();
+      sparkles[i].draw();
+    }
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
       p.update();
       p.draw();
-    });
-    requestAnimationFrame(animateFlowers);
+      if (p.isBurst && p.alpha <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+
+    requestAnimationFrame(animateCelebration);
   }
 
-  // --- Open Button Trigger ---
   openBtn.addEventListener("click", () => {
     openScreen.classList.add("hide");
     document.body.classList.remove("locked");
     site.classList.add("show");
     musicToggle.classList.add("show");
-    flowerCanvas.classList.add("active");
-    animateFlowers();
+    canvas.classList.add("active");
+    initCelebration();
 
     audio.play().then(() => {
       musicToggle.classList.add("playing");
@@ -848,7 +907,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- Countdown Timer ---
   const targetDate = new Date("2026-11-23T10:00:00+05:30").getTime();
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
@@ -881,7 +939,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // --- Scratch Card ---
   function initScratchCard() {
     const scratchCanvas = document.getElementById("scratchCanvas");
     if (!scratchCanvas) return;
@@ -891,7 +948,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scratchCanvas.width = rect.width;
     scratchCanvas.height = rect.height;
 
-    ctxS.fillStyle = "#BAD8B6";
+    ctxS.fillStyle = "#D5CCE3";
     ctxS.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
 
     ctxS.font = "600 12px 'Montserrat', sans-serif";
@@ -925,7 +982,6 @@ document.addEventListener("DOMContentLoaded", () => {
     scratchCanvas.addEventListener("touchmove", scratch);
   }
 
-  // --- Photo Lightbox ---
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const lightboxClose = document.getElementById("lightboxClose");
@@ -948,7 +1004,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === lightbox) closeLightbox();
   });
 
-  // --- Add to Calendar ---
   const calendarBtn = document.getElementById("calendarBtn");
   if (calendarBtn) {
     calendarBtn.addEventListener("click", (e) => {

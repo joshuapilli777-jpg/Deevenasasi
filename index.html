@@ -18,7 +18,7 @@
 }
 
 :root {
-  --bg-main: #FDFBF7;
+  --bg-main: #FAF8F5;
   --bg-subtle: #E8EFE6;
   --text-main: #1E2A5E;
   --text-muted: #55679C;
@@ -44,13 +44,17 @@ body{
 }
 .locked{overflow:hidden}
 
-#petalCanvas {
+#flowerCanvas {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
   z-index: 15;
+  display: none;
+}
+#flowerCanvas.active {
+  display: block;
 }
 
 .script-font,
@@ -75,49 +79,51 @@ body{
   font-size:20px;
 }
 
-/* Floral Dividers */
-.floral-divider {
+.minimal-divider {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 18px auto;
   gap: 12px;
 }
-.floral-divider .bar {
+.minimal-divider .bar {
   height: 1px;
   width: 70px;
-  background: linear-gradient(90deg, transparent, var(--purple-royal));
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7));
 }
-.floral-divider .bar.right {
-  background: linear-gradient(90deg, var(--purple-royal), transparent);
+.minimal-divider .bar.right {
+  background: linear-gradient(90deg, rgba(255,255,255,0.7), transparent);
 }
-.floral-divider svg {
-  width: 38px;
-  height: 38px;
+.minimal-divider .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold-accent);
 }
 
-/* Detailed Flower Corners */
-.floral-corner {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  pointer-events: none;
-  z-index: 2;
-}
-.floral-top-left { top: -6px; left: -6px; }
-.floral-top-right { top: -6px; right: -6px; transform: scaleX(-1); }
-.floral-bottom-left { bottom: -6px; left: -6px; transform: scaleY(-1); }
-.floral-bottom-right { bottom: -6px; right: -6px; transform: scale(-1); }
-
-/* Header Floral Crests */
-.flower-crest {
+/* Realistic Botanical Flower Arrangements */
+.card-flower-header {
+  width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
+  margin: -15px auto 10px;
 }
-.flower-crest svg {
-  width: 90px;
-  height: 50px;
+.card-flower-header img {
+  width: 190px;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(30, 42, 94, 0.12));
+}
+
+.section-floral-spray {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto 20px;
+}
+.section-floral-spray img {
+  width: 210px;
+  max-width: 80%;
+  height: auto;
+  filter: drop-shadow(0 10px 18px rgba(30, 42, 94, 0.14));
 }
 
 #open{
@@ -293,7 +299,7 @@ body{
 }
 .person{
   position:relative;
-  padding:48px 28px;
+  padding:32px 28px 44px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -312,7 +318,7 @@ body{
 }
 .venue-card{
   position:relative;
-  padding:52px 28px;
+  padding:36px 28px 48px;
   border-radius:24px;
   background:var(--card-bg);
   border:1px solid var(--border-light);
@@ -562,68 +568,14 @@ footer{
   .album-grid{grid-template-columns:repeat(2, 1fr);gap:10px}
   .album-item{height:160px}
   .music-toggle{bottom:16px;right:16px;width:42px;height:42px}
-  .floral-corner{width:54px;height:54px}
+  .section-floral-spray img {width: 170px;}
 }
 </style>
 </head>
 <body class="locked">
 
-<!-- Floating Flowers & Petals Canvas -->
-<canvas id="petalCanvas"></canvas>
-
-<!-- Reusable SVG Templates for Flowers -->
-<svg style="display:none">
-  <defs>
-    <!-- Detailed Botanical Flower Corner -->
-    <g id="flowerCorner">
-      <path d="M0,0 Q30,12 42,42 Q12,30 0,0" fill="#B8D5B3" opacity="0.65"/>
-      <path d="M12,0 Q35,22 30,55 Q8,25 12,0" fill="#8D77AB" opacity="0.45"/>
-      <g transform="translate(18, 18)">
-        <circle cx="0" cy="-12" r="8" fill="#E1D7B7" opacity="0.8"/>
-        <circle cx="12" cy="0" r="8" fill="#E1D7B7" opacity="0.8"/>
-        <circle cx="0" cy="12" r="8" fill="#E1D7B7" opacity="0.8"/>
-        <circle cx="-12" cy="0" r="8" fill="#E1D7B7" opacity="0.8"/>
-        <circle cx="-8" cy="-8" r="7" fill="#8D77AB" opacity="0.7"/>
-        <circle cx="8" cy="-8" r="7" fill="#8D77AB" opacity="0.7"/>
-        <circle cx="8" cy="8" r="7" fill="#8D77AB" opacity="0.7"/>
-        <circle cx="-8" cy="8" r="7" fill="#8D77AB" opacity="0.7"/>
-        <circle cx="0" cy="0" r="6" fill="#F9F6E6"/>
-      </g>
-    </g>
-
-    <!-- Detailed Center Blossom -->
-    <g id="blossomCenter">
-      <path d="M-15,-2 C-10,-12 0,-15 0,-2 C0,-15 10,-12 15,-2 C12,8 0,16 0,16 C0,16 -12,8 -15,-2 Z" fill="#B8D5B3" opacity="0.6"/>
-      <circle cx="0" cy="-7" r="5" fill="#8D77AB" opacity="0.85"/>
-      <circle cx="7" cy="0" r="5" fill="#8D77AB" opacity="0.85"/>
-      <circle cx="0" cy="7" r="5" fill="#8D77AB" opacity="0.85"/>
-      <circle cx="-7" cy="0" r="5" fill="#8D77AB" opacity="0.85"/>
-      <circle cx="-5" cy="-5" r="4.5" fill="#E1D7B7" opacity="0.9"/>
-      <circle cx="5" cy="-5" r="4.5" fill="#E1D7B7" opacity="0.9"/>
-      <circle cx="5" cy="5" r="4.5" fill="#E1D7B7" opacity="0.9"/>
-      <circle cx="-5" cy="5" r="4.5" fill="#E1D7B7" opacity="0.9"/>
-      <circle cx="0" cy="0" r="3.5" fill="#fff"/>
-    </g>
-
-    <!-- Top Flower Crest -->
-    <g id="flowerCrest">
-      <path d="M-30,4 Q-15,-10 0,0 Q15,-10 30,4" fill="none" stroke="#B8D5B3" stroke-width="2"/>
-      <path d="M-22,-4 Q-18,-15 -10,-8" fill="none" stroke="#8D77AB" stroke-width="1.5"/>
-      <path d="M22,-4 Q18,-15 10,-8" fill="none" stroke="#8D77AB" stroke-width="1.5"/>
-      <g transform="translate(0, 0)">
-        <circle cx="0" cy="-6" r="4.5" fill="#8D77AB" opacity="0.85"/>
-        <circle cx="6" cy="0" r="4.5" fill="#8D77AB" opacity="0.85"/>
-        <circle cx="0" cy="6" r="4.5" fill="#8D77AB" opacity="0.85"/>
-        <circle cx="-6" cy="0" r="4.5" fill="#8D77AB" opacity="0.85"/>
-        <circle cx="-4" cy="-4" r="4" fill="#E1D7B7"/>
-        <circle cx="4" cy="-4" r="4" fill="#E1D7B7"/>
-        <circle cx="4" cy="4" r="4" fill="#E1D7B7"/>
-        <circle cx="-4" cy="4" r="4" fill="#E1D7B7"/>
-        <circle cx="0" cy="0" r="3" fill="#fff"/>
-      </g>
-    </g>
-  </defs>
-</svg>
+<!-- Floating Real Flowers & Petals Canvas -->
+<canvas id="flowerCanvas"></canvas>
 
 <audio id="weddingMusic" loop preload="auto">
   <source src="DS.mp3.mpeg" type="audio/mpeg">
@@ -635,18 +587,14 @@ footer{
   </svg>
 </button>
 
+<!-- Clean Opening Screen (All flower graphics removed) -->
 <section id="open">
   <div class="card">
-    <svg class="floral-corner floral-top-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
-    <svg class="floral-corner floral-top-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
-    <svg class="floral-corner floral-bottom-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
-    <svg class="floral-corner floral-bottom-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
-
     <div class="mono">D &amp; S</div>
     <div class="kicker">A Celebration of Love</div>
-    <div class="floral-divider">
+    <div class="minimal-divider">
       <span class="bar"></span>
-      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
+      <span class="dot"></span>
       <span class="bar right"></span>
     </div>
     <div class="openverse">“The steadfast love of the Lord never ceases.”</div>
@@ -658,16 +606,16 @@ footer{
 <main id="site" class="site">
   <section class="hero">
     <div>
-      <div class="flower-crest">
-        <svg viewBox="-40 -20 80 40"><use href="#flowerCrest"/></svg>
+      <div class="section-floral-spray">
+        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="Floral Header">
       </div>
       <div class="small">Together with their families</div>
       <h1>D &amp; S</h1>
       <div class="names">Dr. Deevena Salivendra<br>&amp;<br>Dr. Sasi Preetham Manukonda</div>
-      <div class="floral-divider" style="color:var(--gold-accent)">
-        <span class="bar" style="background:linear-gradient(90deg, transparent, var(--gold-accent))"></span>
-        <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
-        <span class="bar right" style="background:linear-gradient(90deg, var(--gold-accent), transparent)"></span>
+      <div class="minimal-divider" style="margin-top:20px;">
+        <span class="bar"></span>
+        <span class="dot"></span>
+        <span class="bar right"></span>
       </div>
       <div class="small" style="margin-top:15px">November 23, 2026 · 10:00 AM</div>
     </div>
@@ -678,23 +626,23 @@ footer{
     <p class="verse">“The steadfast love of the Lord never ceases.”</p>
     <div class="small">Lamentations 3:22</div>
 
-    <div class="floral-divider">
-      <span class="bar"></span>
-      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
-      <span class="bar right"></span>
+    <div class="section-floral-spray">
+      <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=500&q=80" alt="Floral Accent">
     </div>
 
     <div class="couple">
       <div class="person">
-        <svg class="floral-corner floral-top-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
-        <svg class="floral-corner floral-bottom-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+        <div class="card-flower-header">
+          <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=400&q=80" alt="Bride Flowers">
+        </div>
         <div class="small">The Bride</div>
         <h3>Dr. Deevena Salivendra</h3>
         <div class="parents"><strong>D/o Dr. Salivendra Kishore Kumar and Mrs. Emily</strong></div>
       </div>
       <div class="person">
-        <svg class="floral-corner floral-top-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
-        <svg class="floral-corner floral-bottom-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+        <div class="card-flower-header">
+          <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=400&q=80" alt="Groom Flowers">
+        </div>
         <div class="small">The Groom</div>
         <h3>Dr. Sasi Preetham Manukonda</h3>
         <div class="parents"><strong>S/o Mr. Manukoda.V.V. Satyanarayana and Mrs. Santha Kumari</strong></div>
@@ -720,10 +668,8 @@ footer{
   <section class="section">
     <div class="small">Cherished Memories</div>
     <h2>Moments &amp; Memories</h2>
-    <div class="floral-divider">
-      <span class="bar"></span>
-      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
-      <span class="bar right"></span>
+    <div class="section-floral-spray">
+      <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80" alt="Floral Branch">
     </div>
 
     <div class="album-grid">
@@ -741,10 +687,8 @@ footer{
   <section class="section">
     <div class="small">Counting the Moments</div>
     <h2>Until We Say “I Do”</h2>
-    <div class="floral-divider">
-      <span class="bar"></span>
-      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
-      <span class="bar right"></span>
+    <div class="section-floral-spray">
+      <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=500&q=80" alt="Floral Branch">
     </div>
     <div class="count">
       <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
@@ -758,14 +702,13 @@ footer{
     <div class="section-inner">
       <div class="kicker">The Celebration</div>
       <h2>Meet us at the garden</h2>
-      <div class="floral-divider">
-        <span class="bar"></span>
-        <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
-        <span class="bar right"></span>
+      <div class="section-floral-spray">
+        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80" alt="Floral Branch">
       </div>
       <div class="venue-card">
-        <svg class="floral-corner floral-top-left" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
-        <svg class="floral-corner floral-top-right" viewBox="0 0 80 80"><use href="#flowerCorner"/></svg>
+        <div class="card-flower-header">
+          <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=400&q=80" alt="Venue Flowers">
+        </div>
         <h3 style="font-family: 'Playfair Display', serif !important;">Adabala Gardens</h3>
         <p>Saibaba Temple Rd<br>Palakollu, Andhra Pradesh 534260</p>
         <div class="buttons">
@@ -777,15 +720,15 @@ footer{
   </section>
 
   <section class="closing">
-    <div class="flower-crest">
-      <svg viewBox="-40 -20 80 40"><use href="#flowerCrest"/></svg>
+    <div class="section-floral-spray">
+      <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80" alt="Closing Floral">
     </div>
     <div class="small">A New Beginning</div>
     <h2>We Can't Wait to Celebrate With You</h2>
-    <div class="floral-divider" style="color:var(--gold-accent)">
-      <span class="bar" style="background:linear-gradient(90deg, transparent, var(--gold-accent))"></span>
-      <svg viewBox="-20 -20 40 40"><use href="#blossomCenter"/></svg>
-      <span class="bar right" style="background:linear-gradient(90deg, var(--gold-accent), transparent)"></span>
+    <div class="minimal-divider" style="margin-top:20px;">
+      <span class="bar"></span>
+      <span class="dot"></span>
+      <span class="bar right"></span>
     </div>
     <p>Dr. Deevena Salivendra &amp; Dr. Sasi Preetham Manukonda</p>
   </section>
@@ -805,95 +748,86 @@ document.addEventListener("DOMContentLoaded", () => {
   const site = document.getElementById("site");
   const audio = document.getElementById("weddingMusic");
   const musicToggle = document.getElementById("musicToggle");
+  const flowerCanvas = document.getElementById("flowerCanvas");
+  const ctx = flowerCanvas.getContext("2d");
 
-  // --- Falling Flowers & Petals Canvas ---
-  const canvas = document.getElementById("petalCanvas");
-  const ctx = canvas.getContext("2d");
-  let floralItems = [];
-
-  function resizePetalCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  // --- Falling Realistic Flowers Canvas ---
+  function resizeFlowerCanvas() {
+    flowerCanvas.width = window.innerWidth;
+    flowerCanvas.height = window.innerHeight;
   }
-  window.addEventListener("resize", resizePetalCanvas);
-  resizePetalCanvas();
+  window.addEventListener("resize", resizeFlowerCanvas);
+  resizeFlowerCanvas();
 
-  class FloralParticle {
+  // Preload real blossom image assets
+  const flowerImages = [
+    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=120&q=80",
+    "https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=120&q=80"
+  ];
+  const loadedImgs = [];
+  flowerImages.forEach(src => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = src;
+    loadedImgs.push(img);
+  });
+
+  class RealFlowerParticle {
     constructor() {
       this.reset(true);
     }
     reset(initial = false) {
-      this.x = Math.random() * canvas.width;
-      this.y = initial ? Math.random() * canvas.height : -25;
-      this.isFlower = Math.random() > 0.65; // ~35% full flowers, 65% petals
-      this.size = this.isFlower ? 12 + Math.random() * 8 : 8 + Math.random() * 8;
-      this.speedY = 0.7 + Math.random() * 1.3;
+      this.x = Math.random() * flowerCanvas.width;
+      this.y = initial ? Math.random() * flowerCanvas.height : -50;
+      this.size = 28 + Math.random() * 26;
+      this.speedY = 0.8 + Math.random() * 1.2;
       this.speedX = (Math.random() - 0.5) * 1.2;
       this.angle = Math.random() * 360;
-      this.rotSpeed = (Math.random() - 0.5) * 2;
-      this.color = Math.random() > 0.4 ? "rgba(225, 215, 183, 0.55)" : "rgba(184, 213, 179, 0.45)";
-      this.flowerPetalColor = Math.random() > 0.5 ? "rgba(141, 119, 171, 0.45)" : "rgba(225, 215, 183, 0.55)";
+      this.rotSpeed = (Math.random() - 0.5) * 1.5;
+      this.img = loadedImgs[Math.floor(Math.random() * loadedImgs.length)];
+      this.opacity = 0.55 + Math.random() * 0.4;
     }
     update() {
       this.y += this.speedY;
-      this.x += Math.sin(this.y * 0.012) * 1.1 + this.speedX;
+      this.x += Math.sin(this.y * 0.015) * 1.2 + this.speedX;
       this.angle += this.rotSpeed;
-      if (this.y > canvas.height + 30 || this.x < -40 || this.x > canvas.width + 40) {
+      if (this.y > flowerCanvas.height + 60 || this.x < -60 || this.x > flowerCanvas.width + 60) {
         this.reset();
       }
     }
     draw() {
+      if (!this.img || !this.img.complete) return;
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate((this.angle * Math.PI) / 180);
-
-      if (this.isFlower) {
-        // Draw 5-petal blossom
-        ctx.fillStyle = this.flowerPetalColor;
-        for (let i = 0; i < 5; i++) {
-          ctx.rotate((Math.PI * 2) / 5);
-          ctx.beginPath();
-          ctx.ellipse(0, this.size * 0.5, this.size * 0.35, this.size * 0.5, 0, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        // Flower center pistil
-        ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
-        ctx.beginPath();
-        ctx.arc(0, 0, this.size * 0.22, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        // Single petal
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.quadraticCurveTo(this.size / 2, -this.size / 2, this.size, 0);
-        ctx.quadraticCurveTo(this.size / 2, this.size / 2, 0, 0);
-        ctx.fill();
-      }
+      ctx.globalAlpha = this.opacity;
+      ctx.drawImage(this.img, -this.size / 2, -this.size / 2, this.size, this.size);
       ctx.restore();
     }
   }
 
-  for (let i = 0; i < 35; i++) {
-    floralItems.push(new FloralParticle());
+  const flowerParticles = [];
+  for (let i = 0; i < 20; i++) {
+    flowerParticles.push(new RealFlowerParticle());
   }
 
   function animateFlowers() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    floralItems.forEach((p) => {
+    ctx.clearRect(0, 0, flowerCanvas.width, flowerCanvas.height);
+    flowerParticles.forEach(p => {
       p.update();
       p.draw();
     });
     requestAnimationFrame(animateFlowers);
   }
-  animateFlowers();
 
-  // --- Invitation Open & Music ---
+  // --- Open Button Trigger ---
   openBtn.addEventListener("click", () => {
     openScreen.classList.add("hide");
     document.body.classList.remove("locked");
     site.classList.add("show");
     musicToggle.classList.add("show");
+    flowerCanvas.classList.add("active");
+    animateFlowers();
 
     audio.play().then(() => {
       musicToggle.classList.add("playing");

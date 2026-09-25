@@ -259,10 +259,21 @@ body{
   text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
 }
 .hero .names{
-  font-size:50px;
-  line-height:1.2;
+  font-size:74px;
+  line-height:1.15;
   color:var(--text-main);
   text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
+}
+.hero .weds-text {
+  display: inline-block;
+  font-family: 'Playfair Display', 'Cormorant Garamond', serif !important;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: 2px;
+  color: var(--sunset-warm);
+  margin: 6px 0;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .section{
@@ -627,7 +638,8 @@ footer{
   .couple{grid-template-columns:1fr;gap:20px}
   .hero{padding-top:100px}
   .hero h1{font-size:75px}
-  .hero .names{font-size:36px}
+  .hero .names{font-size:52px}
+  .hero .weds-text{font-size:22px}
   .count{gap:8px}
   .time{padding:16px 5px}
   .time strong{font-size:30px}
@@ -674,7 +686,11 @@ footer{
     <div>
       <div class="small">Together with their families</div>
       <h1>D &amp; S</h1>
-      <div class="names">Deevena<br>Weds<br>Sasi Preetham</div>
+      <div class="names">
+        Deevena<br>
+        <span class="weds-text">weds</span><br>
+        Sasi Preetham
+      </div>
       <div class="celebration-divider" style="margin-top:20px;">
         <span class="bar" style="background:linear-gradient(90deg, transparent, var(--sunset-gold))"></span>
         <span class="sparkle" style="color:var(--sunset-gold)">&#10022;</span>

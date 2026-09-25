@@ -231,40 +231,39 @@ body{
   align-items: flex-start;
   justify-content: center;
   text-align: center;
-  padding: 85px 20px 40px;
+  padding: 60px 20px 40px;
   position: relative;
   background: var(--template-img) no-repeat center top / cover;
 }
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 45%, rgba(0, 0, 0, 0.35) 100%);
-  pointer-events:none;
-}
+
+/* Border, background card, and blur box removed */
 .hero>div{
   position:relative;
   z-index:1;
   max-width: 680px;
-  padding: 30px 24px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 28px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
-.hero .small{color:var(--text-muted)}
+.hero .small{
+  color: var(--text-muted);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
 .hero h1{
   font-size:95px;
   line-height:1;
-  margin:15px 0;
+  margin:10px 0 15px;
   color:var(--text-main);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
 }
 .hero .names{
   font-size:50px;
   line-height:1.2;
   color:var(--text-main);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
 }
 
 .section{
@@ -627,7 +626,7 @@ footer{
 }
 @media(max-width:700px){
   .couple{grid-template-columns:1fr;gap:20px}
-  .hero{padding-top:45px}
+  .hero{padding-top:40px}
   .hero h1{font-size:75px}
   .hero .names{font-size:36px}
   .count{gap:8px}
@@ -707,7 +706,7 @@ footer{
       <div class="person">
         <div class="small">The Groom</div>
         <h3>Dr. Sasi Preetham Manukonda</h3>
-        <div class="parents"><strong>S/o Mr. Manukonda.V.V. Satyanarayana and Mrs. Santha Kumari</strong></div>
+        <div class="parents"><strong>S/o Mr. Manukoda.V.V. Satyanarayana and Mrs. Santha Kumari</strong></div>
       </div>
     </div>
   </section>
@@ -751,7 +750,7 @@ footer{
 
       <div class="album-controls">
         <button class="album-nav-btn" id="albumPrev" aria-label="Previous Page">
-          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 1.41-1.41L10.83 12z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
         </button>
         <span class="swipe-hint">&larr; Swipe Album &rarr;</span>
         <button class="album-nav-btn" id="albumNext" aria-label="Next Page">
@@ -1113,7 +1112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const d = Math.floor(distance / (1000 * 60 * 60 * 24));
     const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const m = Math.floor((distance % (1000 * 60)) / (1000 * 60));
     const s = Math.floor((distance % (1000 * 60)) / 1000);
 
     daysEl.textContent = String(d).padStart(2, "0");

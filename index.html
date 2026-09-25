@@ -18,17 +18,17 @@
 }
 
 :root {
-  --bg-main: #FAF8F5;
-  --bg-subtle: #F0EAE1;
-  --text-main: #1E2A5E;
-  --text-muted: #55679C;
-  --purple-royal: #8D77AB;
-  --royal-gradient: linear-gradient(135deg, #1E2A5E 0%, #3B4B7F 50%, #8D77AB 100%);
-  --gold-accent: #E1D7B7;
+  --bg-main: #FDFBF7;
+  --bg-subtle: #F6EFE6;
+  --text-main: #2C3539;
+  --text-muted: #6B5B52;
+  --purple-royal: #C89666;
+  --gold-accent: #C5A059;
   --gold-bright: #F5D77F;
-  --card-bg: rgba(255, 255, 255, 0.94);
-  --border-light: rgba(141, 119, 171, 0.25);
-  --shadow: 0 20px 40px -15px rgba(30, 42, 94, 0.12);
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --border-light: rgba(197, 160, 89, 0.3);
+  --shadow: 0 20px 40px -15px rgba(100, 70, 50, 0.12);
+  --sunset-gradient: linear-gradient(135deg, #7A5C43 0%, #C89666 50%, #D4AF37 100%);
 }
 
 *{box-sizing:border-box}
@@ -109,18 +109,27 @@ body{
   justify-content:center;
   text-align:center;
   color:#fff;
-  background:var(--royal-gradient);
+  background: url('beach-sunset.jpg') no-repeat center center / cover;
   transition:opacity .8s cubic-bezier(0.16,1,0.3,1),visibility .8s;
+}
+#open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 20, 15, 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 .hide{opacity:0;visibility:hidden;pointer-events:none}
 .card{
   position:relative;
+  z-index: 2;
   padding:50px 36px 42px;
   max-width:580px;
-  background:rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.18);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(225, 215, 183, 0.4);
+  border:1px solid rgba(255, 255, 255, 0.5);
   border-radius:28px;
 }
 .mono{
@@ -136,13 +145,13 @@ body{
   text-transform:uppercase;
   color:var(--text-muted);
 }
-#open .small,#open .kicker{color:rgba(255,255,255,0.85)}
+#open .small,#open .kicker{color:rgba(255,255,255,0.9)}
 .openverse{
   font-style:italic;
   font-size:23px;
   margin:25px 0 10px;
   line-height:1.4;
-  color:var(--gold-accent);
+  color:var(--gold-bright);
 }
 .btn{
   display:inline-flex;
@@ -160,12 +169,12 @@ body{
   text-transform:uppercase;
   cursor:pointer;
   transition:all .3s ease;
-  box-shadow:0 8px 20px -6px rgba(30,42,94,0.45);
+  box-shadow:0 8px 20px -6px rgba(100,70,50,0.35);
 }
-.btn:hover{background:#3B4B7F;transform:translateY(-2px)}
+.btn:hover{background:#443328;transform:translateY(-2px)}
 .openbtn{
   margin-top:35px;
-  background:rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.22);
   border:1px solid var(--gold-accent);
   color:#fff;
   backdrop-filter:blur(8px);
@@ -213,35 +222,46 @@ body{
 
 .site{display:none}
 .site.show{display:block}
+
+/* Sunset Beach Hero Background */
 .hero{
-  min-height:95vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:#fff;
-  background:var(--royal-gradient);
-  padding:40px 20px;
-  position:relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  padding: 85px 20px 40px;
+  position: relative;
+  background: url('beach-sunset.jpg') no-repeat center bottom / cover;
 }
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:radial-gradient(circle at center,transparent 0%,rgba(0,0,0,0.25) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(0, 0, 0, 0.25) 100%);
   pointer-events:none;
 }
-.hero>div{position:relative;z-index:1}
-.hero .small{color:var(--gold-accent)}
+.hero>div{
+  position:relative;
+  z-index:1;
+  max-width: 700px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 24px;
+}
+.hero .small{color:var(--text-muted)}
 .hero h1{
   font-size:95px;
   line-height:1;
   margin:15px 0;
-  color:#fff;
+  color:var(--text-main);
 }
 .hero .names{
-  font-size:54px;
+  font-size:50px;
   line-height:1.2;
+  color:var(--text-main);
 }
 
 .section{
@@ -312,7 +332,7 @@ body{
 .pop-date-card.revealed {
   opacity: 1;
   transform: scale(1) translateY(0);
-  box-shadow: 0 30px 70px -10px rgba(141, 119, 171, 0.4);
+  box-shadow: 0 30px 70px -10px rgba(200, 150, 102, 0.35);
 }
 .pop-date-card::before {
   content: "";
@@ -382,7 +402,7 @@ body{
   background: #fff;
   border-radius: 20px;
   padding: 14px 14px 28px 14px;
-  box-shadow: 0 16px 36px -10px rgba(30, 42, 94, 0.18), 0 0 0 1px rgba(225, 215, 183, 0.4);
+  box-shadow: 0 16px 36px -10px rgba(100, 70, 50, 0.16), 0 0 0 1px rgba(225, 215, 183, 0.4);
   scroll-snap-align: center;
   position: relative;
   transform: perspective(1000px) rotateY(0deg);
@@ -392,7 +412,7 @@ body{
 }
 .album-page:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 24px 44px -12px rgba(141, 119, 171, 0.35), 0 0 0 1px var(--gold-accent);
+  box-shadow: 0 24px 44px -12px rgba(200, 150, 102, 0.3), 0 0 0 1px var(--gold-accent);
 }
 .album-page-inner {
   width: 100%;
@@ -484,7 +504,7 @@ body{
   color:#fff;
 }
 .buttons .btn.primary:hover{
-  background:#3B4B7F;
+  background:#443328;
 }
 .buttons .btn:not(.primary){
   background:#fff;
@@ -532,7 +552,7 @@ body{
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: rgba(14, 18, 41, 0.92);
+  background: rgba(30, 20, 15, 0.94);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -579,10 +599,10 @@ body{
   padding:110px 24px;
   text-align:center;
   color:#fff;
-  background:var(--royal-gradient);
+  background: var(--sunset-gradient);
   position: relative;
 }
-.closing .small{color:var(--gold-accent)}
+.closing .small{color:var(--gold-bright)}
 .closing h2{
   font-size:60px;
   line-height:1.1;
@@ -591,7 +611,7 @@ body{
 .closing p{
   font-size:24px;
   font-style:italic;
-  color:rgba(255,255,255,0.9);
+  color:rgba(255,255,255,0.95);
 }
 footer{
   text-align:center;
@@ -604,8 +624,9 @@ footer{
 }
 @media(max-width:700px){
   .couple{grid-template-columns:1fr;gap:20px}
+  .hero{padding-top:60px}
   .hero h1{font-size:75px}
-  .hero .names{font-size:38px}
+  .hero .names{font-size:36px}
   .count{gap:8px}
   .time{padding:16px 5px}
   .time strong{font-size:30px}
@@ -638,7 +659,7 @@ footer{
     <div class="kicker">A Celebration of Love</div>
     <div class="celebration-divider">
       <span class="bar" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7));"></span>
-      <span class="sparkle" style="color: var(--gold-accent);">&#10022;</span>
+      <span class="sparkle" style="color: var(--gold-bright);">&#10022;</span>
       <span class="bar right" style="background: linear-gradient(90deg, rgba(255,255,255,0.7), transparent);"></span>
     </div>
     <div class="openverse">“The steadfast love of the Lord never ceases.”</div>
@@ -654,9 +675,9 @@ footer{
       <h1>D &amp; S</h1>
       <div class="names">Dr. Deevena Salivendra<br>&amp;<br>Dr. Sasi Preetham Manukonda</div>
       <div class="celebration-divider" style="margin-top:20px;">
-        <span class="bar" style="background:linear-gradient(90deg, transparent, var(--gold-accent))"></span>
-        <span class="sparkle" style="color:var(--gold-accent)">&#10022;</span>
-        <span class="bar right" style="background:linear-gradient(90deg, var(--gold-accent), transparent)"></span>
+        <span class="bar" style="background:linear-gradient(90deg, transparent, var(--purple-royal))"></span>
+        <span class="sparkle" style="color:var(--purple-royal)">&#10022;</span>
+        <span class="bar right" style="background:linear-gradient(90deg, var(--purple-royal), transparent)"></span>
       </div>
       <div class="small" style="margin-top:15px">November 23, 2026 · 10:00 AM</div>
     </div>
@@ -785,9 +806,9 @@ footer{
     <div class="small">A New Beginning</div>
     <h2>We Can't Wait to Celebrate With You</h2>
     <div class="celebration-divider" style="margin-top:20px;">
-      <span class="bar" style="background:linear-gradient(90deg, transparent, var(--gold-accent))"></span>
-      <span class="sparkle" style="color:var(--gold-accent)">&#10022;</span>
-      <span class="bar right" style="background:linear-gradient(90deg, var(--gold-accent), transparent)"></span>
+      <span class="bar" style="background:linear-gradient(90deg, transparent, var(--gold-bright))"></span>
+      <span class="sparkle" style="color:var(--gold-bright)">&#10022;</span>
+      <span class="bar right" style="background:linear-gradient(90deg, var(--gold-bright), transparent)"></span>
     </div>
     <p>Dr. Deevena Salivendra &amp; Dr. Sasi Preetham Manukonda</p>
   </section>
@@ -820,10 +841,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const confettiPalette = [
     "#E1D7B7",
     "#F5D77F",
-    "#8D77AB",
-    "#C8B6E2",
+    "#C89666",
+    "#E8B4B8",
     "#FFFFFF",
-    "#E8B4B8"
+    "#D4AF37"
   ];
 
   class ConfettiParticle {

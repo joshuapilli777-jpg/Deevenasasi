@@ -61,7 +61,37 @@ a{text-decoration:none;color:inherit}
   background:rgba(255,255,255,.10);
   backdrop-filter:blur(18px);
   box-shadow:0 30px 90px rgba(0,0,0,.3);
+  position:relative;
+  overflow:hidden;
 }
+.opening-card::before,.opening-card::after{content:"";position:absolute;border:1px solid rgba(227,199,123,.28);border-radius:50%;pointer-events:none}
+.opening-card::before{width:360px;height:360px;left:-190px;top:-190px}
+.opening-card::after{width:300px;height:300px;right:-160px;bottom:-160px}
+
+.monogram-ring{
+  width:145px;
+  height:145px;
+  margin:0 auto 12px;
+  border:1px solid rgba(227,199,123,.55);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  position:relative;
+  animation:monogramFloat 5s ease-in-out infinite;
+}
+.monogram-ring::before{
+  content:"✦";
+  position:absolute;
+  top:-9px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:15px;
+  color:var(--gold2);
+  background:#503522;
+  padding:0 8px;
+}
+@keyframes monogramFloat{50%{transform:translateY(-4px) scale(1.015)}}
+
 .mono{
   font:normal 48px/1 "Alex Brush",cursive;
   color:#fff;
@@ -121,8 +151,14 @@ a{text-decoration:none;color:inherit}
   color:#fff;
   background:rgba(255,255,255,.12);
   border:1px solid #e3c77b;
+  position:relative;
+  z-index:2;
 }
 .open-btn:hover{background:#e3c77b;color:#30231b;transform:translateY(-2px)}
+
+.opening-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.opening-particles i{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--gold2);opacity:.6;animation:particleFloat 6s linear infinite}
+@keyframes particleFloat{0%{transform:translateY(20px);opacity:0}20%{opacity:.65}80%{opacity:.4}100%{transform:translateY(-120px);opacity:0}}
 
 .site{opacity:1;transition:opacity .7s ease}
 
@@ -153,7 +189,9 @@ a{text-decoration:none;color:inherit}
   background:rgba(255,255,255,.35);
   filter:blur(70px);
 }
+.hero .hero-frame{position:absolute;inset:28px;border:1px solid rgba(177,135,61,.25);pointer-events:none}
 .hero-content{position:relative;z-index:2;padding:40px 20px}
+.hero-monogram{font:normal 42px/1 "Alex Brush",cursive;color:var(--gold);margin-bottom:12px}
 .hero-kicker{
   font-size:11px;
   letter-spacing:4px;
@@ -328,6 +366,7 @@ a{text-decoration:none;color:inherit}
   color:var(--muted);
 }
 
+.count-intro{max-width:620px;margin:0 auto;color:var(--muted);font:italic 21px/1.45 "Cormorant Garamond",serif}
 .count{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -341,7 +380,12 @@ a{text-decoration:none;color:inherit}
   border-radius:22px;
   background:rgba(255,255,255,.75);
   box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
 }
+.count .counter::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(227,199,123,.16),transparent);transform:translateX(-120%);animation:sheen 5s ease-in-out infinite}
+.count .counter:nth-child(2)::after{animation-delay:.7s}.count .counter:nth-child(3)::after{animation-delay:1.4s}.count .counter:nth-child(4)::after{animation-delay:2.1s}
+@keyframes sheen{20%,100%{transform:translateX(120%)}}
 .counter strong{
   display:block;
   font:500 clamp(30px,5vw,48px)/1 "Cormorant Garamond",serif;
@@ -355,6 +399,14 @@ a{text-decoration:none;color:inherit}
   font-weight:600;
 }
 
+.timeline{max-width:700px;margin:45px auto 0;position:relative;text-align:left}
+.timeline::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:1px;background:var(--line)}
+.timeline-item{position:relative;padding:0 0 30px 58px}
+.timeline-dot{position:absolute;left:10px;top:4px;width:17px;height:17px;border-radius:50%;background:var(--paper);border:1px solid var(--gold);box-shadow:0 0 0 5px rgba(196,154,69,.08)}
+.timeline-time{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:600;text-transform:uppercase}
+.timeline-title{margin:6px 0;font:500 27px/1.2 "Playfair Display",serif}
+.timeline-copy{margin:0;color:var(--muted);font:18px/1.5 "Cormorant Garamond",serif}
+
 .venue-card{
   max-width:650px;
   margin:35px auto 0;
@@ -364,6 +416,7 @@ a{text-decoration:none;color:inherit}
   border:1px solid var(--line);
   box-shadow:var(--shadow);
 }
+.venue-icon{font-size:28px;color:var(--gold);margin-bottom:8px}
 .venue-card h3{
   margin:0 0 12px;
   font:500 clamp(35px,5vw,48px)/1.1 "Playfair Display",serif;
@@ -382,6 +435,7 @@ a{text-decoration:none;color:inherit}
 .btn.primary{background:var(--brown);color:#fff}
 .btn.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(57,38,24,.12)}
+.ics-note{margin-top:12px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 
 .closing{
   padding:120px 24px;
@@ -389,6 +443,7 @@ a{text-decoration:none;color:inherit}
   color:#fff;
   background:linear-gradient(135deg,#291a12,#65442e 55%,#b48a46);
 }
+.closing .closing-monogram{font:normal 52px/1 "Alex Brush",cursive;color:#f1d38a}
 .closing h2{
   margin:15px 0;
   font:normal clamp(60px,10vw,95px)/1 "Alex Brush",cursive;
@@ -425,6 +480,9 @@ footer{
 .music.show{display:block}
 .music.playing{animation:spin 5s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+.music-label{position:fixed;right:74px;bottom:22px;z-index:899;padding:8px 12px;border-radius:999px;background:rgba(48,35,27,.9);color:#f8e6b0;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;opacity:0;transform:translateX(8px);pointer-events:none;transition:.3s ease}
+.music-label.show{opacity:1;transform:none}
 
 #lightbox{
   position:fixed;
@@ -468,6 +526,7 @@ footer{
 @media(max-width:700px){
   .opening-card{padding:45px 20px}
   .mono{font-size:44px}
+  .monogram-ring{width:125px;height:125px}
   .hero::before{inset:12px}
   .section{padding:70px 18px}
   .couple{grid-template-columns:1fr}
@@ -475,49 +534,13 @@ footer{
   .counter{padding:20px 5px}
   .counter strong{font-size:30px}
   .photo{flex-basis:76vw;height:100vw}
+  .music-label{right:66px;bottom:22px}
+  .timeline{margin-top:35px}
+  .timeline-title{font-size:24px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
-
-/* Premium enhancements */
-.opening-card{position:relative;overflow:hidden}
-.opening-card::before,.opening-card::after{content:"";position:absolute;border:1px solid rgba(227,199,123,.28);border-radius:50%;pointer-events:none}
-.opening-card::before{width:360px;height:360px;left:-190px;top:-190px}
-.opening-card::after{width:300px;height:300px;right:-160px;bottom:-160px}
-.monogram-ring{width:145px;height:145px;margin:0 auto 12px;border:1px solid rgba(227,199,123,.55);border-radius:50%;display:grid;place-items:center;position:relative;animation:monogramFloat 5s ease-in-out infinite}
-.monogram-ring::before{content:"✦";position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:15px;color:var(--gold2);background:#503522;padding:0 8px}
-@keyframes monogramFloat{50%{transform:translateY(-4px) scale(1.015)}}
-.open-btn{position:relative;z-index:2}
-.opening-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.opening-particles i{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--gold2);opacity:.6;animation:particleFloat 6s linear infinite}
-@keyframes particleFloat{0%{transform:translateY(20px);opacity:0}20%{opacity:.65}80%{opacity:.4}100%{transform:translateY(-120px);opacity:0}}
-.hero .hero-frame{position:absolute;inset:28px;border:1px solid rgba(177,135,61,.25);pointer-events:none}
-.hero-monogram{font:normal 42px/1 "Alex Brush",cursive;color:var(--gold);margin-bottom:12px}
-.luxury-rule{display:flex;align-items:center;gap:12px;justify-content:center;margin:18px auto}
-.luxury-rule span{display:block;height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.count-intro{max-width:620px;margin:0 auto;color:var(--muted);font:italic 21px/1.45 "Cormorant Garamond",serif}
-.count .counter{position:relative;overflow:hidden}
-.count .counter::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(227,199,123,.16),transparent);transform:translateX(-120%);animation:sheen 5s ease-in-out infinite}
-.count .counter:nth-child(2)::after{animation-delay:.7s}.count .counter:nth-child(3)::after{animation-delay:1.4s}.count .counter:nth-child(4)::after{animation-delay:2.1s}
-@keyframes sheen{20%,100%{transform:translateX(120%)}}
-.timeline{max-width:700px;margin:45px auto 0;position:relative;text-align:left}
-.timeline::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:1px;background:var(--line)}
-.timeline-item{position:relative;padding:0 0 30px 58px}
-.timeline-dot{position:absolute;left:10px;top:4px;width:17px;height:17px;border-radius:50%;background:var(--paper);border:1px solid var(--gold);box-shadow:0 0 0 5px rgba(196,154,69,.08)}
-.timeline-time{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:600;text-transform:uppercase}
-.timeline-title{margin:6px 0;font:500 27px/1.2 "Playfair Display",serif}
-.timeline-copy{margin:0;color:var(--muted);font:18px/1.5 "Cormorant Garamond",serif}
-.venue-icon{font-size:28px;color:var(--gold);margin-bottom:8px}
-.music-label{position:fixed;right:74px;bottom:22px;z-index:899;padding:8px 12px;border-radius:999px;background:rgba(48,35,27,.9);color:#f8e6b0;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;opacity:0;transform:translateX(8px);pointer-events:none;transition:.3s ease}
-.music-label.show{opacity:1;transform:none}
-.ics-note{margin-top:12px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
-.closing .closing-monogram{font:normal 52px/1 "Alex Brush",cursive;color:#f1d38a}
-@media(max-width:700px){
- .monogram-ring{width:125px;height:125px}.music-label{right:66px;bottom:22px}
- .timeline{margin-top:35px}.timeline-title{font-size:24px}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
 <script>document.documentElement.classList.remove('no-js');</script>
 <style>.no-js #opening{display:grid}.no-js .site{opacity:1}</style>
@@ -528,7 +551,16 @@ footer{
 <input type="checkbox" id="open-toggle" aria-label="Open wedding invitation">
 
 <div id="opening">
-  <div class="opening-particles" aria-hidden="true"><i style="left:8%;top:78%;animation-delay:0s"></i><i style="left:18%;top:58%;animation-delay:1.1s"></i><i style="left:31%;top:84%;animation-delay:2.2s"></i><i style="left:45%;top:68%;animation-delay:0.5s"></i><i style="left:57%;top:88%;animation-delay:1.7s"></i><i style="left:69%;top:62%;animation-delay:2.8s"></i><i style="left:82%;top:80%;animation-delay:0.9s"></i><i style="left:92%;top:55%;animation-delay:2.0s"></i></div>
+  <div class="opening-particles" aria-hidden="true">
+    <i style="left:8%;top:78%;animation-delay:0s"></i>
+    <i style="left:18%;top:58%;animation-delay:1.1s"></i>
+    <i style="left:31%;top:84%;animation-delay:2.2s"></i>
+    <i style="left:45%;top:68%;animation-delay:0.5s"></i>
+    <i style="left:57%;top:88%;animation-delay:1.7s"></i>
+    <i style="left:69%;top:62%;animation-delay:2.8s"></i>
+    <i style="left:82%;top:80%;animation-delay:0.9s"></i>
+    <i style="left:92%;top:55%;animation-delay:2.0s"></i>
+  </div>
   <div class="opening-card">
     <div class="monogram-ring"><div class="mono">D &amp; S</div></div>
     <div class="eyebrow">A Celebration of Love</div>
@@ -537,7 +569,7 @@ footer{
     </div>
     <div class="open-verse">“The steadfast love of the Lord never ceases.”</div>
     <div class="open-ref">LAMENTATIONS 3:22</div>
-    <label class="open-btn" for="open-toggle">Tap to Open</label>
+    <label class="open-btn" id="openBtn" for="open-toggle">Tap to Open</label>
   </div>
 </div>
 
@@ -698,57 +730,76 @@ footer{
 (function(){
   "use strict";
 
-  const body = document.body;
   const music = document.getElementById("weddingMusic");
   const musicBtn = document.getElementById("musicBtn");
-
-  const openToggle = document.getElementById("open-toggle");
-
-  function enhanceAfterOpen(){
-    if(!openToggle || !openToggle.checked) return;
-    if(musicBtn) musicBtn.classList.add("show");
-    if(music){
-      music.play().then(function(){
-        if(musicBtn) musicBtn.classList.add("playing");
-      }).catch(function(){});
-    }
-  }
-
-  if(openToggle) openToggle.addEventListener("change", enhanceAfterOpen);
-
   const musicLabel = document.getElementById("musicLabel");
-  if(music){ music.volume = 0; }
-  function fadeMusic(target){
+  const openBtn = document.getElementById("openBtn");
+
+  function fadeMusic(target, duration = 800){
     if(!music) return;
     const start = music.volume;
     const diff = target - start;
     const startTime = performance.now();
     function step(now){
-      const p = Math.min(1,(now-startTime)/650);
-      music.volume = Math.max(0,Math.min(1,start + diff*p));
-      if(p<1) requestAnimationFrame(step);
+      const p = Math.min(1, (now - startTime) / duration);
+      music.volume = Math.max(0, Math.min(1, start + diff * p));
+      if(p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
-  if(musicBtn) musicBtn.addEventListener("click", async function(){
-    if(music.paused){
-      try{
-        await music.play();
-        fadeMusic(.55);
-        musicBtn.classList.add("playing");
-        if(musicLabel) musicLabel.classList.add("show");
-        window.setTimeout(function(){ if(musicLabel) musicLabel.classList.remove("show"); },2600);
-      }catch(e){
-        if(musicLabel){ musicLabel.textContent="Add DS.mp3.mpeg to play music"; musicLabel.classList.add("show"); window.setTimeout(function(){musicLabel.classList.remove("show")},3000); }
-      }
-    }else{
-      fadeMusic(0);
-      window.setTimeout(function(){music.pause();},700);
-      musicBtn.classList.remove("playing");
-    }
-  });
 
-  /* Countdown — 23 November 2026, 10:00 AM IST (UTC+05:30) */
+  function startMusicPlayback(){
+    if(!music) return;
+    if(musicBtn) musicBtn.classList.add("show");
+
+    music.volume = 0;
+    const playPromise = music.play();
+    if(playPromise !== undefined){
+      playPromise.then(function(){
+        fadeMusic(0.6, 1200);
+        if(musicBtn) musicBtn.classList.add("playing");
+      }).catch(function(error){
+        console.warn("Audio playback error:", error);
+        if(musicLabel){
+          musicLabel.textContent = "Tap ♫ to play music";
+          musicLabel.classList.add("show");
+          setTimeout(function(){ musicLabel.classList.remove("show"); }, 3000);
+        }
+      });
+    }
+  }
+
+  if(openBtn){
+    openBtn.addEventListener("click", startMusicPlayback);
+  }
+
+  if(musicBtn){
+    musicBtn.addEventListener("click", async function(){
+      if(music.paused){
+        try{
+          await music.play();
+          fadeMusic(0.6, 600);
+          musicBtn.classList.add("playing");
+          if(musicLabel){
+            musicLabel.textContent = "Our song";
+            musicLabel.classList.add("show");
+            setTimeout(function(){ musicLabel.classList.remove("show"); }, 2600);
+          }
+        }catch(e){
+          if(musicLabel){
+            musicLabel.textContent = "Add DS.mp3.mpeg to play music";
+            musicLabel.classList.add("show");
+            setTimeout(function(){ musicLabel.classList.remove("show"); }, 3000);
+          }
+        }
+      }else{
+        fadeMusic(0, 400);
+        setTimeout(function(){ music.pause(); }, 400);
+        musicBtn.classList.remove("playing");
+      }
+    });
+  }
+
   const weddingDate = Date.UTC(2026, 10, 23, 4, 30, 0);
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
@@ -783,76 +834,78 @@ footer{
   }
 
   updateCountdown();
-  window.setInterval(updateCountdown, 1000);
+  setInterval(updateCountdown, 1000);
 
-  /* Scroll reveal is visual enhancement only; content is never hidden. */
   document.querySelectorAll(".reveal").forEach(function(item){
     item.classList.add("animate-in","visible");
   });
 
-  /* Album navigation */
   const album = document.getElementById("album");
-  const photos = album ? Array.from(album.querySelectorAll(".photo")) : [];
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
 
   function moveAlbum(direction){
-    const amount = Math.min(album.clientWidth * .78, 360);
-    album.scrollBy({left:direction * amount,behavior:"smooth"});
+    const amount = Math.min(album.clientWidth * 0.78, 360);
+    album.scrollBy({left: direction * amount, behavior: "smooth"});
   }
 
-  if(prev) prev.addEventListener("click",function(){moveAlbum(-1);});
-  if(next) next.addEventListener("click",function(){moveAlbum(1);});
+  if(prev) prev.addEventListener("click", function(){ moveAlbum(-1); });
+  if(next) next.addEventListener("click", function(){ moveAlbum(1); });
 
   if(album){
     album.style.webkitOverflowScrolling = "touch";
   }
 
-  /* Photo lightbox */
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const closeLightbox = document.getElementById("closeLightbox");
+  const photos = album ? Array.from(album.querySelectorAll(".photo")) : [];
 
   photos.forEach(function(photo){
-    photo.addEventListener("click",function(){
+    photo.addEventListener("click", function(){
       const img = photo.querySelector("img");
       if(!img) return;
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt;
       lightbox.classList.add("active");
-      lightbox.setAttribute("aria-hidden","false");
+      lightbox.setAttribute("aria-hidden", "false");
       document.documentElement.style.overflow = "hidden";
     });
   });
 
   function closeBox(){
     lightbox.classList.remove("active");
-    lightbox.setAttribute("aria-hidden","true");
+    lightbox.setAttribute("aria-hidden", "true");
     document.documentElement.style.overflow = "";
   }
 
-  if(closeLightbox) closeLightbox.addEventListener("click",closeBox);
-  if(lightbox) lightbox.addEventListener("click",function(e){
+  if(closeLightbox) closeLightbox.addEventListener("click", closeBox);
+  if(lightbox) lightbox.addEventListener("click", function(e){
     if(e.target === lightbox) closeBox();
   });
 
-  document.addEventListener("keydown",function(e){
+  document.addEventListener("keydown", function(e){
     if(e.key === "Escape") closeBox();
   });
 
   const icsBtn = document.getElementById("icsBtn");
-  if(icsBtn) icsBtn.addEventListener("click",function(){
+  if(icsBtn) icsBtn.addEventListener("click", function(){
     const ics = [
       "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//D&S Wedding//EN","CALSCALE:GREGORIAN","BEGIN:VEVENT",
       "UID:ds-wedding-20261123@example.com","DTSTAMP:20261005T000000Z","DTSTART:20261123T043000Z","DTEND:20261123T073000Z",
       "SUMMARY:D & S Wedding","DESCRIPTION:Wedding Ceremony of Deevena & Sasi Preetham",
-      "LOCATION:Adabala Gardens\, Saibaba Temple Road\, Palakollu\, Andhra Pradesh 534260",
+      "LOCATION:Adabala Gardens\\, Saibaba Temple Road\\, Palakollu\\, Andhra Pradesh 534260",
       "END:VEVENT","END:VCALENDAR"
     ].join("\r\n");
-    const blob = new Blob([ics],{type:"text/calendar;charset=utf-8"});
+    const blob = new Blob([ics], {type: "text/calendar;charset=utf-8"});
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a"); a.href=url; a.download="D-and-S-Wedding-23-November-2026.ics"; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function(){URL.revokeObjectURL(url)},1000);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "D-and-S-Wedding-23-November-2026.ics";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
   });
 
 })();

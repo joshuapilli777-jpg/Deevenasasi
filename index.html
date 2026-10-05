@@ -7,6 +7,12 @@
 <meta name="description" content="Wedding invitation of Deevena & Sasi Preetham — 23 November 2026">
 <title>D & S | Wedding Invitation</title>
 
+<!-- Open Graph / WhatsApp / Social Share Preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Deevena & Sasi Preetham — Wedding Invitation">
+<meta property="og:description" content="23 November 2026 · Adabala Gardens, Palakollu">
+<meta property="og:image" content="./DS%20pics/TLB06338.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -418,7 +424,7 @@ a{text-decoration:none;color:inherit}
 /* Timeline */
 .timeline{max-width:700px;margin:45px auto 0;position:relative;text-align:left}
 .timeline::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:1px;background:var(--gold-border)}
-.timeline-item{position:relative;padding:0 0 30px 58px}
+.timeline-item{position:relative;padding:0 0 34px 58px}
 .timeline-dot{
   position:absolute;left:10px;top:4px;width:17px;height:17px;
   border-radius:50%;background:#fff;border:1px solid #c59b3f;
@@ -428,9 +434,9 @@ a{text-decoration:none;color:inherit}
 .timeline-title{margin:6px 0;font:500 27px/1.2 "Playfair Display",serif}
 .timeline-copy{margin:0;color:var(--muted);font:19px/1.5 "Cormorant Garamond",serif}
 
-/* Venue */
+/* Venue & Map */
 .venue-card{
-  max-width:650px;
+  max-width:680px;
   margin:35px auto 0;
   padding:48px 28px;
   border-radius:32px;
@@ -459,6 +465,21 @@ a{text-decoration:none;color:inherit}
 .btn.primary{background:linear-gradient(135deg,#38251a,#563a29);color:#fff}
 .btn.secondary{background:#fff;color:var(--ink);border:1px solid var(--gold-border)}
 .btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(57,38,24,.15)}
+
+.map-frame-wrap{
+  margin-top:28px;
+  width:100%;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--gold-border);
+  box-shadow:0 10px 30px rgba(50, 32, 18, 0.08);
+}
+.map-frame-wrap iframe{
+  display:block;
+  width:100%;
+  height:280px;
+  border:0;
+}
 
 /* Floating Quick Bar */
 .quick-dock{
@@ -529,26 +550,53 @@ footer{
   text-transform:uppercase;
 }
 
-/* Floating Audio Player */
+/* Live Audio Visualizer Button */
 .music{
   position:fixed;
   right:20px;
   bottom:24px;
   z-index:900;
-  width:46px;height:46px;
+  width:48px;
+  height:48px;
   border-radius:50%;
   border:1px solid #c59b3f;
-  background:rgba(255,255,255,.92);
-  color:#38251a;
+  background:rgba(255,255,255,.94);
   box-shadow:0 10px 30px rgba(0,0,0,.15);
   display:none;
   cursor:pointer;
+  padding:0;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
   transition:transform .3s ease;
 }
 .music:hover{transform:scale(1.1)}
-.music.show{display:block}
-.music.playing{animation:spin 6s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
+.music.show{display:flex}
+
+.music .sound-bar{
+  width:3px;
+  height:6px;
+  background:#38251a;
+  border-radius:2px;
+  transition:height .3s ease, background .3s ease;
+}
+.music.playing .sound-bar{
+  background:#c59b3f;
+}
+.music.playing .sound-bar:nth-child(1){
+  animation:waveDance 0.8s ease-in-out infinite alternate;
+}
+.music.playing .sound-bar:nth-child(2){
+  animation:waveDance 0.8s ease-in-out infinite alternate 0.25s;
+}
+.music.playing .sound-bar:nth-child(3){
+  animation:waveDance 0.8s ease-in-out infinite alternate 0.5s;
+}
+
+@keyframes waveDance{
+  0%{height:5px;}
+  100%{height:20px;}
+}
 
 .music-label{
   position:fixed;right:76px;bottom:28px;z-index:899;
@@ -650,7 +698,11 @@ footer{
   <source src="DS.mp3.mpeg" type="audio/mpeg">
 </audio>
 
-<button class="music" id="musicBtn" aria-label="Toggle music">♫</button>
+<button class="music" id="musicBtn" aria-label="Toggle music">
+  <span class="sound-bar"></span>
+  <span class="sound-bar"></span>
+  <span class="sound-bar"></span>
+</button>
 <div class="music-label" id="musicLabel">Our song</div>
 
 <!-- Floating Quick Dock -->
@@ -668,7 +720,7 @@ footer{
     <div class="hero-monogram shimmer-text">D &amp; S</div>
     <div class="hero-kicker">Together with their families</div>
     <div class="names">Deevena</div>
-    <div class="weds">with</div>
+    <div class="weds">weds</div>
     <div class="names">Sasi Preetham</div>
     <div class="hero-date">23 November 2026 · 10:00 AM</div>
     <div class="scroll-note">Scroll to discover ↓</div>
@@ -754,9 +806,10 @@ footer{
   </div>
 </section>
 
+<!-- Expanded Program Timeline -->
 <section class="section alt reveal">
   <div class="section-label shimmer-text">The celebration begins</div>
-  <h2>A Moment to Remember</h2>
+  <h2>Ceremony &amp; Program</h2>
   <div class="ornament divider">
     <span class="line"></span><span class="star">✦</span><span class="line"></span>
   </div>
@@ -764,12 +817,27 @@ footer{
     <div class="timeline-item">
       <div class="timeline-dot" aria-hidden="true"></div>
       <div class="timeline-time shimmer-text">10:00 AM · 23 November 2026</div>
-      <div class="timeline-title">Wedding Ceremony</div>
-      <p class="timeline-copy">Join us at Adabala Gardens as we celebrate the beginning of Deevena &amp; Sasi Preetham's journey together.</p>
+      <div class="timeline-title">Welcome &amp; Gathering</div>
+      <p class="timeline-copy">Gathering of beloved family and friends at Adabala Gardens to commence this blessed day in love and joy.</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-time shimmer-text">11:30 AM · 23 November 2026</div>
+      <div class="timeline-title">Sacred Wedding Ceremony</div>
+      <p class="timeline-copy">Join us in prayer and witness the holy solemnization of marriage as Deevena &amp; Sasi Preetham unite their lives as one.</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-time shimmer-text">12:30 PM · 23 November 2026</div>
+      <div class="timeline-title">Celebratory Lunch &amp; Blessings</div>
+      <p class="timeline-copy">Share in warm fellowship, a festive wedding lunch, and shower the newlywed couple with your heartfelt blessings.</p>
     </div>
   </div>
 </section>
 
+<!-- Venue with Interactive Map -->
 <section class="section reveal">
   <div class="section-label shimmer-text">The celebration</div>
   <h2>Meet Us at the Garden</h2>
@@ -785,6 +853,15 @@ footer{
       <a class="btn primary" target="_blank" rel="noopener" href="https://maps.app.goo.gl/LtFcmX7WESMcbg2h9">View Directions</a>
       <a class="btn secondary" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=D%20%26%20S%20Wedding&dates=20261123T100000/20261123T130000&details=Wedding%20Ceremony%20of%20Deevena%20%26%20Sasi%20Preetham&location=Adabala%20Gardens%2C%20Palakollu%2C%20Andhra%20Pradesh" target="_blank" rel="noopener">Google Calendar</a>
       <button class="btn secondary" id="icsBtn" type="button">Save .ICS File</button>
+    </div>
+
+    <div class="map-frame-wrap">
+      <iframe
+        title="Adabala Gardens Location Map"
+        src="https://maps.google.com/maps?q=Adabala%20Gardens,%20Palakollu,%20Andhra%20Pradesh&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
   </div>
 </section>
@@ -841,7 +918,7 @@ footer{
       }).catch(function(error){
         console.warn("Autoplay prevention:", error);
         if(musicLabel){
-          musicLabel.textContent = "Tap ♫ to play music";
+          musicLabel.textContent = "Tap soundbar to play music";
           musicLabel.classList.add("show");
           setTimeout(function(){ musicLabel.classList.remove("show"); }, 3000);
         }

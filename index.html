@@ -732,4 +732,32 @@ footer{
 
   photos.forEach(function(photo){
     photo.addEventListener("click",function(){
-      const img = phot
+      const img = photo.querySelector("img");
+      if(!img) return;
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add("active");
+      lightbox.setAttribute("aria-hidden","false");
+      document.documentElement.style.overflow = "hidden";
+    });
+  });
+
+  function closeBox(){
+    lightbox.classList.remove("active");
+    lightbox.setAttribute("aria-hidden","true");
+    document.documentElement.style.overflow = "";
+  }
+
+  if(closeLightbox) closeLightbox.addEventListener("click",closeBox);
+  if(lightbox) lightbox.addEventListener("click",function(e){
+    if(e.target === lightbox) closeBox();
+  });
+
+  document.addEventListener("keydown",function(e){
+    if(e.key === "Escape") closeBox();
+  });
+
+})();
+</script>
+</body>
+</html>

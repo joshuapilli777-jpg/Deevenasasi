@@ -720,7 +720,7 @@ footer{
     <div class="hero-monogram shimmer-text">D &amp; S</div>
     <div class="hero-kicker">Together with their families</div>
     <div class="names">Deevena</div>
-    <div class="weds">weds</div>
+    <div class="weds">with</div>
     <div class="names">Sasi Preetham</div>
     <div class="hero-date">23 November 2026 · 10:00 AM</div>
     <div class="scroll-note">Scroll to discover ↓</div>
@@ -852,7 +852,6 @@ footer{
     <div class="buttons">
       <a class="btn primary" target="_blank" rel="noopener" href="https://maps.app.goo.gl/LtFcmX7WESMcbg2h9">View Directions</a>
       <a class="btn secondary" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=D%20%26%20S%20Wedding&dates=20261123T100000/20261123T130000&details=Wedding%20Ceremony%20of%20Deevena%20%26%20Sasi%20Preetham&location=Adabala%20Gardens%2C%20Palakollu%2C%20Andhra%20Pradesh" target="_blank" rel="noopener">Google Calendar</a>
-      <button class="btn secondary" id="icsBtn" type="button">Save .ICS File</button>
     </div>
 
     <div class="map-frame-wrap">
@@ -1113,27 +1112,6 @@ footer{
 
   document.addEventListener("keydown", function(e){
     if(e.key === "Escape") closeBox();
-  });
-
-  /* iCalendar (.ics) download */
-  const icsBtn = document.getElementById("icsBtn");
-  if(icsBtn) icsBtn.addEventListener("click", function(){
-    const ics = [
-      "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//D&S Wedding//EN","CALSCALE:GREGORIAN","BEGIN:VEVENT",
-      "UID:ds-wedding-20261123@example.com","DTSTAMP:20261005T000000Z","DTSTART:20261123T043000Z","DTEND:20261123T073000Z",
-      "SUMMARY:D & S Wedding","DESCRIPTION:Wedding Ceremony of Deevena & Sasi Preetham",
-      "LOCATION:Adabala Gardens\\, Saibaba Temple Road\\, Palakollu\\, Andhra Pradesh 534260",
-      "END:VEVENT","END:VCALENDAR"
-    ].join("\r\n");
-    const blob = new Blob([ics], {type: "text/calendar;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "D-and-S-Wedding-23-November-2026.ics";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
   });
 
 })();

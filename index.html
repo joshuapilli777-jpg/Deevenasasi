@@ -63,8 +63,9 @@ a{text-decoration:none;color:inherit}
   box-shadow:0 30px 90px rgba(0,0,0,.3);
 }
 .mono{
-  font:normal 88px/1 "Alex Brush",cursive;
+  font:normal 48px/1 "Alex Brush",cursive;
   color:#fff;
+  white-space:nowrap;
 }
 .eyebrow{
   margin-top:12px;
@@ -462,12 +463,11 @@ footer{
   transform:none;
   transition:opacity .8s ease,transform .8s ease;
 }
-/* Never hide invitation content while JavaScript is loading. */
 .reveal.animate-in,.reveal.animate-in.visible{opacity:1;transform:none}
 
 @media(max-width:700px){
   .opening-card{padding:45px 20px}
-  .mono{font-size:70px}
+  .mono{font-size:44px}
   .hero::before{inset:12px}
   .section{padding:70px 18px}
   .couple{grid-template-columns:1fr}
@@ -514,7 +514,7 @@ footer{
 .ics-note{margin-top:12px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 .closing .closing-monogram{font:normal 52px/1 "Alex Brush",cursive;color:#f1d38a}
 @media(max-width:700px){
- .monogram-ring{width:125px;height:125px}.mono{font-size:72px}.music-label{right:66px;bottom:22px}
+ .monogram-ring{width:125px;height:125px}.music-label{right:66px;bottom:22px}
  .timeline{margin-top:35px}.timeline-title{font-size:24px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
@@ -804,7 +804,6 @@ footer{
   if(prev) prev.addEventListener("click",function(){moveAlbum(-1);});
   if(next) next.addEventListener("click",function(){moveAlbum(1);});
 
-  /* Keep gallery interaction simple and reliable: native horizontal scrolling + buttons. */
   if(album){
     album.style.webkitOverflowScrolling = "touch";
   }

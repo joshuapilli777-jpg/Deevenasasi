@@ -664,16 +664,18 @@ footer{
     }
   });
 
-  /* Countdown */
-  const weddingDate = new Date("2026-11-23T10:00:00+05:30").getTime();
+  /* Countdown — 23 November 2026, 10:00 AM IST (UTC+05:30) */
+  const weddingDate = Date.UTC(2026, 10, 23, 4, 30, 0);
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
   const minsEl = document.getElementById("mins");
   const secsEl = document.getElementById("secs");
 
-  function pad(n){ return String(n).padStart(2,"0"); }
+  function pad(n){ return String(Math.max(0, n)).padStart(2,"0"); }
 
   function updateCountdown(){
+    if(!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
     const distance = weddingDate - Date.now();
 
     if(distance <= 0){
@@ -684,10 +686,11 @@ footer{
       return;
     }
 
-    const days = Math.floor(distance / 86400000);
-    const hours = Math.floor((distance % 86400000) / 3600000);
-    const mins = Math.floor((distance % 3600000) / 60000);
-    const secs = Math.floor((distance % 60000) / 1000);
+    const totalSeconds = Math.floor(distance / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
 
     daysEl.textContent = pad(days);
     hoursEl.textContent = pad(hours);
@@ -696,7 +699,7 @@ footer{
   }
 
   updateCountdown();
-  setInterval(updateCountdown,1000);
+  window.setInterval(updateCountdown, 1000);
 
   /* Scroll reveal is visual enhancement only; content is never hidden. */
   document.querySelectorAll(".reveal").forEach(function(item){
@@ -729,8 +732,4 @@ footer{
 
   photos.forEach(function(photo){
     photo.addEventListener("click",function(){
-      const img = photo.querySelector("img");
-      if(!img) return;
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.classList.add
+      const img = phot

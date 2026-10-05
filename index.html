@@ -33,7 +33,6 @@ body{
   font-family:Montserrat,Arial,sans-serif;
   overflow-x:hidden;
 }
-body.locked{overflow:hidden}
 button,a{font:inherit}
 a{text-decoration:none;color:inherit}
 
@@ -49,8 +48,8 @@ a{text-decoration:none;color:inherit}
     linear-gradient(135deg,#241710,#68462e 52%,#9d7440);
   transition:opacity .9s ease,visibility .9s ease;
 }
-#opening.hidden{opacity:0;visibility:hidden;pointer-events:none}
-#opening.hidden + .site{opacity:1;}
+#open-toggle{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;}
+#open-toggle:checked ~ #opening{opacity:0;visibility:hidden;pointer-events:none;}
 
 .opening-card{
   width:min(620px,100%);
@@ -116,6 +115,7 @@ a{text-decoration:none;color:inherit}
   transition:.25s ease;
 }
 .open-btn{
+  display:inline-block;
   margin-top:30px;
   color:#fff;
   background:rgba(255,255,255,.12);
@@ -123,8 +123,7 @@ a{text-decoration:none;color:inherit}
 }
 .open-btn:hover{background:#e3c77b;color:#30231b;transform:translateY(-2px)}
 
-.site{opacity:0;transition:opacity .7s ease}
-.site.visible{opacity:1}
+.site{opacity:1;transition:opacity .7s ease}
 
 .hero{
   min-height:100svh;
@@ -463,8 +462,8 @@ footer{
   transform:none;
   transition:opacity .8s ease,transform .8s ease;
 }
-.reveal.animate-in{opacity:0;transform:translateY(30px)}
-.reveal.animate-in.visible{opacity:1;transform:none}
+/* Never hide invitation content while JavaScript is loading. */
+.reveal.animate-in,.reveal.animate-in.visible{opacity:1;transform:none}
 
 @media(max-width:700px){
   .opening-card{padding:45px 20px}
@@ -482,10 +481,12 @@ footer{
 }
 </style>
 <script>document.documentElement.classList.remove('no-js');</script>
-<style>.no-js #opening{display:none}.no-js .site{opacity:1}.no-js body{overflow:auto}</style>
+<style>.no-js #opening{display:grid}.no-js .site{opacity:1}</style>
 </head>
 
-<body class="locked">
+<body>
+
+<input type="checkbox" id="open-toggle" aria-label="Open wedding invitation">
 
 <div id="opening">
   <div class="opening-card">
@@ -496,7 +497,7 @@ footer{
     </div>
     <div class="open-verse">“The steadfast love of the Lord never ceases.”</div>
     <div class="open-ref">LAMENTATIONS 3:22</div>
-    <button class="open-btn" id="openBtn" type="button">Tap to Open</button>
+    <label class="open-btn" for="open-toggle">Tap to Open</label>
   </div>
 </div>
 
@@ -634,28 +635,22 @@ footer{
   "use strict";
 
   const body = document.body;
-  const opening = document.getElementById("opening");
-  const site = document.getElementById("site");
-  const openBtn = document.getElementById("openBtn");
   const music = document.getElementById("weddingMusic");
   const musicBtn = document.getElementById("musicBtn");
 
-  function openInvitation(){
-    if(opening) opening.classList.add("hidden");
-    body.classList.remove("locked");
-    if(site) site.classList.add("visible");
-    if(musicBtn) musicBtn.classList.add("show");
+  const openToggle = document.getElementById("open-toggle");
 
+  function enhanceAfterOpen(){
+    if(!openToggle || !openToggle.checked) return;
+    if(musicBtn) musicBtn.classList.add("show");
     if(music){
       music.play().then(function(){
-        musicBtn.classList.add("playing");
-      }).catch(function(){
-        /* Audio may be blocked; the invitation still opens normally. */
-      });
+        if(musicBtn) musicBtn.classList.add("playing");
+      }).catch(function(){});
     }
   }
 
-  if(openBtn) openBtn.addEventListener("click", openInvitation);
+  if(openToggle) openToggle.addEventListener("change", enhanceAfterOpen);
 
   if(musicBtn) musicBtn.addEventListener("click", async function(){
     if(music.paused){
@@ -703,21 +698,10 @@ footer{
   updateCountdown();
   setInterval(updateCountdown,1000);
 
-  /* Scroll reveal */
-  const revealItems = document.querySelectorAll(".reveal");
-  // Content is visible even if animations or IntersectionObserver are unavailable.
-  if("IntersectionObserver" in window){
-    revealItems.forEach(function(item){ item.classList.add("animate-in"); });
-    const observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },{threshold:.08});
-    revealItems.forEach(function(item){observer.observe(item);});
-  }
+  /* Scroll reveal is visual enhancement only; content is never hidden. */
+  document.querySelectorAll(".reveal").forEach(function(item){
+    item.classList.add("animate-in","visible");
+  });
 
   /* Album navigation */
   const album = document.getElementById("album");
@@ -734,4 +718,26 @@ footer{
   if(next) next.addEventListener("click",function(){moveAlbum(1);});
 
   /* Mouse drag for desktop */
-  let
+  let dragging = false;
+  let startX = 0;
+  let startScroll = 0;
+
+  if(album) album.addEventListener("pointerdown",function(e){
+    dragging = true;
+    startX = e.clientX;
+    startScroll = album.scrollLeft;
+    album.classList.add("dragging");
+    album.setPointerCapture(e.pointerId);
+  });
+
+  if(album) album.addEventListener("pointermove",function(e){
+    if(!dragging) return;
+    album.scrollLeft = startScroll - (e.clientX - startX);
+  });
+
+  function stopDrag(){
+    dragging = false;
+    album.classList.remove("dragging");
+  }
+
+  if(album) album.addEventListener("pointeru

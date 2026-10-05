@@ -50,6 +50,7 @@ a{text-decoration:none;color:inherit}
   transition:opacity .9s ease,visibility .9s ease;
 }
 #opening.hidden{opacity:0;visibility:hidden;pointer-events:none}
+#opening.hidden + .site{opacity:1;}
 
 .opening-card{
   width:min(620px,100%);
@@ -492,7 +493,11 @@ footer{
     </div>
     <div class="open-verse">“The steadfast love of the Lord never ceases.”</div>
     <div class="open-ref">LAMENTATIONS 3:22</div>
-    <button class="open-btn" id="openBtn">Tap to Open</button>
+    <button class="open-btn" id="openBtn"
+  type="button"
+  onclick="(function(){var o=document.getElementById('opening');var b=document.body;var s=document.getElementById('site');if(o)o.classList.add('hidden');if(b)b.classList.remove('locked');if(s)s.classList.add('visible');var m=document.getElementById('weddingMusic');if(m){m.play().catch(function(){});}var mb=document.getElementById('musicBtn');if(mb)mb.classList.add('show');})()">
+  Tap to Open
+</button>
   </div>
 </div>
 
@@ -636,17 +641,18 @@ footer{
   const music = document.getElementById("weddingMusic");
   const musicBtn = document.getElementById("musicBtn");
 
-  openBtn.addEventListener("click", async function(){
+  openBtn.addEventListener("click", function(){
     opening.classList.add("hidden");
     body.classList.remove("locked");
     site.classList.add("visible");
     musicBtn.classList.add("show");
 
-    try{
-      await music.play();
-      musicBtn.classList.add("playing");
-    }catch(e){
-      /* Browser may block audio; the music button remains available. */
+    if(music){
+      music.play().then(function(){
+        musicBtn.classList.add("playing");
+      }).catch(function(){
+        /* Audio may be blocked; the invitation still opens normally. */
+      });
     }
   });
 
@@ -731,24 +737,4 @@ footer{
   /* Mouse drag for desktop */
   let dragging = false;
   let startX = 0;
-  let startScroll = 0;
-
-  album.addEventListener("pointerdown",function(e){
-    dragging = true;
-    startX = e.clientX;
-    startScroll = album.scrollLeft;
-    album.classList.add("dragging");
-    album.setPointerCapture(e.pointerId);
-  });
-
-  album.addEventListener("pointermove",function(e){
-    if(!dragging) return;
-    album.scrollLeft = startScroll - (e.clientX - startX);
-  });
-
-  function stopDrag(){
-    dragging = false;
-    album.classList.remove("dragging");
-  }
-
-  al
+  let star

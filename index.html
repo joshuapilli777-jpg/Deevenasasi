@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -459,11 +459,12 @@ footer{
 }
 
 .reveal{
-  opacity:0;
-  transform:translateY(30px);
+  opacity:1;
+  transform:none;
   transition:opacity .8s ease,transform .8s ease;
 }
-.reveal.visible{opacity:1;transform:none}
+.reveal.animate-in{opacity:0;transform:translateY(30px)}
+.reveal.animate-in.visible{opacity:1;transform:none}
 
 @media(max-width:700px){
   .opening-card{padding:45px 20px}
@@ -480,6 +481,8 @@ footer{
   *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
 </style>
+<script>document.documentElement.classList.remove('no-js');</script>
+<style>.no-js #opening{display:none}.no-js .site{opacity:1}.no-js body{overflow:auto}</style>
 </head>
 
 <body class="locked">
@@ -493,11 +496,7 @@ footer{
     </div>
     <div class="open-verse">“The steadfast love of the Lord never ceases.”</div>
     <div class="open-ref">LAMENTATIONS 3:22</div>
-    <button class="open-btn" id="openBtn"
-  type="button"
-  onclick="(function(){var o=document.getElementById('opening');var b=document.body;var s=document.getElementById('site');if(o)o.classList.add('hidden');if(b)b.classList.remove('locked');if(s)s.classList.add('visible');var m=document.getElementById('weddingMusic');if(m){m.play().catch(function(){});}var mb=document.getElementById('musicBtn');if(mb)mb.classList.add('show');})()">
-  Tap to Open
-</button>
+    <button class="open-btn" id="openBtn" type="button">Tap to Open</button>
   </div>
 </div>
 
@@ -641,11 +640,11 @@ footer{
   const music = document.getElementById("weddingMusic");
   const musicBtn = document.getElementById("musicBtn");
 
-  openBtn.addEventListener("click", function(){
-    opening.classList.add("hidden");
+  function openInvitation(){
+    if(opening) opening.classList.add("hidden");
     body.classList.remove("locked");
-    site.classList.add("visible");
-    musicBtn.classList.add("show");
+    if(site) site.classList.add("visible");
+    if(musicBtn) musicBtn.classList.add("show");
 
     if(music){
       music.play().then(function(){
@@ -654,9 +653,11 @@ footer{
         /* Audio may be blocked; the invitation still opens normally. */
       });
     }
-  });
+  }
 
-  musicBtn.addEventListener("click", async function(){
+  if(openBtn) openBtn.addEventListener("click", openInvitation);
+
+  if(musicBtn) musicBtn.addEventListener("click", async function(){
     if(music.paused){
       try{
         await music.play();
@@ -704,8 +705,9 @@ footer{
 
   /* Scroll reveal */
   const revealItems = document.querySelectorAll(".reveal");
-
+  // Content is visible even if animations or IntersectionObserver are unavailable.
   if("IntersectionObserver" in window){
+    revealItems.forEach(function(item){ item.classList.add("animate-in"); });
     const observer = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
@@ -713,16 +715,13 @@ footer{
           observer.unobserve(entry.target);
         }
       });
-    },{threshold:.12});
-
+    },{threshold:.08});
     revealItems.forEach(function(item){observer.observe(item);});
-  }else{
-    revealItems.forEach(function(item){item.classList.add("visible");});
   }
 
   /* Album navigation */
   const album = document.getElementById("album");
-  const photos = Array.from(album.querySelectorAll(".photo"));
+  const photos = album ? Array.from(album.querySelectorAll(".photo")) : [];
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
 
@@ -731,10 +730,8 @@ footer{
     album.scrollBy({left:direction * amount,behavior:"smooth"});
   }
 
-  prev.addEventListener("click",function(){moveAlbum(-1);});
-  next.addEventListener("click",function(){moveAlbum(1);});
+  if(prev) prev.addEventListener("click",function(){moveAlbum(-1);});
+  if(next) next.addEventListener("click",function(){moveAlbum(1);});
 
   /* Mouse drag for desktop */
-  let dragging = false;
-  let startX = 0;
-  let star
+  let

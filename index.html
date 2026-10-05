@@ -717,27 +717,20 @@ footer{
   if(prev) prev.addEventListener("click",function(){moveAlbum(-1);});
   if(next) next.addEventListener("click",function(){moveAlbum(1);});
 
-  /* Mouse drag for desktop */
-  let dragging = false;
-  let startX = 0;
-  let startScroll = 0;
-
-  if(album) album.addEventListener("pointerdown",function(e){
-    dragging = true;
-    startX = e.clientX;
-    startScroll = album.scrollLeft;
-    album.classList.add("dragging");
-    album.setPointerCapture(e.pointerId);
-  });
-
-  if(album) album.addEventListener("pointermove",function(e){
-    if(!dragging) return;
-    album.scrollLeft = startScroll - (e.clientX - startX);
-  });
-
-  function stopDrag(){
-    dragging = false;
-    album.classList.remove("dragging");
+  /* Keep gallery interaction simple and reliable: native horizontal scrolling + buttons. */
+  if(album){
+    album.style.webkitOverflowScrolling = "touch";
   }
 
-  if(album) album.addEventListener("pointeru
+  /* Photo lightbox */
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const closeLightbox = document.getElementById("closeLightbox");
+
+  photos.forEach(function(photo){
+    photo.addEventListener("click",function(){
+      const img = photo.querySelector("img");
+      if(!img) return;
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add

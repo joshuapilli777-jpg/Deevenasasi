@@ -34,13 +34,20 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
 body{
   margin:0;
   color:var(--ink);
   background:var(--cream);
   font-family:Montserrat,Arial,sans-serif;
   overflow-x:hidden;
+  overflow-y:auto !important;
+  height:auto;
+  min-height:100%;
   position:relative;
 }
 button,a{font:inherit}
@@ -96,7 +103,7 @@ a{text-decoration:none;color:inherit}
   will-change:transform;
 }
 
-/* Opening Envelope Screen & 3D Wax Seal */
+/* Opening Screen */
 #opening{
   position:fixed;
   inset:0;
@@ -107,10 +114,14 @@ a{text-decoration:none;color:inherit}
   background:
     radial-gradient(circle at 50% 25%, rgba(225,192,115,.22), transparent 45%),
     linear-gradient(140deg, #1b120c, #482f1f 55%, #7e572d);
-  transition:opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.9s;
+  transition:opacity 0.8s ease, visibility 0.8s ease;
 }
 #open-toggle{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;}
-#open-toggle:checked ~ #opening{opacity:0;visibility:hidden;pointer-events:none;}
+#open-toggle:checked ~ #opening{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none !important;
+}
 
 .envelope-wrapper{
   width:min(600px, 100%);
@@ -181,7 +192,6 @@ a{text-decoration:none;color:inherit}
   animation:bob 2s ease-in-out infinite;
 }
 
-/* Breaking wax seal animation */
 .wax-seal-btn.breaking .wax-seal{
   animation:breakSeal 0.75s forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -284,12 +294,10 @@ a{text-decoration:none;color:inherit}
 #dustCanvas{
   position:absolute;
   inset:0;
-  pointer-events:auto;
+  pointer-events:none !important;
   z-index:1;
-  touch-action:none;
 }
-.hero-content{position:relative;z-index:2;padding:40px 20px;pointer-events:none}
-.hero-content a, .hero-content button{pointer-events:auto}
+.hero-content{position:relative;z-index:2;padding:40px 20px}
 .hero-monogram{font:normal 44px/1 "Alex Brush",cursive;margin-bottom:12px}
 .hero-kicker{
   font-size:11px;
@@ -781,8 +789,8 @@ footer{
       </div>
       <div class="open-verse">“The steadfast love of the Lord never ceases.”</div>
       <div class="open-ref">LAMENTATIONS 3:22</div>
-      
-      <!-- 3D Wax Seal Button -->
+
+         <!-- 3D Wax Seal Button -->
       <button type="button" class="wax-seal-btn" id="openBtn" aria-label="Break Seal and Open Invitation">
         <div class="wax-seal">
           <span class="wax-seal-inner">D&amp;S</span>
@@ -1037,6 +1045,11 @@ footer{
       startMusicPlayback();
       setTimeout(function(){
         openToggle.checked = true;
+        const opening = document.getElementById("opening");
+        if(opening){
+          opening.style.display = "none";
+        }
+        document.body.style.overflowY = "auto";
       }, 550);
     });
   }
@@ -1073,7 +1086,6 @@ footer{
   if(canvas){
     const ctx = canvas.getContext("2d");
     let w, h, particles = [];
-    const mouse = { x: -1000, y: -1000, radius: 120 };
 
     function resize(){
       w = canvas.width = canvas.parentElement.offsetWidth;
@@ -1082,20 +1094,6 @@ footer{
     window.addEventListener("resize", resize);
     resize();
 
-    // Track mouse & touch coordinates for interactive deflection
-    function updateCoords(e){
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      mouse.x = clientX - rect.left;
-      mouse.y = clientY - rect.top;
-    }
-    canvas.addEventListener("mousemove", updateCoords);
-    canvas.addEventListener("touchmove", updateCoords, { passive: true });
-    canvas.addEventListener("mouseleave", function(){ mouse.x = -1000; mouse.y = -1000; });
-    canvas.addEventListener("touchend", function(){ mouse.x = -1000; mouse.y = -1000; });
-
-    // Petal & gold flake particle definitions
     for(let i = 0; i < 48; i++){
       particles.push({
         x: Math.random() * w,
@@ -1115,17 +1113,6 @@ footer{
       ctx.clearRect(0, 0, w, h);
 
       particles.forEach(function(p){
-        // Repulsion from touch/cursor
-        const dx = p.x - mouse.x;
-        const dy = p.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if(dist < mouse.radius){
-          const angle = Math.atan2(dy, dx);
-          const force = (mouse.radius - dist) / mouse.radius;
-          p.x += Math.cos(angle) * force * 5;
-          p.y += Math.sin(angle) * force * 5;
-        }
-
         p.oscillation += p.oscSpeed;
         p.rotation += p.rotSpeed;
         p.x += p.speedX + Math.sin(p.oscillation) * 0.45;
@@ -1140,7 +1127,6 @@ footer{
         ctx.rotate(p.rotation);
         ctx.fillStyle = p.color;
 
-        // Draw soft teardrop / jasmine petal shape
         ctx.beginPath();
         ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
         ctx.fill();
@@ -1295,4 +1281,3 @@ footer{
 </script>
 </body>
 </html>
-    

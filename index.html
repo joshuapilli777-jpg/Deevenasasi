@@ -49,6 +49,7 @@ body{
   height:auto;
   min-height:100%;
   position:relative;
+  touch-action:pan-y;
 }
 button,a{font:inherit}
 a{text-decoration:none;color:inherit}
@@ -73,7 +74,7 @@ a{text-decoration:none;color:inherit}
   transform:translate(-50%, -50%) scale(1) rotate(0deg);
   font:normal clamp(220px, 35vw, 420px)/1 "Alex Brush", cursive;
   color:rgba(197, 155, 63, 0.045);
-  pointer-events:none;
+  pointer-events:none !important;
   z-index:0;
   user-select:none;
   white-space:nowrap;
@@ -85,7 +86,7 @@ a{text-decoration:none;color:inherit}
   position:absolute;
   width:64px;
   height:64px;
-  pointer-events:none;
+  pointer-events:none !important;
   z-index:3;
   opacity:0.65;
 }
@@ -99,7 +100,7 @@ a{text-decoration:none;color:inherit}
 .tilt-card{
   transform-style:preserve-3d;
   perspective:1000px;
-  transition:transform 0.15s ease-out, box-shadow 0.3s ease;
+  transition:transform 0.2s ease-out, box-shadow 0.3s ease;
   will-change:transform;
 }
 
@@ -114,7 +115,7 @@ a{text-decoration:none;color:inherit}
   background:
     radial-gradient(circle at 50% 25%, rgba(225,192,115,.22), transparent 45%),
     linear-gradient(140deg, #1b120c, #482f1f 55%, #7e572d);
-  transition:opacity 0.8s ease, visibility 0.8s ease;
+  transition:opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s;
 }
 #open-toggle{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;}
 #open-toggle:checked ~ #opening{
@@ -123,14 +124,9 @@ a{text-decoration:none;color:inherit}
   pointer-events:none !important;
 }
 
-.envelope-wrapper{
-  width:min(600px, 100%);
-  position:relative;
-  perspective:1200px;
-}
 .opening-card{
-  width:100%;
-  padding:56px 32px;
+  width:min(600px, 100%);
+  padding:54px 30px;
   text-align:center;
   color:#fff;
   border:1px solid rgba(247, 226, 139, 0.35);
@@ -141,64 +137,6 @@ a{text-decoration:none;color:inherit}
   box-shadow:0 35px 90px rgba(0,0,0,.45);
   position:relative;
   overflow:hidden;
-  transition:transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Realistic 3D Golden Wax Seal */
-.wax-seal-btn{
-  display:inline-block;
-  margin-top:28px;
-  cursor:pointer;
-  background:none;
-  border:0;
-  padding:0;
-  outline:none;
-  position:relative;
-  z-index:10;
-  -webkit-tap-highlight-color:transparent;
-}
-.wax-seal{
-  width:88px;
-  height:88px;
-  margin:0 auto;
-  border-radius:50%;
-  background:radial-gradient(circle at 35% 35%, #f6e27a 0%, #c59b3f 45%, #7e5518 90%);
-  box-shadow:0 12px 28px rgba(0,0,0,0.55), inset 0 2px 4px rgba(255,255,255,0.7), inset 0 -4px 8px rgba(0,0,0,0.6);
-  display:grid;
-  place-items:center;
-  position:relative;
-  transition:transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.wax-seal::before{
-  content:"";
-  position:absolute;
-  inset:6px;
-  border-radius:50%;
-  border:1.5px dashed rgba(255, 245, 205, 0.6);
-}
-.wax-seal-inner{
-  font:normal 26px/1 "Alex Brush", cursive;
-  color:#36200a;
-  text-shadow:0 1px 1px rgba(255,255,255,0.4);
-}
-.seal-hint{
-  display:block;
-  margin-top:14px;
-  font-size:10px;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  color:var(--gold-mid);
-  font-weight:600;
-  animation:bob 2s ease-in-out infinite;
-}
-
-.wax-seal-btn.breaking .wax-seal{
-  animation:breakSeal 0.75s forwards cubic-bezier(0.4, 0, 0.2, 1);
-}
-@keyframes breakSeal{
-  0%{transform:scale(1)}
-  40%{transform:scale(1.18) rotate(-6deg);box-shadow:0 0 35px rgba(246, 226, 122, 0.9)}
-  100%{transform:scale(0) rotate(25deg);opacity:0}
 }
 
 .monogram-ring{
@@ -266,6 +204,29 @@ a{text-decoration:none;color:inherit}
   letter-spacing:2px;
   color:rgba(255,255,255,.8);
 }
+
+.open-btn{
+  display:inline-block;
+  margin-top:30px;
+  color:#2b1d15;
+  background:var(--gold-gradient);
+  border:1px solid #f6e27a;
+  border-radius:999px;
+  padding:15px 34px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  box-shadow:0 10px 28px rgba(0,0,0,0.35);
+  transition:all .3s ease;
+  user-select:none;
+}
+.open-btn:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 14px 34px rgba(246, 226, 122, 0.45);
+}
+
 .btn{
   border:0;
   border-radius:999px;
@@ -297,7 +258,12 @@ a{text-decoration:none;color:inherit}
   pointer-events:none !important;
   z-index:1;
 }
-.hero-content{position:relative;z-index:2;padding:40px 20px}
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:40px 20px;
+  pointer-events:auto;
+}
 .hero-monogram{font:normal 44px/1 "Alex Brush",cursive;margin-bottom:12px}
 .hero-kicker{
   font-size:11px;
@@ -712,9 +678,14 @@ footer{
   background:rgba(18, 11, 7, 0.95);
   opacity:0;
   visibility:hidden;
+  pointer-events:none;
   transition:.35s ease;
 }
-#lightbox.active{opacity:1;visibility:visible}
+#lightbox.active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
 #lightbox img{
   max-width:92vw;
   max-height:86vh;
@@ -736,12 +707,15 @@ footer{
 
 /* Scroll Fade Animations */
 .reveal{
-  opacity:0;
-  transform:translateY(32px);
-  transition:opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change:opacity, transform;
+  opacity:1;
+  transform:none;
+  transition:opacity 0.8s ease, transform 0.8s ease;
 }
-.reveal.visible{
+.js-observer .reveal{
+  opacity:0;
+  transform:translateY(30px);
+}
+.js-observer .reveal.visible{
   opacity:1;
   transform:translateY(0);
 }
@@ -768,8 +742,13 @@ footer{
   #bgWatermark{transform:translate(-50%, -50%)!important}
 }
 </style>
-<script>document.documentElement.classList.remove('no-js');</script>
-<style>.no-js #opening{display:grid}.no-js .site{opacity:1}.no-js .reveal{opacity:1;transform:none}</style>
+<script>
+document.documentElement.classList.remove('no-js');
+if('IntersectionObserver' in window){
+  document.documentElement.classList.add('js-observer');
+}
+</script>
+<style>.no-js #opening{display:grid}.no-js .site{opacity:1}</style>
 </head>
 
 <body>
@@ -780,24 +759,16 @@ footer{
 <input type="checkbox" id="open-toggle" aria-label="Open wedding invitation">
 
 <div id="opening">
-  <div class="envelope-wrapper">
-    <div class="opening-card">
-      <div class="monogram-ring"><div class="mono shimmer-text">D &amp; S</div></div>
-      <div class="eyebrow shimmer-text">A Celebration of Love</div>
-      <div class="ornament">
-        <span class="line"></span><span class="star">✦</span><span class="line"></span>
-      </div>
-      <div class="open-verse">“The steadfast love of the Lord never ceases.”</div>
-      <div class="open-ref">LAMENTATIONS 3:22</div>
-
-         <!-- 3D Wax Seal Button -->
-      <button type="button" class="wax-seal-btn" id="openBtn" aria-label="Break Seal and Open Invitation">
-        <div class="wax-seal">
-          <span class="wax-seal-inner">D&amp;S</span>
-        </div>
-        <span class="seal-hint">Break Seal to Open</span>
-      </button>
+  <div class="opening-card">
+    <div class="monogram-ring"><div class="mono shimmer-text">D &amp; S</div></div>
+    <div class="eyebrow shimmer-text">A Celebration of Love</div>
+    <div class="ornament">
+      <span class="line"></span><span class="star">✦</span><span class="line"></span>
     </div>
+    <div class="open-verse">“The steadfast love of the Lord never ceases.”</div>
+    <div class="open-ref">LAMENTATIONS 3:22</div>
+    
+    <label class="open-btn" id="openBtn" for="open-toggle">Tap to Open</label>
   </div>
 </div>
 
@@ -1038,19 +1009,28 @@ footer{
     }
   }
 
-  /* Wax Seal Breaking & Opening Animation */
-  if(openBtn && openToggle){
-    openBtn.addEventListener("click", function(){
-      openBtn.classList.add("breaking");
-      startMusicPlayback();
+  /* Dismiss Opening Overlay & Start Audio */
+  function openInvitation(){
+    startMusicPlayback();
+    if(openToggle) openToggle.checked = true;
+    const opening = document.getElementById("opening");
+    if(opening){
+      opening.style.opacity = "0";
+      opening.style.pointerEvents = "none";
       setTimeout(function(){
-        openToggle.checked = true;
-        const opening = document.getElementById("opening");
-        if(opening){
-          opening.style.display = "none";
-        }
-        document.body.style.overflowY = "auto";
-      }, 550);
+        opening.style.display = "none";
+      }, 700);
+    }
+    document.documentElement.style.overflowY = "auto";
+    document.body.style.overflowY = "auto";
+  }
+
+  if(openBtn){
+    openBtn.addEventListener("click", openInvitation);
+  }
+  if(openToggle){
+    openToggle.addEventListener("change", function(){
+      if(openToggle.checked) openInvitation();
     });
   }
 
@@ -1081,11 +1061,12 @@ footer{
     });
   }
 
-  /* Interactive Canvas Champagne / Gold Petal Physics */
+  /* Interactive Canvas Golden Petals (Touch-safe without scroll blocking) */
   const canvas = document.getElementById("dustCanvas");
   if(canvas){
     const ctx = canvas.getContext("2d");
     let w, h, particles = [];
+    const mouse = { x: -1000, y: -1000, radius: 120 };
 
     function resize(){
       w = canvas.width = canvas.parentElement.offsetWidth;
@@ -1094,18 +1075,24 @@ footer{
     window.addEventListener("resize", resize);
     resize();
 
-    for(let i = 0; i < 48; i++){
+    window.addEventListener("mousemove", function(e){
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    for(let i = 0; i < 42; i++){
       particles.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        size: Math.random() * 5 + 2.5,
-        speedX: Math.random() * 0.6 - 0.3,
-        speedY: Math.random() * 0.7 + 0.3,
+        size: Math.random() * 4.5 + 2,
+        speedX: Math.random() * 0.5 - 0.25,
+        speedY: Math.random() * 0.6 + 0.3,
         rotation: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.03,
+        rotSpeed: (Math.random() - 0.5) * 0.02,
         oscillation: Math.random() * Math.PI * 2,
         oscSpeed: Math.random() * 0.02 + 0.01,
-        color: i % 3 === 0 ? "rgba(255, 248, 235, 0.75)" : "rgba(235, 195, 95, 0.65)"
+        color: i % 3 === 0 ? "rgba(255, 248, 235, 0.7)" : "rgba(235, 195, 95, 0.6)"
       });
     }
 
@@ -1113,9 +1100,19 @@ footer{
       ctx.clearRect(0, 0, w, h);
 
       particles.forEach(function(p){
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if(dist < mouse.radius){
+          const angle = Math.atan2(dy, dx);
+          const force = (mouse.radius - dist) / mouse.radius;
+          p.x += Math.cos(angle) * force * 4;
+          p.y += Math.sin(angle) * force * 4;
+        }
+
         p.oscillation += p.oscSpeed;
         p.rotation += p.rotSpeed;
-        p.x += p.speedX + Math.sin(p.oscillation) * 0.45;
+        p.x += p.speedX + Math.sin(p.oscillation) * 0.4;
         p.y += p.speedY;
 
         if(p.y > h + 20){ p.y = -20; p.x = Math.random() * w; }
@@ -1126,7 +1123,6 @@ footer{
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rotation);
         ctx.fillStyle = p.color;
-
         ctx.beginPath();
         ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
         ctx.fill();
@@ -1138,23 +1134,25 @@ footer{
     render();
   }
 
-  /* 3D Tilt Card Parallax Effect */
-  const tiltCards = document.querySelectorAll(".tilt-card");
-  tiltCards.forEach(function(card){
-    card.addEventListener("mousemove", function(e){
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      const rotateX = (-y / (rect.height / 2)) * 7;
-      const rotateY = (x / (rect.width / 2)) * 7;
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+  /* 3D Tilt Card Effect (Desktop Only) */
+  if(window.matchMedia("(hover: hover)").matches){
+    const tiltCards = document.querySelectorAll(".tilt-card");
+    tiltCards.forEach(function(card){
+      card.addEventListener("mousemove", function(e){
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const rotateX = (-y / (rect.height / 2)) * 6;
+        const rotateY = (x / (rect.width / 2)) * 6;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015)`;
+      });
+      card.addEventListener("mouseleave", function(){
+        card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+      });
     });
-    card.addEventListener("mouseleave", function(){
-      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
-    });
-  });
+  }
 
-  /* Scroll-Triggered Monogram Watermark Rotation & Zoom */
+  /* Monogram Watermark Rotation & Zoom */
   const watermark = document.getElementById("bgWatermark");
   window.addEventListener("scroll", function(){
     if(!watermark) return;
@@ -1175,7 +1173,7 @@ footer{
           entry.target.classList.add("visible");
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12 });
 
     document.querySelectorAll(".reveal").forEach(function(el){
       revealObserver.observe(el);

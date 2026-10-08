@@ -16,7 +16,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;600;700&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Pinyon+Script&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -54,9 +54,16 @@ body{
 button, a{font:inherit}
 a{text-decoration:none;color:inherit}
 
-/* Dedicated Font Class for D & S Monograms */
+/* D&S Monogram Font */
 .ds-font{
   font-family:'Great Vibes', cursive !important;
+}
+
+/* Section Headings Font (Cinzel Decorative - distinct from Pinyon Script couple names) */
+h2, .section-heading{
+  font-family:'Cinzel Decorative', serif !important;
+  letter-spacing:2px;
+  font-weight:600;
 }
 
 /* Foil Shimmer Text with Angled Glint */
@@ -81,7 +88,7 @@ a{text-decoration:none;color:inherit}
   top:50%;
   left:50%;
   transform:translate(-50%, -50%);
-  font-size:clamp(180px, 32vw, 380px);
+  font-size:clamp(160px, 28vw, 340px);
   line-height:1;
   color:rgba(197, 155, 63, 0.045);
   pointer-events:none !important;
@@ -136,7 +143,7 @@ a{text-decoration:none;color:inherit}
 
 .opening-card{
   width:min(580px, 100%);
-  padding:50px 28px;
+  padding:48px 28px;
   text-align:center;
   color:#fff;
   border:1px solid rgba(247, 226, 139, 0.35);
@@ -149,14 +156,16 @@ a{text-decoration:none;color:inherit}
   overflow:hidden;
 }
 
+/* Resized Circle Container & Logo */
 .monogram-ring{
-  width:145px;
-  height:145px;
+  width:140px;
+  height:140px;
   margin:0 auto 16px;
-  border:1.5px solid rgba(246, 226, 122, 0.55);
+  border:1.5px solid rgba(246, 226, 122, 0.6);
   border-radius:50%;
-  display:grid;
-  place-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   position:relative;
   animation:monogramFloat 5s ease-in-out infinite;
 }
@@ -166,17 +175,19 @@ a{text-decoration:none;color:inherit}
   top:-11px;
   left:50%;
   transform:translateX(-50%);
-  font-size:14px;
+  font-size:13px;
   color:var(--gold-mid);
   background:#382417;
   padding:0 8px;
 }
 @keyframes monogramFloat{50%{transform:translateY(-6px) scale(1.02)}}
 
+/* Resized Monogram Logo text */
 .mono{
-  font-size:56px;
+  font-size:38px;
   line-height:1;
   white-space:nowrap;
+  transform:translateY(-2px);
 }
 .eyebrow{
   margin-top:14px;
@@ -280,7 +291,7 @@ a{text-decoration:none;color:inherit}
   pointer-events:auto;
 }
 .hero-monogram{
-  font-size:54px;
+  font-size:44px;
   line-height:1;
   margin-bottom:12px;
 }
@@ -358,10 +369,9 @@ a{text-decoration:none;color:inherit}
   text-transform:uppercase;
 }
 .section h2{
-  margin:12px 0;
-  font-family:'Pinyon Script', cursive;
-  font-size:clamp(56px, 8vw, 84px);
-  line-height:1.05;
+  margin:14px 0;
+  font-size:clamp(26px, 4vw, 38px);
+  line-height:1.2;
   color:var(--ink);
 }
 .verse{
@@ -479,9 +489,11 @@ a{text-decoration:none;color:inherit}
 }
 .date-card .date{
   margin:16px 0 8px;
-  font-family:'Pinyon Script', cursive;
-  font-size:clamp(54px, 8vw, 76px);
-  line-height:1.1;
+  font-family:'Cinzel Decorative', serif;
+  font-weight:600;
+  font-size:clamp(26px, 3.8vw, 36px);
+  letter-spacing:2px;
+  color:var(--ink);
 }
 .date-card .time{
   font-family:'Cinzel', serif;
@@ -703,15 +715,14 @@ a{text-decoration:none;color:inherit}
   z-index:2;
 }
 .closing .closing-monogram{
-  font-size:68px;
+  font-size:56px;
   line-height:1;
   color:#f6e27a;
 }
 .closing h2{
-  margin:15px 0;
-  font-family:'Pinyon Script', cursive;
-  font-size:clamp(68px, 11vw, 110px);
-  line-height:1;
+  margin:16px 0;
+  font-size:clamp(30px, 4.5vw, 44px);
+  line-height:1.2;
 }
 .closing p{
   margin:0 auto;
@@ -830,9 +841,9 @@ footer{
 }
 
 @media(max-width:700px){
-  .opening-card{padding:45px 20px}
-  .mono{font-size:46px}
-  .monogram-ring{width:130px;height:130px}
+  .opening-card{padding:42px 18px}
+  .monogram-ring{width:125px;height:125px}
+  .mono{font-size:34px}
   .section{padding:70px 18px}
   .couple{grid-template-columns:1fr;gap:18px}
   .count{gap:8px}
@@ -861,7 +872,7 @@ if('IntersectionObserver' in window){
 
 <body>
 
-<!-- Background Royal Monogram Watermark (Great Vibes font) -->
+<!-- Background Royal Monogram Watermark -->
 <div id="bgWatermark" class="ds-font" aria-hidden="true">D &amp; S</div>
 
 <input type="checkbox" id="open-toggle" aria-label="Open wedding invitation">

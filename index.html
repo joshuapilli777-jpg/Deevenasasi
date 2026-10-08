@@ -51,7 +51,7 @@ body{
   position:relative;
   touch-action:pan-y;
 }
-button, a{font:inherit}
+button, a, input, select, textarea{font:inherit}
 a{text-decoration:none;color:inherit}
 
 /* D&S Monogram Font */
@@ -159,7 +159,7 @@ h2, .section-heading{
   overflow:hidden;
 }
 
-/* Ring Size */
+/* Monogram Ring */
 .monogram-ring{
   width:160px;
   height:160px;
@@ -299,7 +299,6 @@ h2, .section-heading{
   overflow:visible;
 }
 
-/* Fixed Hero Monogram: fully visible, padded so flourishes don't clip */
 .hero-monogram{
   font-size:clamp(34px, 7vw, 44px);
   line-height:1.2;
@@ -644,6 +643,87 @@ h2, .section-heading{
 }
 .timeline-copy{margin:0;color:var(--muted);font:20px/1.5 "Cormorant Garamond", serif}
 
+/* RSVP Card & Form */
+.rsvp-card{
+  max-width:680px;
+  margin:35px auto 0;
+  padding:48px 30px;
+  border-radius:32px;
+  background:var(--glass-bg);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);
+  box-shadow:var(--glass-shadow);
+  position:relative;
+  text-align:center;
+}
+.rsvp-form{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:18px;
+  margin-top:28px;
+  text-align:left;
+}
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.form-group.full{
+  grid-column:1 / -1;
+}
+.form-group label{
+  font-family:'Cinzel', serif;
+  font-size:10px;
+  letter-spacing:2px;
+  font-weight:600;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  padding:12px 16px;
+  border-radius:14px;
+  border:1px solid var(--gold-border);
+  background:rgba(255, 255, 255, 0.85);
+  color:var(--ink);
+  font-size:17px;
+  outline:none;
+  transition:border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:#b88628;
+  box-shadow:0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+.form-group textarea{
+  resize:vertical;
+  min-height:85px;
+}
+.rsvp-submit{
+  grid-column:1 / -1;
+  margin-top:10px;
+  background:var(--gold-gradient);
+  color:#2b1d15;
+  border:1px solid #f6e27a;
+  border-radius:999px;
+  padding:15px;
+  font-family:'Cinzel', serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(180, 130, 40, 0.25);
+  transition:all 0.3s ease;
+}
+.rsvp-submit:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(180, 130, 40, 0.35);
+}
+
 /* Venue Card */
 .venue-card{
   max-width:680px;
@@ -689,7 +769,7 @@ h2, .section-heading{
   z-index:850;
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
   padding:8px 14px;
   border-radius:999px;
   background:rgba(35, 23, 16, 0.88);
@@ -709,7 +789,7 @@ h2, .section-heading{
   letter-spacing:2px;
   text-transform:uppercase;
   font-weight:600;
-  padding:8px 14px;
+  padding:8px 12px;
   border-radius:999px;
   transition:background .25s ease;
 }
@@ -869,8 +949,10 @@ footer{
   .count{gap:8px}
   .counter{padding:20px 4px}
   .photo{flex-basis:78vw;height:104vw}
-  .quick-dock{bottom:18px;gap:6px;padding:6px 10px}
-  .dock-link{font-size:9px;padding:7px 10px}
+  .rsvp-form{grid-template-columns:1fr}
+  .form-group.full{grid-column:auto}
+  .quick-dock{bottom:18px;gap:4px;padding:6px 8px}
+  .dock-link{font-size:8.5px;padding:6px 8px;letter-spacing:1px}
   .music{right:16px;bottom:80px}
   .music-label{right:70px;bottom:84px}
   .filigree{width:56px;height:56px}
@@ -928,7 +1010,8 @@ if('IntersectionObserver' in window){
 
 <!-- Floating Quick Dock -->
 <nav class="quick-dock" id="quickDock" aria-label="Quick Actions">
-  <a class="dock-link accent" target="_blank" rel="noopener" href="https://maps.app.goo.gl/LtFcmX7WESMcbg2h9">Directions</a>
+  <a class="dock-link accent" href="#rsvp-section">RSVP</a>
+  <a class="dock-link" target="_blank" rel="noopener" href="https://maps.app.goo.gl/LtFcmX7WESMcbg2h9">Directions</a>
   <a class="dock-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=D%20%26%20S%20Wedding&dates=20261123T100000/20261123T130000&details=Wedding%20Ceremony%20of%20Deevena%20%26%20Sasi%20Preetham&location=Adabala%20Gardens%2C%20Palakollu%2C%20Andhra%20Pradesh" target="_blank" rel="noopener">Calendar</a>
   <a class="dock-link" href="#album-section">Album</a>
 </nav>
@@ -1124,8 +1207,66 @@ if('IntersectionObserver' in window){
   </div>
 </section>
 
+<!-- RSVP Section -->
+<section class="section alt reveal" id="rsvp-section">
+  <div class="section-inner">
+    <div class="section-label shimmer-text">Will You Join Us?</div>
+    <h2>R.S.V.P</h2>
+    <div class="ornament divider">
+      <span class="line"></span><span class="star">✦</span><span class="line"></span>
+    </div>
+    <p class="count-intro">Kindly confirm your presence by filling out the details below.</p>
+
+    <div class="rsvp-card tilt-card">
+      <div class="filigree top-left" aria-hidden="true" style="width:50px;height:50px">
+        <svg viewBox="0 0 100 100"><path d="M14,86 Q14,14 86,14" stroke="#c59b3f" stroke-width="1.4" fill="none"/><circle cx="14" cy="86" r="3" fill="#c59b3f"/></svg>
+      </div>
+      <div class="filigree top-right" aria-hidden="true" style="width:50px;height:50px">
+        <svg viewBox="0 0 100 100"><path d="M14,86 Q14,14 86,14" stroke="#c59b3f" stroke-width="1.4" fill="none"/><circle cx="14" cy="86" r="3" fill="#c59b3f"/></svg>
+      </div>
+
+      <form class="rsvp-form" id="rsvpForm">
+        <div class="form-group">
+          <label for="guestName">Your Full Name</label>
+          <input type="text" id="guestName" name="guestName" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="guestPhone">WhatsApp / Phone</label>
+          <input type="tel" id="guestPhone" name="guestPhone" placeholder="Mobile number" required>
+        </div>
+
+        <div class="form-group">
+          <label for="attendance">Will You Attend?</label>
+          <select id="attendance" name="attendance" required>
+            <option value="Joyfully Attending">Joyfully Attending</option>
+            <option value="Regretfully Declining">Regretfully Declining</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="guestCount">Total Guests</label>
+          <select id="guestCount" name="guestCount" required>
+            <option value="1">1 Person</option>
+            <option value="2">2 Persons</option>
+            <option value="3">3 Persons</option>
+            <option value="4+">4+ Persons (Family)</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label for="guestMessage">Warm Wishes / Notes (Optional)</label>
+          <textarea id="guestMessage" name="guestMessage" placeholder="Leave a blessing or note for the couple..."></textarea>
+        </div>
+
+        <button type="submit" class="rsvp-submit">Confirm via WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- Venue Section -->
-<section class="section alt reveal">
+<section class="section reveal">
   <div class="bokeh-layer" aria-hidden="true">
     <div class="bokeh-orb orb-4"></div>
   </div>
@@ -1485,6 +1626,38 @@ if('IntersectionObserver' in window){
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  /* RSVP WhatsApp Forwarder */
+  const rsvpForm = document.getElementById("rsvpForm");
+  if(rsvpForm){
+    rsvpForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      const name = document.getElementById("guestName").value.trim();
+      const phone = document.getElementById("guestPhone").value.trim();
+      const attendance = document.getElementById("attendance").value;
+      const count = document.getElementById("guestCount").value;
+      const notes = document.getElementById("guestMessage").value.trim();
+
+      // Enter the host's WhatsApp number with country code (e.g., 919876543210 for India)
+      const hostWhatsAppNumber = ""; 
+
+      let message = `*Wedding RSVP — Deevena %26 Sasi Preetham*\n\n` +
+                    `*Name:* ${encodeURIComponent(name)}\n` +
+                    `*Phone:* ${encodeURIComponent(phone)}\n` +
+                    `*Attendance:* ${encodeURIComponent(attendance)}\n` +
+                    `*Guests:* ${encodeURIComponent(count)}\n`;
+
+      if(notes){
+        message += `*Message:* ${encodeURIComponent(notes)}\n`;
+      }
+
+      const waUrl = hostWhatsAppNumber 
+        ? `https://wa.me/${hostWhatsAppNumber}?text=${message}`
+        : `https://api.whatsapp.com/send?text=${message}`;
+
+      window.open(waUrl, "_blank");
+    });
+  }
 
   /* Photo Album Carousel */
   const album = document.getElementById("album");

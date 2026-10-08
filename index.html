@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#17110d">
+<meta name="format-detection" content="telephone=no">
 <meta name="description" content="Wedding invitation of Deevena & Sasi Preetham — 23 November 2026">
 <title>D & S | Wedding Invitation</title>
 
@@ -15,21 +16,21 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --cream: #fcf9f2;
-  --paper: rgba(255, 255, 255, 0.85);
+  --paper: rgba(255, 255, 255, 0.88);
   --ink: #2b1d15;
   --muted: #6e5c50;
   --gold-start: #d4af37;
   --gold-mid: #f6e27a;
   --gold-end: #aa771c;
   --gold-gradient: linear-gradient(135deg, #c59b3f 0%, #f7e28b 45%, #b28328 100%);
-  --gold-border: rgba(197, 155, 63, 0.35);
-  --glass-bg: rgba(255, 255, 255, 0.68);
-  --glass-border: rgba(255, 255, 255, 0.85);
+  --gold-border: rgba(197, 155, 63, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.9);
   --glass-shadow: 0 24px 50px rgba(50, 32, 18, 0.08), 0 4px 12px rgba(50, 32, 18, 0.04);
 }
 
@@ -43,7 +44,7 @@ body{
   margin:0;
   color:var(--ink);
   background:var(--cream);
-  font-family:Montserrat,Arial,sans-serif;
+  font-family:'Cormorant Garamond', Georgia, serif;
   overflow-x:hidden;
   overflow-y:auto !important;
   height:auto;
@@ -51,19 +52,23 @@ body{
   position:relative;
   touch-action:pan-y;
 }
-button,a{font:inherit}
+button, a{font:inherit}
 a{text-decoration:none;color:inherit}
 
-/* Foil Shimmer Text Utility */
+/* Foil Shimmer Text with Angled Glint & Metallic Emboss Drop Shadow */
 .shimmer-text {
-  background: linear-gradient(120deg, #b88628 0%, #fae69e 40%, #b88628 75%, #fae69e 100%);
-  background-size: 200% auto;
+  background: linear-gradient(115deg, #a67425 0%, #edd382 30%, #fff7d6 50%, #edd382 70%, #a67425 100%);
+  background-size: 250% 100%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 6s linear infinite;
+  animation: foilSweep 5.5s ease-in-out infinite;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.9)) drop-shadow(0 2px 4px rgba(180, 130, 40, 0.45));
+  display: inline-block;
 }
-@keyframes shine {
-  to { background-position: 200% center; }
+@keyframes foilSweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -50% 0; }
 }
 
 /* Background Royal Monogram Watermark */
@@ -72,8 +77,8 @@ a{text-decoration:none;color:inherit}
   top:50%;
   left:50%;
   transform:translate(-50%, -50%) scale(1) rotate(0deg);
-  font:normal clamp(220px, 35vw, 420px)/1 "Alex Brush", cursive;
-  color:rgba(197, 155, 63, 0.045);
+  font:normal clamp(220px, 35vw, 420px)/1 "Pinyon Script", cursive;
+  color:rgba(197, 155, 63, 0.04);
   pointer-events:none !important;
   z-index:0;
   user-select:none;
@@ -81,16 +86,17 @@ a{text-decoration:none;color:inherit}
   will-change:transform;
 }
 
-/* Royal Corner Filigree Vectors */
+/* Botanical Gold Leaf Garland / Filigrees */
 .filigree{
   position:absolute;
-  width:64px;
-  height:64px;
+  width:84px;
+  height:84px;
   pointer-events:none !important;
-  z-index:3;
-  opacity:0.65;
+  z-index:4;
+  opacity:0.75;
+  transition:transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.filigree svg{width:100%;height:100%;display:block;fill:none;stroke:#c59b3f;stroke-width:1.2}
+.filigree svg{width:100%;height:100%;display:block}
 .filigree.top-left{top:14px;left:14px}
 .filigree.top-right{top:14px;right:14px;transform:scaleX(-1)}
 .filigree.bottom-left{bottom:14px;left:14px;transform:scaleY(-1)}
@@ -113,7 +119,7 @@ a{text-decoration:none;color:inherit}
   place-items:center;
   padding:24px;
   background:
-    radial-gradient(circle at 50% 25%, rgba(225,192,115,.22), transparent 45%),
+    radial-gradient(circle at 50% 25%, rgba(225,192,115,.25), transparent 45%),
     linear-gradient(140deg, #1b120c, #482f1f 55%, #7e572d);
   transition:opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s;
 }
@@ -140,10 +146,10 @@ a{text-decoration:none;color:inherit}
 }
 
 .monogram-ring{
-  width:135px;
-  height:135px;
+  width:145px;
+  height:145px;
   margin:0 auto 16px;
-  border:1px solid rgba(246, 226, 122, 0.5);
+  border:1.5px solid rgba(246, 226, 122, 0.55);
   border-radius:50%;
   display:grid;
   place-items:center;
@@ -153,7 +159,7 @@ a{text-decoration:none;color:inherit}
 .monogram-ring::before{
   content:"✦";
   position:absolute;
-  top:-10px;
+  top:-11px;
   left:50%;
   transform:translateX(-50%);
   font-size:14px;
@@ -161,17 +167,18 @@ a{text-decoration:none;color:inherit}
   background:#382417;
   padding:0 8px;
 }
-@keyframes monogramFloat{50%{transform:translateY(-5px) scale(1.02)}}
+@keyframes monogramFloat{50%{transform:translateY(-6px) scale(1.02)}}
 
 .mono{
-  font:normal 48px/1 "Alex Brush",cursive;
+  font:normal 62px/1 "Pinyon Script", cursive;
   white-space:nowrap;
 }
 .eyebrow{
-  margin-top:12px;
+  margin-top:14px;
+  font-family:'Cinzel', serif;
   font-size:10px;
   font-weight:600;
-  letter-spacing:3.5px;
+  letter-spacing:4px;
   text-transform:uppercase;
 }
 .ornament{
@@ -191,17 +198,18 @@ a{text-decoration:none;color:inherit}
 }
 .ornament span.star{
   color:#f7e28b;
-  font-size:17px;
+  font-size:16px;
 }
 .open-verse{
   margin:0 auto 8px;
   max-width:470px;
-  font:italic 25px/1.45 "Cormorant Garamond",serif;
+  font:italic 25px/1.45 "Cormorant Garamond", serif;
   color:#fbe4a8;
 }
 .open-ref{
+  font-family:'Cinzel', serif;
   font-size:11px;
-  letter-spacing:2px;
+  letter-spacing:3px;
   color:rgba(255,255,255,.8);
 }
 
@@ -212,11 +220,12 @@ a{text-decoration:none;color:inherit}
   background:var(--gold-gradient);
   border:1px solid #f6e27a;
   border-radius:999px;
-  padding:15px 34px;
+  padding:15px 36px;
   cursor:pointer;
+  font-family:'Cinzel', serif;
   font-size:11px;
   font-weight:600;
-  letter-spacing:2.5px;
+  letter-spacing:3px;
   text-transform:uppercase;
   box-shadow:0 10px 28px rgba(0,0,0,0.35);
   transition:all .3s ease;
@@ -232,9 +241,10 @@ a{text-decoration:none;color:inherit}
   border-radius:999px;
   padding:14px 28px;
   cursor:pointer;
+  font-family:'Cinzel', serif;
   font-size:11px;
   font-weight:600;
-  letter-spacing:2px;
+  letter-spacing:2.5px;
   text-transform:uppercase;
   transition:all .3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -248,7 +258,7 @@ a{text-decoration:none;color:inherit}
   text-align:center;
   overflow:hidden;
   background:
-    radial-gradient(circle at 50% 30%, rgba(247, 226, 139, 0.3), transparent 40%),
+    radial-gradient(circle at 50% 30%, rgba(247, 226, 139, 0.35), transparent 45%),
     linear-gradient(145deg, #f7efe4 0%, #fffdfa 50%, #eee1cf 100%);
   z-index:1;
 }
@@ -256,16 +266,20 @@ a{text-decoration:none;color:inherit}
   position:absolute;
   inset:0;
   pointer-events:none !important;
-  z-index:1;
+  z-index:2;
 }
 .hero-content{
   position:relative;
-  z-index:2;
+  z-index:3;
   padding:40px 20px;
   pointer-events:auto;
 }
-.hero-monogram{font:normal 44px/1 "Alex Brush",cursive;margin-bottom:12px}
+.hero-monogram{
+  font:normal 56px/1 "Pinyon Script", cursive;
+  margin-bottom:12px;
+}
 .hero-kicker{
+  font-family:'Cinzel', serif;
   font-size:11px;
   letter-spacing:4px;
   font-weight:600;
@@ -273,28 +287,33 @@ a{text-decoration:none;color:inherit}
   color:var(--muted);
 }
 .names{
-  margin:20px 0 4px;
-  font:normal clamp(68px,11vw,120px)/.85 "Alex Brush",cursive;
+  margin:20px 0 6px;
+  font:normal clamp(76px, 12vw, 132px)/0.88 "Pinyon Script", cursive;
   color:var(--ink);
-  text-shadow:0 4px 18px rgba(255,255,255,.8);
+  text-shadow:0 4px 18px rgba(255,255,255,.9);
 }
 .weds{
   display:block;
   margin:12px 0;
-  font:italic 25px "Playfair Display",serif;
-  letter-spacing:5px;
+  font-family:'Cinzel Decorative', serif;
+  font-size:20px;
+  letter-spacing:6px;
   color:#c59b3f;
 }
 .hero-date{
   margin-top:28px;
-  font:500 17px "Cormorant Garamond",serif;
-  letter-spacing:3px;
+  font-family:'Cinzel', serif;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:4px;
   text-transform:uppercase;
+  color:#423023;
 }
 .scroll-note{
   margin-top:55px;
+  font-family:'Cinzel', serif;
   font-size:9px;
-  letter-spacing:3px;
+  letter-spacing:3.5px;
   text-transform:uppercase;
   color:var(--muted);
   animation:bob 2s ease-in-out infinite;
@@ -312,29 +331,56 @@ a{text-decoration:none;color:inherit}
 }
 .section.alt{background:linear-gradient(180deg,#f8f2e9 0%,#fcf9f2 100%)}
 .section-label{
+  font-family:'Cinzel', serif;
   font-size:11px;
-  letter-spacing:3px;
+  letter-spacing:4px;
   font-weight:600;
   text-transform:uppercase;
 }
 .section h2{
-  margin:10px 0;
-  font:normal clamp(46px,7vw,72px)/1.05 "Alex Brush",cursive;
+  margin:12px 0;
+  font:normal clamp(56px, 8vw, 84px)/1.05 "Pinyon Script", cursive;
   color:var(--ink);
 }
 .verse{
   max-width:650px;
   margin:0 auto;
-  font:italic 28px/1.5 "Cormorant Garamond",serif;
+  font:italic 28px/1.5 "Cormorant Garamond", serif;
   color:#4d3525;
 }
 .reference{
-  margin-top:5px;
+  margin-top:6px;
+  font-family:'Cinzel', serif;
   font-size:11px;
-  letter-spacing:2.5px;
+  letter-spacing:4px;
   color:var(--muted);
 }
 .divider{margin:25px auto 32px}
+
+/* Floating Bokeh Orbs Container */
+.bokeh-layer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+.bokeh-orb{
+  position:absolute;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(246, 226, 122, 0.6) 0%, rgba(212, 175, 55, 0.15) 60%, transparent 100%);
+  animation:bokehFloat 14s ease-in-out infinite alternate;
+}
+.bokeh-orb.orb-1{width:160px;height:160px;top:10%;left:5%;filter:blur(3px);animation-duration:12s;}
+.bokeh-orb.orb-2{width:220px;height:220px;bottom:15%;right:8%;filter:blur(5px);animation-duration:17s;animation-delay:-4s;}
+.bokeh-orb.orb-3{width:110px;height:110px;top:50%;left:80%;filter:blur(2px);animation-duration:15s;animation-delay:-7s;}
+.bokeh-orb.orb-4{width:180px;height:180px;bottom:20%;left:15%;filter:blur(6px);animation-duration:19s;animation-delay:-2s;}
+
+@keyframes bokehFloat{
+  0%{transform:translate(0, 0) scale(1);}
+  50%{transform:translate(25px, -30px) scale(1.08);}
+  100%{transform:translate(-20px, 25px) scale(0.95);}
+}
 
 /* Couple Cards */
 .couple{
@@ -342,9 +388,11 @@ a{text-decoration:none;color:inherit}
   grid-template-columns:repeat(2,1fr);
   gap:26px;
   margin-top:48px;
+  position:relative;
+  z-index:1;
 }
 .person{
-  padding:44px 30px;
+  padding:48px 30px;
   border:1px solid var(--glass-border);
   border-radius:30px;
   background:var(--glass-bg);
@@ -354,17 +402,18 @@ a{text-decoration:none;color:inherit}
   position:relative;
 }
 .role{
-  font-size:10px;
-  letter-spacing:3px;
+  font-family:'Cinzel', serif;
+  font-size:11px;
+  letter-spacing:4px;
   text-transform:uppercase;
   font-weight:600;
 }
 .person h3{
   margin:14px 0;
-  font:normal clamp(36px,4vw,48px)/1.05 "Alex Brush",cursive;
+  font:normal clamp(44px, 4.5vw, 56px)/1.05 "Pinyon Script", cursive;
 }
 .parents{
-  font:20px/1.5 "Cormorant Garamond",serif;
+  font:21px/1.5 "Cormorant Garamond", serif;
   color:var(--muted);
 }
 
@@ -375,25 +424,29 @@ a{text-decoration:none;color:inherit}
   padding:50px 28px;
   border-radius:32px;
   border:1px solid var(--glass-border);
-  background:linear-gradient(145deg, rgba(255,255,255,0.9), rgba(247,238,226,0.8));
+  background:linear-gradient(145deg, rgba(255,255,255,0.92), rgba(247,238,226,0.85));
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   box-shadow:var(--glass-shadow);
   position:relative;
 }
 .date-card .tag{
-  font-size:10px;
-  letter-spacing:3px;
+  font-family:'Cinzel', serif;
+  font-size:11px;
+  letter-spacing:4px;
   text-transform:uppercase;
   font-weight:600;
 }
 .date-card .date{
-  margin:16px 0 8px;
-  font:normal clamp(45px,7vw,65px)/1.1 "Alex Brush",cursive;
+  margin:18px 0 8px;
+  font:normal clamp(54px, 8vw, 76px)/1.1 "Pinyon Script", cursive;
 }
 .date-card .time{
+  font-family:'Cinzel', serif;
   color:var(--muted);
-  font:21px "Cormorant Garamond",serif;
+  font-size:14px;
+  letter-spacing:3px;
+  text-transform:uppercase;
 }
 
 /* Photo Album */
@@ -414,7 +467,7 @@ a{text-decoration:none;color:inherit}
   padding:12px 12px 28px;
   border-radius:22px;
   background:#fff;
-  border:1px solid rgba(197, 155, 63, 0.2);
+  border:1px solid rgba(197, 155, 63, 0.25);
   box-shadow:0 18px 45px rgba(57,38,24,.12);
   scroll-snap-align:center;
   transition:transform .4s ease;
@@ -442,14 +495,15 @@ a{text-decoration:none;color:inherit}
 }
 .album-btn:hover{transform:scale(1.1)}
 .swipe{
-  font-size:9px;
-  letter-spacing:2px;
+  font-family:'Cinzel', serif;
+  font-size:10px;
+  letter-spacing:3px;
   text-transform:uppercase;
   color:var(--muted);
 }
 
 /* Countdown */
-.count-intro{max-width:620px;margin:0 auto;color:var(--muted);font:italic 22px/1.45 "Cormorant Garamond",serif}
+.count-intro{max-width:620px;margin:0 auto;color:var(--muted);font:italic 23px/1.45 "Cormorant Garamond", serif}
 .count{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -480,13 +534,17 @@ a{text-decoration:none;color:inherit}
 @keyframes sheen{20%,100%{transform:translateX(120%)}}
 .counter strong{
   display:block;
-  font:500 clamp(32px,5vw,50px)/1 "Cormorant Garamond",serif;
+  font-family:'Cinzel', serif;
+  font-weight:600;
+  font-size:clamp(30px, 4.5vw, 46px);
+  line-height:1;
 }
 .counter span{
   display:block;
-  margin-top:8px;
+  margin-top:10px;
+  font-family:'Cinzel', serif;
   font-size:9px;
-  letter-spacing:2px;
+  letter-spacing:3px;
   font-weight:600;
 }
 
@@ -499,9 +557,21 @@ a{text-decoration:none;color:inherit}
   border-radius:50%;background:#fff;border:1px solid #c59b3f;
   box-shadow:0 0 0 6px rgba(197, 155, 63, 0.12);
 }
-.timeline-time{font-size:10px;letter-spacing:2px;font-weight:600;text-transform:uppercase}
-.timeline-title{margin:6px 0;font:500 27px/1.2 "Playfair Display",serif}
-.timeline-copy{margin:0;color:var(--muted);font:19px/1.5 "Cormorant Garamond",serif}
+.timeline-time{
+  font-family:'Cinzel', serif;
+  font-size:11px;
+  letter-spacing:3px;
+  font-weight:600;
+  text-transform:uppercase;
+}
+.timeline-title{
+  margin:8px 0 4px;
+  font-family:'Cinzel', serif;
+  font-size:22px;
+  font-weight:600;
+  letter-spacing:1px;
+}
+.timeline-copy{margin:0;color:var(--muted);font:20px/1.5 "Cormorant Garamond", serif}
 
 /* Venue Card */
 .venue-card{
@@ -518,12 +588,15 @@ a{text-decoration:none;color:inherit}
 }
 .venue-icon{font-size:30px;margin-bottom:8px}
 .venue-card h3{
-  margin:0 0 12px;
-  font:500 clamp(35px,5vw,48px)/1.1 "Playfair Display",serif;
+  margin:0 0 14px;
+  font-family:'Cinzel', serif;
+  font-size:clamp(30px, 4.5vw, 42px);
+  font-weight:600;
+  letter-spacing:1px;
 }
 .address{
-  margin:0 auto 26px;
-  font:22px/1.55 "Cormorant Garamond",serif;
+  margin:0 auto 28px;
+  font:22px/1.55 "Cormorant Garamond", serif;
   color:var(--muted);
 }
 .buttons{
@@ -560,8 +633,9 @@ a{text-decoration:none;color:inherit}
 }
 .dock-link{
   color:#fcf9f2;
+  font-family:'Cinzel', serif;
   font-size:10px;
-  letter-spacing:1.5px;
+  letter-spacing:2px;
   text-transform:uppercase;
   font-weight:600;
   padding:8px 14px;
@@ -586,15 +660,18 @@ a{text-decoration:none;color:inherit}
   position:relative;
   z-index:1;
 }
-.closing .closing-monogram{font:normal 54px/1 "Alex Brush",cursive;color:#f6e27a}
+.closing .closing-monogram{
+  font:normal 68px/1 "Pinyon Script", cursive;
+  color:#f6e27a;
+}
 .closing h2{
   margin:15px 0;
-  font:normal clamp(62px,10vw,98px)/1 "Alex Brush",cursive;
+  font:normal clamp(68px, 11vw, 110px)/1 "Pinyon Script", cursive;
 }
 .closing p{
   margin:0 auto;
   max-width:600px;
-  font:italic 26px/1.5 "Cormorant Garamond",serif;
+  font:italic 26px/1.5 "Cormorant Garamond", serif;
   color:#f8eee2;
 }
 footer{
@@ -602,14 +679,15 @@ footer{
   text-align:center;
   background:#140c07;
   color:#c59b3f;
-  font-size:9px;
-  letter-spacing:2px;
+  font-family:'Cinzel', serif;
+  font-size:10px;
+  letter-spacing:3px;
   text-transform:uppercase;
   position:relative;
   z-index:1;
 }
 
-/* Live Audio Visualizer Button */
+/* Music Visualizer Button */
 .music{
   position:fixed;
   right:20px;
@@ -661,7 +739,8 @@ footer{
   position:fixed;right:76px;bottom:28px;z-index:899;
   padding:8px 14px;border-radius:999px;
   background:rgba(35,23,16,.92);color:#fae69e;
-  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  font-family:'Cinzel', serif;
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
   opacity:0;transform:translateX(8px);pointer-events:none;
   transition:.3s ease;
 }
@@ -705,40 +784,42 @@ footer{
   cursor:pointer;
 }
 
-/* Scroll Fade Animations */
+/* Cinematic Masked Clip-Path Slide-Up Transitions */
 .reveal{
-  opacity:1;
-  transform:none;
-  transition:opacity 0.8s ease, transform 0.8s ease;
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: translateY(0);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
 }
 .js-observer .reveal{
-  opacity:0;
-  transform:translateY(30px);
+  clip-path: inset(100% 0 0 0);
+  opacity: 0;
+  transform: translateY(45px);
 }
 .js-observer .reveal.visible{
-  opacity:1;
-  transform:translateY(0);
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media(max-width:700px){
   .opening-card{padding:45px 20px}
-  .mono{font-size:42px}
-  .monogram-ring{width:125px;height:125px}
+  .mono{font-size:52px}
+  .monogram-ring{width:130px;height:130px}
   .section{padding:75px 18px}
   .couple{grid-template-columns:1fr;gap:18px}
   .count{gap:8px}
   .counter{padding:20px 4px}
-  .counter strong{font-size:30px}
   .photo{flex-basis:78vw;height:104vw}
   .quick-dock{bottom:18px;gap:6px;padding:6px 10px}
   .dock-link{font-size:9px;padding:7px 10px}
   .music{right:16px;bottom:80px}
   .music-label{right:70px;bottom:84px}
-  .filigree{width:46px;height:46px}
+  .filigree{width:56px;height:56px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .reveal{opacity:1!important;transform:none!important}
+  .reveal{opacity:1!important;transform:none!important;clip-path:inset(0 0 0 0)!important}
   #bgWatermark{transform:translate(-50%, -50%)!important}
 }
 </style>
@@ -773,7 +854,7 @@ if('IntersectionObserver' in window){
 </div>
 
 <audio id="weddingMusic" loop preload="auto">
-  <source src="DS.mp3.mpeg" type="audio/mpeg">
+  <source src="DS.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music" id="musicBtn" aria-label="Toggle music">
@@ -793,20 +874,52 @@ if('IntersectionObserver' in window){
 <main id="site" class="site">
 
 <section class="hero">
-  <!-- Royal Corner Filigrees -->
-  <div class="filigree top-left" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25 M10,10 L30,30 M15,45 Q45,45 45,15"/></svg></div>
-  <div class="filigree top-right" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25 M10,10 L30,30 M15,45 Q45,45 45,15"/></svg></div>
-  <div class="filigree bottom-left" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25 M10,10 L30,30 M15,45 Q45,45 45,15"/></svg></div>
-  <div class="filigree bottom-right" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25 M10,10 L30,30 M15,45 Q45,45 45,15"/></svg></div>
+  <!-- Botanical Gold Leaf Garlands -->
+  <div class="filigree top-left" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <path d="M12,88 Q12,14 86,14 M12,88 Q48,48 88,48" stroke="#c59b3f" stroke-width="1.2" fill="none"/>
+      <path d="M22,35 C15,22 30,15 35,26 C40,37 28,45 22,35 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <path d="M50,22 C42,10 60,6 64,18 C68,30 55,34 50,22 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <path d="M78,16 C75,4 92,2 93,13 C94,24 81,27 78,16 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <circle cx="12" cy="88" r="3" fill="#c59b3f"/>
+    </svg>
+  </div>
+  <div class="filigree top-right" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <path d="M12,88 Q12,14 86,14 M12,88 Q48,48 88,48" stroke="#c59b3f" stroke-width="1.2" fill="none"/>
+      <path d="M22,35 C15,22 30,15 35,26 C40,37 28,45 22,35 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <path d="M50,22 C42,10 60,6 64,18 C68,30 55,34 50,22 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <path d="M78,16 C75,4 92,2 93,13 C94,24 81,27 78,16 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <circle cx="12" cy="88" r="3" fill="#c59b3f"/>
+    </svg>
+  </div>
+  <div class="filigree bottom-left" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <path d="M12,88 Q12,14 86,14 M12,88 Q48,48 88,48" stroke="#c59b3f" stroke-width="1.2" fill="none"/>
+      <path d="M22,35 C15,22 30,15 35,26 C40,37 28,45 22,35 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <path d="M50,22 C42,10 60,6 64,18 C68,30 55,34 50,22 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <path d="M78,16 C75,4 92,2 93,13 C94,24 81,27 78,16 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <circle cx="12" cy="88" r="3" fill="#c59b3f"/>
+    </svg>
+  </div>
+  <div class="filigree bottom-right" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <path d="M12,88 Q12,14 86,14 M12,88 Q48,48 88,48" stroke="#c59b3f" stroke-width="1.2" fill="none"/>
+      <path d="M22,35 C15,22 30,15 35,26 C40,37 28,45 22,35 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <path d="M50,22 C42,10 60,6 64,18 C68,30 55,34 50,22 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <path d="M78,16 C75,4 92,2 93,13 C94,24 81,27 78,16 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/>
+      <circle cx="12" cy="88" r="3" fill="#c59b3f"/>
+    </svg>
+  </div>
 
-  <!-- Interactive Golden Dust & Petals Canvas -->
+  <!-- Interactive Golden Dust & Cursor Sparkle Canvas -->
   <canvas id="dustCanvas"></canvas>
 
   <div class="hero-content">
     <div class="hero-monogram shimmer-text">D &amp; S</div>
     <div class="hero-kicker">Together with their families</div>
     <div class="names">Deevena</div>
-    <div class="weds">with</div>
+    <div class="weds">WITH</div>
     <div class="names">Sasi Preetham</div>
     <div class="hero-date">23 November 2026 · 10:00 AM</div>
     <div class="scroll-note">Scroll to discover ↓</div>
@@ -814,6 +927,13 @@ if('IntersectionObserver' in window){
 </section>
 
 <section class="section reveal">
+  <!-- Floating Ambient Bokeh Orbs -->
+  <div class="bokeh-layer" aria-hidden="true">
+    <div class="bokeh-orb orb-1"></div>
+    <div class="bokeh-orb orb-2"></div>
+    <div class="bokeh-orb orb-3"></div>
+  </div>
+
   <div class="verse">“The steadfast love of the Lord never ceases.”</div>
   <div class="reference">LAMENTATIONS 3:22</div>
   <div class="ornament divider">
@@ -823,13 +943,17 @@ if('IntersectionObserver' in window){
 
   <div class="couple">
     <article class="person tilt-card">
-      <div class="filigree top-left" aria-hidden="true" style="width:38px;height:38px"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25"/></svg></div>
+      <div class="filigree top-left" aria-hidden="true" style="width:46px;height:46px">
+        <svg viewBox="0 0 100 100"><path d="M14,86 Q14,14 86,14" stroke="#c59b3f" stroke-width="1.4" fill="none"/><path d="M26,38 C18,24 35,16 42,28 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/></svg>
+      </div>
       <div class="role shimmer-text">The Bride</div>
       <h3>Dr. Deevena Salivendra</h3>
       <div class="parents">D/o Dr. Salivendra Kishore Kumar<br>&amp; Mrs. Emily</div>
     </article>
     <article class="person tilt-card">
-      <div class="filigree top-right" aria-hidden="true" style="width:38px;height:38px"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25"/></svg></div>
+      <div class="filigree top-right" aria-hidden="true" style="width:46px;height:46px">
+        <svg viewBox="0 0 100 100"><path d="M14,86 Q14,14 86,14" stroke="#c59b3f" stroke-width="1.4" fill="none"/><path d="M26,38 C18,24 35,16 42,28 Z" fill="rgba(246,226,122,0.4)" stroke="#c59b3f" stroke-width="0.8"/></svg>
+      </div>
       <div class="role shimmer-text">The Groom</div>
       <h3>Dr. Sasi Preetham Manukonda</h3>
       <div class="parents">S/o Mr. M.V.V. Satyanarayana<br>&amp; Mrs. Santha Kumari</div>
@@ -845,8 +969,12 @@ if('IntersectionObserver' in window){
   </div>
 
   <div class="date-card tilt-card">
-    <div class="filigree top-left" aria-hidden="true" style="width:44px;height:44px"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25"/></svg></div>
-    <div class="filigree top-right" aria-hidden="true" style="width:44px;height:44px"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25"/></svg></div>
+    <div class="filigree top-left" aria-hidden="true" style="width:50px;height:50px">
+      <svg viewBox="0 0 100 100"><path d="M14,86 Q14,14 86,14" stroke="#c59b3f" stroke-width="1.4" fill="none"/><circle cx="14" cy="86" r="3" fill="#c59b3f"/></svg>
+    </div>
+    <div class="filigree top-right" aria-hidden="true" style="width:50px;height:50px">
+      <svg viewBox="0 0 100 100"><path d="M14,86 Q14,14 86,14" stroke="#c59b3f" stroke-width="1.4" fill="none"/><circle cx="14" cy="86" r="3" fill="#c59b3f"/></svg>
+    </div>
     <div class="tag shimmer-text">Our Wedding Ceremony</div>
     <div class="date">23 November 2026</div>
     <div class="time">Monday Morning · 10:00 AM</div>
@@ -862,14 +990,14 @@ if('IntersectionObserver' in window){
 
   <div class="album-wrap">
     <div class="album" id="album">
-      <div class="photo"><img src="./DS%20pics/TLB06338.jpg" alt="Deevena and Sasi Preetham" loading="lazy"></div>
-      <div class="photo"><img src="./DS%20pics/TLB06823.jpg" alt="Wedding photo 2" loading="lazy"></div>
-      <div class="photo"><img src="./DS%20pics/TLB06597.jpg" alt="Wedding photo 3" loading="lazy"></div>
-      <div class="photo"><img src="./DS%20pics/TLB06586.jpg" alt="Wedding photo 4" loading="lazy"></div>
-      <div class="photo"><img src="./DS%20pics/TLB06978.jpg" alt="Wedding photo 5" loading="lazy"></div>
-      <div class="photo"><img src="./DS%20pics/TLB07601.jpg" alt="Wedding photo 6" loading="lazy"></div>
-      <div class="photo"><img src="./DS%20pics/TLB07432.jpg" alt="Wedding photo 7" loading="lazy"></div>
-      <div class="photo"><img src="./DS%20pics/TLB07452.jpg" alt="Wedding photo 8" loading="lazy"></div>
+      <div class="photo"><img src="./DS%20pics/TLB06338.jpg" alt="Deevena and Sasi Preetham" width="330" height="440" loading="lazy"></div>
+      <div class="photo"><img src="./DS%20pics/TLB06823.jpg" alt="Wedding photo 2" width="330" height="440" loading="lazy"></div>
+      <div class="photo"><img src="./DS%20pics/TLB06597.jpg" alt="Wedding photo 3" width="330" height="440" loading="lazy"></div>
+      <div class="photo"><img src="./DS%20pics/TLB06586.jpg" alt="Wedding photo 4" width="330" height="440" loading="lazy"></div>
+      <div class="photo"><img src="./DS%20pics/TLB06978.jpg" alt="Wedding photo 5" width="330" height="440" loading="lazy"></div>
+      <div class="photo"><img src="./DS%20pics/TLB07601.jpg" alt="Wedding photo 6" width="330" height="440" loading="lazy"></div>
+      <div class="photo"><img src="./DS%20pics/TLB07432.jpg" alt="Wedding photo 7" width="330" height="440" loading="lazy"></div>
+      <div class="photo"><img src="./DS%20pics/TLB07452.jpg" alt="Wedding photo 8" width="330" height="440" loading="lazy"></div>
     </div>
 
     <div class="album-controls">
@@ -929,6 +1057,11 @@ if('IntersectionObserver' in window){
 
 <!-- Venue Section -->
 <section class="section reveal">
+  <!-- Floating Bokeh Orbs Behind Venue -->
+  <div class="bokeh-layer" aria-hidden="true">
+    <div class="bokeh-orb orb-4"></div>
+  </div>
+
   <div class="section-label shimmer-text">The celebration</div>
   <h2>Meet Us at the Garden</h2>
   <div class="ornament divider">
@@ -936,8 +1069,12 @@ if('IntersectionObserver' in window){
   </div>
 
   <div class="venue-card tilt-card">
-    <div class="filigree top-left" aria-hidden="true" style="width:44px;height:44px"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25"/></svg></div>
-    <div class="filigree top-right" aria-hidden="true" style="width:44px;height:44px"><svg viewBox="0 0 100 100"><path d="M10,90 Q10,10 90,10 M25,90 Q25,25 90,25"/></svg></div>
+    <div class="filigree top-left" aria-hidden="true" style="width:50px;height:50px">
+      <svg viewBox="0 0 100 100"><path d="M14,86 Q14,14 86,14" stroke="#c59b3f" stroke-width="1.4" fill="none"/><circle cx="14" cy="86" r="3" fill="#c59b3f"/></svg>
+    </div>
+    <div class="filigree top-right" aria-hidden="true" style="width:50px;height:50px">
+      <svg viewBox="0 0 100 100"><path d="M14,86 Q14,14 86,14" stroke="#c59b3f" stroke-width="1.4" fill="none"/><circle cx="14" cy="86" r="3" fill="#c59b3f"/></svg>
+    </div>
     <div class="venue-icon shimmer-text" aria-hidden="true">⌖</div>
     <h3>Adabala Gardens</h3>
     <p class="address">Saibaba Temple Road<br>Palakollu, Andhra Pradesh 534260</p>
@@ -999,7 +1136,7 @@ if('IntersectionObserver' in window){
         fadeMusic(0.65, 1200);
         if(musicBtn) musicBtn.classList.add("playing");
       }).catch(function(error){
-        console.warn("Autoplay prevention:", error);
+        console.warn("Autoplay blocked:", error);
         if(musicLabel){
           musicLabel.textContent = "Tap soundbar to play music";
           musicLabel.classList.add("show");
@@ -1009,7 +1146,6 @@ if('IntersectionObserver' in window){
     }
   }
 
-  /* Dismiss Opening Overlay & Start Audio */
   function openInvitation(){
     startMusicPlayback();
     if(openToggle) openToggle.checked = true;
@@ -1025,9 +1161,7 @@ if('IntersectionObserver' in window){
     document.body.style.overflowY = "auto";
   }
 
-  if(openBtn){
-    openBtn.addEventListener("click", openInvitation);
-  }
+  if(openBtn) openBtn.addEventListener("click", openInvitation);
   if(openToggle){
     openToggle.addEventListener("change", function(){
       if(openToggle.checked) openInvitation();
@@ -1048,7 +1182,7 @@ if('IntersectionObserver' in window){
           }
         }catch(e){
           if(musicLabel){
-            musicLabel.textContent = "Add DS.mp3.mpeg to play music";
+            musicLabel.textContent = "Audio file DS.mp3 not found";
             musicLabel.classList.add("show");
             setTimeout(function(){ musicLabel.classList.remove("show"); }, 3000);
           }
@@ -1061,11 +1195,13 @@ if('IntersectionObserver' in window){
     });
   }
 
-  /* Interactive Canvas Golden Petals (Touch-safe without scroll blocking) */
+  /* Interactive Canvas: Golden Dust + Interactive Sparkle Trail */
   const canvas = document.getElementById("dustCanvas");
   if(canvas){
     const ctx = canvas.getContext("2d");
-    let w, h, particles = [];
+    let w, h;
+    const particles = [];
+    const sparkles = [];
     const mouse = { x: -1000, y: -1000, radius: 120 };
 
     function resize(){
@@ -1075,30 +1211,58 @@ if('IntersectionObserver' in window){
     window.addEventListener("resize", resize);
     resize();
 
+    function addSparkle(x, y){
+      for(let i = 0; i < 2; i++){
+        sparkles.push({
+          x: x + (Math.random() - 0.5) * 16,
+          y: y + (Math.random() - 0.5) * 16,
+          size: Math.random() * 2.8 + 1.2,
+          speedX: (Math.random() - 0.5) * 1.5,
+          speedY: (Math.random() - 0.5) * 1.5 - 0.6,
+          alpha: 1,
+          decay: Math.random() * 0.025 + 0.015,
+          color: Math.random() > 0.3 ? "#fae69e" : "#ffffff"
+        });
+      }
+      if(sparkles.length > 70) sparkles.splice(0, sparkles.length - 70);
+    }
+
     window.addEventListener("mousemove", function(e){
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
+      if(mouse.y >= 0 && mouse.y <= h) addSparkle(mouse.x, mouse.y);
     });
 
-    for(let i = 0; i < 42; i++){
+    window.addEventListener("touchmove", function(e){
+      if(!e.touches[0]) return;
+      const rect = canvas.getBoundingClientRect();
+      const tx = e.touches[0].clientX - rect.left;
+      const ty = e.touches[0].clientY - rect.top;
+      mouse.x = tx;
+      mouse.y = ty;
+      if(ty >= 0 && ty <= h) addSparkle(tx, ty);
+    }, { passive: true });
+
+    for(let i = 0; i < 46; i++){
       particles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
+        x: Math.random() * (w || window.innerWidth),
+        y: Math.random() * (h || window.innerHeight),
         size: Math.random() * 4.5 + 2,
         speedX: Math.random() * 0.5 - 0.25,
-        speedY: Math.random() * 0.6 + 0.3,
+        speedY: Math.random() * 0.55 + 0.25,
         rotation: Math.random() * Math.PI * 2,
         rotSpeed: (Math.random() - 0.5) * 0.02,
         oscillation: Math.random() * Math.PI * 2,
         oscSpeed: Math.random() * 0.02 + 0.01,
-        color: i % 3 === 0 ? "rgba(255, 248, 235, 0.7)" : "rgba(235, 195, 95, 0.6)"
+        color: i % 3 === 0 ? "rgba(255, 248, 235, 0.75)" : "rgba(235, 195, 95, 0.65)"
       });
     }
 
     function render(){
       ctx.clearRect(0, 0, w, h);
 
+      // Render Floating Dust Petals
       particles.forEach(function(p){
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
@@ -1106,8 +1270,8 @@ if('IntersectionObserver' in window){
         if(dist < mouse.radius){
           const angle = Math.atan2(dy, dx);
           const force = (mouse.radius - dist) / mouse.radius;
-          p.x += Math.cos(angle) * force * 4;
-          p.y += Math.sin(angle) * force * 4;
+          p.x += Math.cos(angle) * force * 3.5;
+          p.y += Math.sin(angle) * force * 3.5;
         }
 
         p.oscillation += p.oscSpeed;
@@ -1129,12 +1293,35 @@ if('IntersectionObserver' in window){
         ctx.restore();
       });
 
+      // Render Active Sparkle Particles
+      for(let i = sparkles.length - 1; i >= 0; i--){
+        const sp = sparkles[i];
+        sp.x += sp.speedX;
+        sp.y += sp.speedY;
+        sp.alpha -= sp.decay;
+
+        if(sp.alpha <= 0){
+          sparkles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = sp.alpha;
+        ctx.fillStyle = sp.color;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = "#f7e28b";
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, sp.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
       requestAnimationFrame(render);
     }
     render();
   }
 
-  /* 3D Tilt Card Effect (Desktop Only) */
+  /* 3D Tilt Card Effect */
   if(window.matchMedia("(hover: hover)").matches){
     const tiltCards = document.querySelectorAll(".tilt-card");
     tiltCards.forEach(function(card){
@@ -1152,14 +1339,27 @@ if('IntersectionObserver' in window){
     });
   }
 
-  /* Monogram Watermark Rotation & Zoom */
+  /* Watermark Subtle Parallax & Rotation */
   const watermark = document.getElementById("bgWatermark");
+  const filigrees = document.querySelectorAll(".filigree");
   window.addEventListener("scroll", function(){
-    if(!watermark) return;
     const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    const rotate = (scrollY * 0.02) % 360;
-    const scale = 1 + (scrollY * 0.00015);
-    watermark.style.transform = `translate(-50%, -50%) scale(${scale}) rotate(${rotate}deg)`;
+    if(watermark){
+      const rotate = (scrollY * 0.02) % 360;
+      const scale = 1 + (scrollY * 0.00015);
+      watermark.style.transform = `translate(-50%, -50%) scale(${scale}) rotate(${rotate}deg)`;
+    }
+    filigrees.forEach(function(f, i){
+      const dir = (i % 2 === 0) ? 1 : -1;
+      const drift = Math.sin(scrollY * 0.004 + i) * 6 * dir;
+      f.style.transform = f.classList.contains("top-right")
+        ? `scaleX(-1) translateY(${drift}px)`
+        : f.classList.contains("bottom-right")
+        ? `scale(-1) translateY(${drift}px)`
+        : f.classList.contains("bottom-left")
+        ? `scaleY(-1) translateY(${drift}px)`
+        : `translateY(${drift}px)`;
+    });
   }, { passive: true });
 
   /* Scroll Observer for Elements & Quick Dock */
@@ -1229,7 +1429,7 @@ if('IntersectionObserver' in window){
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  /* Album Carousel */
+  /* Photo Album Carousel */
   const album = document.getElementById("album");
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
@@ -1242,7 +1442,7 @@ if('IntersectionObserver' in window){
   if(prev) prev.addEventListener("click", function(){ moveAlbum(-1); });
   if(next) next.addEventListener("click", function(){ moveAlbum(1); });
 
-  /* Photo Lightbox */
+  /* Lightbox */
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const closeLightbox = document.getElementById("closeLightbox");

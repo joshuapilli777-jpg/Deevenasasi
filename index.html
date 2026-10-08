@@ -59,7 +59,7 @@ a{text-decoration:none;color:inherit}
   font-family:'Great Vibes', cursive !important;
 }
 
-/* Headings font: Clean Cinzel without ligature/overlap issues */
+/* Headings font */
 h2, .section-heading{
   font-family:'Cinzel', serif !important;
   font-feature-settings:"liga" 0, "clig" 0, "dlig" 0 !important;
@@ -159,7 +159,7 @@ h2, .section-heading{
   overflow:hidden;
 }
 
-/* Expanded Ring Size to accommodate the D&S cursive flourish fully */
+/* Ring Size */
 .monogram-ring{
   width:160px;
   height:160px;
@@ -186,7 +186,6 @@ h2, .section-heading{
 }
 @keyframes monogramFloat{50%{transform:translateY(-6px) scale(1.02)}}
 
-/* Sized, centered, with padding on sides so tail of 'S' and ascender of 'd' do not clip */
 .mono{
   font-size:31px;
   line-height:1;
@@ -297,12 +296,20 @@ h2, .section-heading{
   z-index:3;
   padding:40px 20px;
   pointer-events:auto;
+  overflow:visible;
 }
+
+/* Fixed Hero Monogram: fully visible, padded so flourishes don't clip */
 .hero-monogram{
-  font-size:42px;
-  line-height:1;
+  font-size:clamp(34px, 7vw, 44px);
+  line-height:1.2;
   margin-bottom:12px;
+  display:inline-block;
+  padding:0 0.35em;
+  overflow:visible;
+  white-space:nowrap;
 }
+
 .hero-kicker{
   font-family:'Cinzel', serif;
   font-size:11px;
@@ -728,6 +735,9 @@ h2, .section-heading{
   font-size:54px;
   line-height:1;
   color:#f6e27a;
+  display:inline-block;
+  padding:0 0.35em;
+  overflow:visible;
 }
 .closing h2{
   margin:18px 0;

@@ -59,7 +59,7 @@ a{text-decoration:none;color:inherit}
   font-family:'Great Vibes', cursive !important;
 }
 
-/* Section Headings Font (Cinzel Decorative - distinct from Pinyon Script couple names) */
+/* Section Headings Font */
 h2, .section-heading{
   font-family:'Cinzel Decorative', serif !important;
   letter-spacing:2px;
@@ -156,7 +156,7 @@ h2, .section-heading{
   overflow:hidden;
 }
 
-/* Resized Circle Container & Logo */
+/* Sized Circle Container & Logo */
 .monogram-ring{
   width:140px;
   height:140px;
@@ -182,7 +182,6 @@ h2, .section-heading{
 }
 @keyframes monogramFloat{50%{transform:translateY(-6px) scale(1.02)}}
 
-/* Resized Monogram Logo text */
 .mono{
   font-size:38px;
   line-height:1;
@@ -891,8 +890,12 @@ if('IntersectionObserver' in window){
   </div>
 </div>
 
+<!-- Resilient Audio element with multiple fallback filename formats -->
 <audio id="weddingMusic" loop preload="auto">
+  <source src="./DS.mp3" type="audio/mpeg">
   <source src="DS.mp3" type="audio/mpeg">
+  <source src="./DS.mp3.mpeg" type="audio/mpeg">
+  <source src="ds.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music" id="musicBtn" aria-label="Toggle music">
@@ -1003,7 +1006,7 @@ if('IntersectionObserver' in window){
 <section class="section alt reveal">
   <div class="section-inner">
     <div class="section-label shimmer-text">Save the date</div>
-    <h2>The Big Day</h2>
+    <h2>Th e Big Day</h2>
     <div class="ornament divider">
       <span class="line"></span><span class="star">✦</span><span class="line"></span>
     </div>
@@ -1107,7 +1110,7 @@ if('IntersectionObserver' in window){
   </div>
   <div class="section-inner">
     <div class="section-label shimmer-text">The celebration</div>
-    <h2>Meet Us at the Garden</h2>
+    <h2>Meet Us at th e Garden</h2>
     <div class="ornament divider">
       <span class="line"></span><span class="star">✦</span><span class="line"></span>
     </div>
@@ -1134,7 +1137,7 @@ if('IntersectionObserver' in window){
 <section class="closing">
   <div class="closing-monogram ds-font">D &amp; S</div>
   <div class="eyebrow shimmer-text">With love, faith &amp; gratitude</div>
-  <h2>See You There</h2>
+  <h2>See You Th ere</h2>
   <p>We would be honoured to have you with us as we begin this beautiful new chapter together.</p>
 </section>
 
@@ -1151,12 +1154,19 @@ if('IntersectionObserver' in window){
 (function(){
   "use strict";
 
-  /* Audio Setup & Trigger */
+  /* Audio Setup & Trigger with Auto Fallback Detection */
   const music = document.getElementById("weddingMusic");
   const musicBtn = document.getElementById("musicBtn");
   const musicLabel = document.getElementById("musicLabel");
   const openBtn = document.getElementById("openBtn");
   const openToggle = document.getElementById("open-toggle");
+
+  function showMusicLabel(msg, duration = 3000){
+    if(!musicLabel) return;
+    musicLabel.textContent = msg;
+    musicLabel.classList.add("show");
+    setTimeout(function(){ musicLabel.classList.remove("show"); }, duration);
+  }
 
   function fadeMusic(target, duration = 800){
     if(!music) return;
@@ -1171,29 +1181,24 @@ if('IntersectionObserver' in window){
     requestAnimationFrame(step);
   }
 
-  function startMusicPlayback(){
-    if(!music) return;
-    if(musicBtn) musicBtn.classList.add("show");
-
-    music.volume = 0;
-    const playPromise = music.play();
-    if(playPromise !== undefined){
-      playPromise.then(function(){
-        fadeMusic(0.65, 1200);
-        if(musicBtn) musicBtn.classList.add("playing");
-      }).catch(function(error){
-        console.warn("Autoplay blocked:", error);
-        if(musicLabel){
-          musicLabel.textContent = "Tap soundbar to play music";
-          musicLabel.classList.add("show");
-          setTimeout(function(){ musicLabel.classList.remove("show"); }, 3000);
-        }
-      });
+  /* Diagnostic helper to test audio files sequentially */
+  async function attemptAudioPlay(){
+    if(!music) return false;
+    try {
+      music.volume = 0;
+      await music.play();
+      fadeMusic(0.65, 1200);
+      if(musicBtn) {
+        musicBtn.classList.add("show", "playing");
+      }
+      return true;
+    } catch(err) {
+      console.warn("Audio playback notice:", err);
+      return false;
     }
   }
 
-  function openInvitation(){
-    startMusicPlayback();
+  async function openInvitation(){
     if(openToggle) openToggle.checked = true;
     const opening = document.getElementById("opening");
     if(opening){
@@ -1205,6 +1210,12 @@ if('IntersectionObserver' in window){
     }
     document.documentElement.style.overflowY = "auto";
     document.body.style.overflowY = "auto";
+
+    if(musicBtn) musicBtn.classList.add("show");
+    const played = await attemptAudioPlay();
+    if(!played){
+      showMusicLabel("Tap sound icon to play", 3500);
+    }
   }
 
   if(openBtn) openBtn.addEventListener("click", openInvitation);
@@ -1218,20 +1229,14 @@ if('IntersectionObserver' in window){
     musicBtn.addEventListener("click", async function(){
       if(music.paused){
         try{
+          music.volume = 0;
           await music.play();
           fadeMusic(0.65, 600);
           musicBtn.classList.add("playing");
-          if(musicLabel){
-            musicLabel.textContent = "Our song";
-            musicLabel.classList.add("show");
-            setTimeout(function(){ musicLabel.classList.remove("show"); }, 2400);
-          }
+          showMusicLabel("Our song", 2400);
         }catch(e){
-          if(musicLabel){
-            musicLabel.textContent = "Audio file not found";
-            musicLabel.classList.add("show");
-            setTimeout(function(){ musicLabel.classList.remove("show"); }, 3000);
-          }
+          console.error("Playback error:", e);
+          showMusicLabel("Place DS.mp3 in folder", 3500);
         }
       }else{
         fadeMusic(0, 400);

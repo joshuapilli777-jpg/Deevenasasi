@@ -146,7 +146,7 @@ h2, .section-heading{
 
 .opening-card{
   width:min(580px, 100%);
-  padding:54px 28px 48px;
+  padding:64px 28px 48px;
   text-align:center;
   color:#fff;
   border:1px solid rgba(247, 226, 139, 0.35);
@@ -156,21 +156,21 @@ h2, .section-heading{
   -webkit-backdrop-filter:blur(28px);
   box-shadow:0 35px 90px rgba(0,0,0,.45);
   position:relative;
-  overflow:visible;
+  overflow:visible !important;
 }
 
 /* Monogram Ring */
 .monogram-ring{
   width:160px;
   height:160px;
-  margin:10px auto 18px;
+  margin:24px auto 18px;
   border:1.5px solid rgba(246, 226, 122, 0.65);
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   position:relative;
-  overflow:visible;
+  overflow:visible !important;
   animation:monogramFloat 5s ease-in-out infinite;
 }
 .monogram-ring::before{
@@ -184,7 +184,10 @@ h2, .section-heading{
   background:#382417;
   padding:0 8px;
 }
-@keyframes monogramFloat{50%{transform:translateY(-6px) scale(1.02)}}
+@keyframes monogramFloat{
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(4px) scale(1.02); }
+}
 
 .mono{
   font-size:31px;
@@ -947,8 +950,8 @@ footer{
 }
 
 @media(max-width:700px){
-  .opening-card{padding:48px 18px 40px}
-  .monogram-ring{width:145px;height:145px;margin:8px auto 14px}
+  .opening-card{padding:58px 18px 36px; overflow:visible !important;}
+  .monogram-ring{width:140px;height:140px;margin:18px auto 14px; overflow:visible !important;}
   .mono{font-size:27px;padding:0 8px}
   .section{padding:70px 18px}
   .couple{grid-template-columns:1fr;gap:18px}
@@ -1637,7 +1640,6 @@ if('IntersectionObserver' in window){
       const count = document.getElementById("guestCount").value;
       const notes = document.getElementById("guestMessage").value.trim();
 
-      // Enter the host's WhatsApp number with country code (e.g., 919876543210 for India)
       const hostWhatsAppNumber = ""; 
 
       let message = `*Wedding RSVP — Deevena %26 Sasi Preetham*\n\n` +
